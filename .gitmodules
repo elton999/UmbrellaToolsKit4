@@ -4,3 +4,6 @@
 [submodule "thirdparty/glm"]
 	path = thirdparty/glm
 	url = https://github.com/g-truc/glm.git
+[submodule "thirdparty/imgui_lib/imgui"]
+	path = thirdparty/imgui_lib/imgui
+	url = https://github.com/ocornut/imgui.git

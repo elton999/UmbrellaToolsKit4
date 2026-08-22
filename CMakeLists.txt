@@ -7,4 +7,4 @@ endif()
 
 project ("UmbrellaToolsKit")
 
-add_subdirectory ("UmbrellaToolsKit")
+add_subdirectory ("src")

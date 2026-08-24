@@ -7,3 +7,6 @@
 [submodule "thirdparty/imgui_lib/imgui"]
 	path = thirdparty/imgui_lib/imgui
 	url = https://github.com/ocornut/imgui.git
+[submodule "thirdparty/catch2"]
+	path = thirdparty/catch2
+	url = https://github.com/catchorg/Catch2.git

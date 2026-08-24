@@ -4,9 +4,11 @@
 
 #include <GLFW/glfw3.h>
 
+#ifdef BUILD_DEBUG
 #include "imgui.h"
 #include "backends/imgui_impl_glfw.h"
 #include "backends/imgui_impl_opengl3.h"
+#endif
 
 static void glfw_error_callback(int error, const char* description)
 {
@@ -27,8 +29,8 @@ int main()
 #endif
 
 	// Create window with graphics context
-	GLFWwindow* window = glfwCreateWindow(1280, 720, "game", NULL, NULL);
-	if (window == NULL) {
+	GLFWwindow* window = glfwCreateWindow(1280, 720, "game", nullptr, nullptr);
+	if (window == nullptr) {
 		glfwTerminate();
 		return -1;
 	}
@@ -41,6 +43,7 @@ int main()
 		return -1;
 	}
 
+	#ifdef BUILD_DEBUG
 	// Setup Dear ImGui context
 	IMGUI_CHECKVERSION();
 	ImGui::CreateContext();
@@ -55,11 +58,12 @@ int main()
 
 	ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 	bool show_demo_window = true;
+	#endif
 
 	while (!glfwWindowShouldClose(window))
 	{
 		glfwPollEvents();
-
+		#ifdef BUILD_DEBUG
 		ImGui_ImplOpenGL3_NewFrame();
 		ImGui_ImplGlfw_NewFrame();
 		ImGui::NewFrame();
@@ -82,21 +86,26 @@ int main()
 
 		// Rendering
 		ImGui::Render();
+		#endif
 		int display_w, display_h;
 		glfwGetFramebufferSize(window, &display_w, &display_h);
 		glViewport(0, 0, display_w, display_h);
 
+		#ifdef BUILD_DEBUG
 		glClearColor(clear_color.x * clear_color.w, clear_color.y * clear_color.w, clear_color.z * clear_color.w, clear_color.w);
+		#endif
 		glClear(GL_COLOR_BUFFER_BIT);
-
+		#ifdef BUILD_DEBUG
 		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+		#endif
 
 		glfwSwapBuffers(window);
 	}
-
+	#ifdef BUILD_DEBUG
 	ImGui_ImplOpenGL3_Shutdown();
 	ImGui_ImplGlfw_Shutdown();
 	ImGui::DestroyContext();
+	#endif
 
 	glfwDestroyWindow(window);
 	glfwTerminate();

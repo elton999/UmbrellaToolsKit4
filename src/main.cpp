@@ -1,8 +1,10 @@
 #include <iostream>
-
 #include <glad/glad.h>
-
 #include <GLFW/glfw3.h>
+#include <string>
+#include <sstream>
+
+#include "engine/core/debug/Log.h"
 
 #ifdef BUILD_DEBUG
 #include "imgui.h"
@@ -12,7 +14,9 @@
 
 static void glfw_error_callback(int error, const char* description)
 {
-	std::cerr << "GLFW Error " << error << ": " << description << std::endl;
+	std::ostringstream stream;
+    stream << "GLFW Error " << error << ": " << description;
+	Log::MsgError(stream.str());
 }
 
 int main()
@@ -36,10 +40,11 @@ int main()
 	}
 	glfwMakeContextCurrent(window);
 	glfwSwapInterval(1); // Enable vsync
+	Log::Msg("int game");
 
 	// Initialize GLAD loader
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
-		std::cerr << "Failed to initialize GLAD" << std::endl;
+		Log::MsgError("Failed to initialize GLAD");
 		return -1;
 	}
 

@@ -2,16 +2,7 @@
 
 project (game VERSION 0.1.0 LANGUAGES CXX)
 
-add_subdirectory ("thirdparty/glm")
-add_subdirectory ("thirdparty/glfw")
-add_subdirectory ("thirdparty/glad")
 add_subdirectory ("src/engine/core")
-
-
-if (CMAKE_BUILD_TYPE STREQUAL "Debug")
-	add_subdirectory ("thirdparty/imgui_lib")
-	add_subdirectory ("thirdparty/catch2")
-endif()
 
 if (WIN32 AND CMAKE_BUILD_TYPE STREQUAL "Debug")
 	add_executable (game "src/main.cpp")
@@ -20,9 +11,9 @@ else()
 endif()
 
 if (CMAKE_BUILD_TYPE STREQUAL "Debug")
-	target_link_libraries(game PRIVATE glm glfw glad imgui Catch2::Catch2WithMain core)
+	target_link_libraries(game PRIVATE core)
 else()
-	target_link_libraries(game PRIVATE glm glfw glad core)
+	target_link_libraries(game PRIVATE core)
 endif()
 
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")

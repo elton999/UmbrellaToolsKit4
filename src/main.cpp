@@ -1,119 +1,20 @@
 #include <iostream>
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
-#include <string>
 #include <sstream>
 
 #include "engine/core/debug/Log.h"
+#include "engine/core/platform/graphics_wrappers/RenderManager.h"
 
-#ifdef BUILD_DEBUG
-#include "imgui.h"
-#include "backends/imgui_impl_glfw.h"
-#include "backends/imgui_impl_opengl3.h"
-#endif
-
-static void glfw_error_callback(int error, const char* description)
-{
-	std::ostringstream stream;
-    stream << "GLFW Error " << error << ": " << description;
-	Log::MsgError(stream.str());
-}
+RenderManager _renderManager;
 
 int main()
 {
-	glfwSetErrorCallback(glfw_error_callback);
-	if (!glfwInit()) return -1;
+	_renderManager.StartUp();
 
-	const char* glsl_version = "#version 330";
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-#ifdef __APPLE__
-	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // Required on Mac
-#endif
-
-	// Create window with graphics context
-	GLFWwindow* window = glfwCreateWindow(1280, 720, "game", nullptr, nullptr);
-	if (window == nullptr) {
-		glfwTerminate();
-		return -1;
-	}
-	glfwMakeContextCurrent(window);
-	glfwSwapInterval(1); // Enable vsync
-	Log::Msg("int game");
-
-	// Initialize GLAD loader
-	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
-		Log::MsgError("Failed to initialize GLAD");
-		return -1;
-	}
-
-	#ifdef BUILD_DEBUG
-	// Setup Dear ImGui context
-	IMGUI_CHECKVERSION();
-	ImGui::CreateContext();
-	ImGuiIO& io = ImGui::GetIO(); (void)io;
-	io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
-
-
-	ImGui::StyleColorsDark();
-
-	ImGui_ImplGlfw_InitForOpenGL(window, true);
-	ImGui_ImplOpenGL3_Init(glsl_version);
-
-	ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
-	bool show_demo_window = true;
-	#endif
-
-	while (!glfwWindowShouldClose(window))
+	while (_renderManager.IsRunning())
 	{
-		glfwPollEvents();
-		#ifdef BUILD_DEBUG
-		ImGui_ImplOpenGL3_NewFrame();
-		ImGui_ImplGlfw_NewFrame();
-		ImGui::NewFrame();
-
-		if (show_demo_window) {
-			ImGui::ShowDemoWindow(&show_demo_window);
-		}
-
-		{
-			ImGui::Begin("Test Control Panel");
-
-			ImGui::Text("Hello, World! GLAD, GLFW, and ImGui are working.");
-			ImGui::Checkbox("Show Demo Window", &show_demo_window);
-
-			ImGui::ColorEdit3("Background Color", (float*)&clear_color);
-
-			ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / io.Framerate, io.Framerate);
-			ImGui::End();
-		}
-
-		// Rendering
-		ImGui::Render();
-		#endif
-		int display_w, display_h;
-		glfwGetFramebufferSize(window, &display_w, &display_h);
-		glViewport(0, 0, display_w, display_h);
-
-		#ifdef BUILD_DEBUG
-		glClearColor(clear_color.x * clear_color.w, clear_color.y * clear_color.w, clear_color.z * clear_color.w, clear_color.w);
-		#endif
-		glClear(GL_COLOR_BUFFER_BIT);
-		#ifdef BUILD_DEBUG
-		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-		#endif
-
-		glfwSwapBuffers(window);
+		_renderManager.Run();
 	}
-	#ifdef BUILD_DEBUG
-	ImGui_ImplOpenGL3_Shutdown();
-	ImGui_ImplGlfw_Shutdown();
-	ImGui::DestroyContext();
-	#endif
 
-	glfwDestroyWindow(window);
-	glfwTerminate();
-
+	_renderManager.ShutDown();
 	return 0;
 }

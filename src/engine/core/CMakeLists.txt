@@ -1,18 +1,29 @@
 cmake_minimum_required(VERSION 3.10)
 project(core)
 
+set(THIRDPARTY_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../../../thirdparty")
+
+add_subdirectory ("${THIRDPARTY_DIR}/glm" "${CMAKE_CURRENT_BINARY_DIR}/glm")
+add_subdirectory ("${THIRDPARTY_DIR}/glfw" "${CMAKE_CURRENT_BINARY_DIR}/glfw")
+add_subdirectory ("${THIRDPARTY_DIR}/glad" "${CMAKE_CURRENT_BINARY_DIR}/glad")
+
+if (CMAKE_BUILD_TYPE STREQUAL "Debug")
+	add_subdirectory ("${THIRDPARTY_DIR}/imgui_lib" "${CMAKE_CURRENT_BINARY_DIR}/imgui_lib")
+	add_subdirectory ("${THIRDPARTY_DIR}/catch2" "${CMAKE_CURRENT_BINARY_DIR}/catch2")
+endif()
+
+
 add_library(core)
 target_sources(core PRIVATE 
 "${CMAKE_CURRENT_SOURCE_DIR}/debug/log.cpp"
-"${CMAKE_CURRENT_SOURCE_DIR}/debug/log.h")
-
+"${CMAKE_CURRENT_SOURCE_DIR}/debug/log.h" "platform/graphics_wrappers/RenderManager.cpp")
 
 target_include_directories(core PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/")
 
 if (CMAKE_BUILD_TYPE STREQUAL "Debug")
-	target_link_libraries(core PRIVATE glm glfw glad imgui Catch2::Catch2WithMain)
+	target_link_libraries(core PUBLIC glm glfw glad imgui Catch2::Catch2WithMain)
 else()
-	target_link_libraries(core PRIVATE glm glfw glad)
+	target_link_libraries(core PUBLIC glm glfw glad)
 endif()
 
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")

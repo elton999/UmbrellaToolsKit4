@@ -2,19 +2,24 @@
 #include <sstream>
 
 #include "engine/core/debug/Log.h"
-#include "engine/core/platform/graphics_wrappers/RenderManager.h"
+#include "engine/core/RenderManager.h"
+#include "engine/core/platform/graphics_wrappers/integrations/glwf_backend_integration.h"
 
-RenderManager _renderManager;
+
+RenderManager renderManager;
+
 
 int main()
 {
-	_renderManager.StartUp();
+	renderManager = {};
+	renderManager.BackendIntegration = new GLWF_BackendIntegration;
+	renderManager.StartUp();
 
-	while (_renderManager.IsRunning())
+	while (renderManager.IsRunning())
 	{
-		_renderManager.Run();
+		renderManager.Run();
 	}
 
-	_renderManager.ShutDown();
+	renderManager.ShutDown();
 	return 0;
 }

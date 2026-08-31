@@ -1,17 +1,16 @@
 #pragma once
 
 #include <iostream>
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
 #include <string>
 #include <sstream>
+#include "platform/graphics_wrappers/graphic_backend.h"
+#include <memory>
 
 class RenderManager
 {
-	private:
-		GLFWwindow* _window;
-
 	public:
+		GraphicBackend* BackendIntegration;
+
 		void StartUp();
 		void Run();
 		void ShutDown();

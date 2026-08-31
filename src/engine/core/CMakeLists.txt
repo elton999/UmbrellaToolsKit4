@@ -9,19 +9,18 @@ add_subdirectory ("${THIRDPARTY_DIR}/glad" "${CMAKE_CURRENT_BINARY_DIR}/glad")
 
 if (CMAKE_BUILD_TYPE STREQUAL "Debug")
 	add_subdirectory ("${THIRDPARTY_DIR}/imgui_lib" "${CMAKE_CURRENT_BINARY_DIR}/imgui_lib")
-	add_subdirectory ("${THIRDPARTY_DIR}/catch2" "${CMAKE_CURRENT_BINARY_DIR}/catch2")
 endif()
 
 
 add_library(core)
 target_sources(core PRIVATE 
 "${CMAKE_CURRENT_SOURCE_DIR}/debug/log.cpp"
-"${CMAKE_CURRENT_SOURCE_DIR}/debug/log.h" "platform/graphics_wrappers/RenderManager.cpp")
+"${CMAKE_CURRENT_SOURCE_DIR}/debug/log.h" "RenderManager.cpp" "platform/graphics_wrappers/graphic_backend.h" "platform/graphics_wrappers/integrations/glwf_backend_integration.h" "platform/graphics_wrappers/integrations/glwf_backend_integration.cpp")
 
 target_include_directories(core PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/")
 
 if (CMAKE_BUILD_TYPE STREQUAL "Debug")
-	target_link_libraries(core PUBLIC glm glfw glad imgui Catch2::Catch2WithMain)
+	target_link_libraries(core PUBLIC glm glfw glad imgui)
 else()
 	target_link_libraries(core PUBLIC glm glfw glad)
 endif()

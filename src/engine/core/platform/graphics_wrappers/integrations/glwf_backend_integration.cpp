@@ -1,9 +1,6 @@
-#include <glad/glad.h>
-#include "RenderManager.h"
-#include "../../debug/Log.h"
+#include "glwf_backend_integration.h"
 
-
-void RenderManager::StartUp()
+void GLWF_BackendIntegration::Init()
 {
 	if (!glfwInit()) return;
 
@@ -16,7 +13,7 @@ void RenderManager::StartUp()
 #endif
 
 	// Create window with graphics context
-	_window = glfwCreateWindow(1280, 720, "game", nullptr, nullptr);
+	_window = glfwCreateWindow(_width, _height, _windowName.c_str(), nullptr, nullptr);
 	if (_window == nullptr) {
 		glfwTerminate();
 		return;
@@ -32,7 +29,7 @@ void RenderManager::StartUp()
 	}
 }
 
-void RenderManager::Run()
+void GLWF_BackendIntegration::Update()
 {
 	glfwPollEvents();
 	int display_w, display_h;
@@ -43,13 +40,23 @@ void RenderManager::Run()
 	glfwSwapBuffers(_window);
 }
 
-void RenderManager::ShutDown()
+void GLWF_BackendIntegration::Close()
 {
 	glfwDestroyWindow(_window);
 	glfwTerminate();
 }
 
-bool RenderManager::IsRunning()
+bool GLWF_BackendIntegration::IsRunning()
 {
 	return !glfwWindowShouldClose(_window);
+}
+
+void GLWF_BackendIntegration::SetSize(int wight, int height)
+{
+
+}
+
+void GLWF_BackendIntegration::SetWindowName(const std::string text)
+{
+
 }

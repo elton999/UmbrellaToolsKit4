@@ -1,25 +1,17 @@
-#include <iostream>
-#include <sstream>
-
-#include "engine/core/debug/Log.h"
-#include "engine/core/render_manager.h"
-#include "engine/core/platform/graphics_wrappers/integrations/glwf_backend_integration.h"
-
-
-RenderManager renderManager;
+#include "engine/umbrella_root.h"
 
 
 int main()
 {
-	renderManager = {};
-	renderManager.BackendIntegration = new GLWF_BackendIntegration;
-	renderManager.StartUp();
+	Umbrella::UmbrellaRoot umbrellaToolsKit = {};
 
-	while (renderManager.IsRunning())
-	{
-		renderManager.Run();
-	}
+	umbrellaToolsKit.StartUp();
 
-	renderManager.ShutDown();
+	umbrellaToolsKit.RenderWindow->BackendIntegration->SetWindowName("Game made with UmbrellaToolsKit4");
+
+	umbrellaToolsKit.Run();
+
+	umbrellaToolsKit.ShutDown();
+
 	return 0;
 }

@@ -1,26 +1,26 @@
-#include "RenderManager.h"
+#include "render_window.h"
 #include "debug/Log.h"
 
 
-void RenderManager::StartUp()
+void Umbrella::RenderWindow::StartUp()
 {
 	if (BackendIntegration == nullptr) return;
 	BackendIntegration->Init();
 }
 
-void RenderManager::Run()
+void Umbrella::RenderWindow::Run()
 {
 	if (BackendIntegration == nullptr) return;
 	BackendIntegration->Update();
 }
 
-void RenderManager::ShutDown()
+void Umbrella::RenderWindow::ShutDown()
 {
 	if (BackendIntegration == nullptr) return;
 	BackendIntegration->Close();
 }
 
-bool RenderManager::IsRunning()
+bool Umbrella::RenderWindow::IsRunning()
 {
 	if (BackendIntegration == nullptr) return false;
 	return BackendIntegration->IsRunning();

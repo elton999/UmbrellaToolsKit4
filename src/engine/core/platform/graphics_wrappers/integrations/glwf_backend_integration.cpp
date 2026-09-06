@@ -1,6 +1,6 @@
 #include "glwf_backend_integration.h"
 
-void GLWF_BackendIntegration::Init()
+void Umbrella::GLWF_BackendIntegration::Init()
 {
 	if (!glfwInit()) return;
 
@@ -29,7 +29,7 @@ void GLWF_BackendIntegration::Init()
 	}
 }
 
-void GLWF_BackendIntegration::Update()
+void Umbrella::GLWF_BackendIntegration::Update()
 {
 	glfwPollEvents();
 	int display_w, display_h;
@@ -40,23 +40,23 @@ void GLWF_BackendIntegration::Update()
 	glfwSwapBuffers(_window);
 }
 
-void GLWF_BackendIntegration::Close()
+void Umbrella::GLWF_BackendIntegration::Close()
 {
 	glfwDestroyWindow(_window);
 	glfwTerminate();
 }
 
-bool GLWF_BackendIntegration::IsRunning()
+bool Umbrella::GLWF_BackendIntegration::IsRunning()
 {
 	return !glfwWindowShouldClose(_window);
 }
 
-void GLWF_BackendIntegration::SetSize(int wight, int height)
+void Umbrella::GLWF_BackendIntegration::SetSize(int wight, int height)
 {
 
 }
 
-void GLWF_BackendIntegration::SetWindowName(const std::string text)
+void Umbrella::GLWF_BackendIntegration::SetWindowName(const std::string text)
 {
 
 }

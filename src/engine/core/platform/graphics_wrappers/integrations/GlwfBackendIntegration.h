@@ -22,6 +22,7 @@ namespace Umbrella
 			bool IsRunning() override;
 			void SetSize(int wight, int height) override;
 			void SetWindowName(const std::string text) override;
+			float GetTime() override;
 	};
 };
 

@@ -16,4 +16,5 @@ class GraphicBackend
 		virtual bool IsRunning() { return false; }
 		virtual void SetSize(int wight, int height) {}
 		virtual void SetWindowName(const std::string text) {}
+		virtual float GetTime() { return 0; }
 };

@@ -60,3 +60,8 @@ void Umbrella::GLWF_BackendIntegration::SetWindowName(const std::string text)
 {
 	glfwSetWindowTitle(_window, text.c_str());
 }
+
+float Umbrella::GLWF_BackendIntegration::GetTime()
+{
+	return (float)glfwGetTime();
+}

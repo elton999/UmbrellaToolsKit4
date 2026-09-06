@@ -1,5 +1,5 @@
 #pragma once
-#include "../graphic_backend.h"
+#include "../GraphicBackend.h"
 #include "../../../debug/Log.h"
 
 #include <iostream>

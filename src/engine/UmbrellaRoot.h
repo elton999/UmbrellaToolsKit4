@@ -4,8 +4,8 @@
 #include <sstream>
 
 #include "core/debug/Log.h"
-#include "core/render_window.h"
-#include "core/platform/graphics_wrappers/integrations/glwf_backend_integration.h"
+#include "core/RenderWindow.h"
+#include "core/platform/graphics_wrappers/integrations/GlwfBackendIntegration.h"
 
 namespace Umbrella
 {

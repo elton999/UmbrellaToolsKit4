@@ -3,7 +3,7 @@
 #include <iostream>
 #include <string>
 #include <sstream>
-#include "platform/graphics_wrappers/graphic_backend.h"
+#include "platform/graphics_wrappers/GraphicBackend.h"
 #include <memory>
 
 

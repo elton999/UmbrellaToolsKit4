@@ -1,4 +1,4 @@
-#include "glwf_backend_integration.h"
+#include "GlwfBackendIntegration.h"
 
 void Umbrella::GLWF_BackendIntegration::Init()
 {
@@ -58,5 +58,5 @@ void Umbrella::GLWF_BackendIntegration::SetSize(int wight, int height)
 
 void Umbrella::GLWF_BackendIntegration::SetWindowName(const std::string text)
 {
-
+	glfwSetWindowTitle(_window, text.c_str());
 }

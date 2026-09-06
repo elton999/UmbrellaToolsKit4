@@ -9,7 +9,7 @@ endif()
 
 
 if (WIN32 AND CMAKE_BUILD_TYPE STREQUAL "Debug")
-	add_executable (game "src/main.cpp" "src/engine/umbrella_root.h" "src/engine/umbrella_root.cpp")
+	add_executable (game "src/main.cpp" "src/engine/UmbrellaRoot.h" "src/engine/UmbrellaRoot.cpp")
 else()
 	add_executable (game WIN32 "src/main.cpp" )
 endif()
@@ -30,7 +30,7 @@ enable_testing()
 include(CTest)
 include(Catch)
 
-add_executable(unit_tests "tests/src/engine/core/render_window.cpp" "src/engine/umbrella_root.h" "src/engine/umbrella_root.cpp")
+add_executable(unit_tests "tests/src/engine/core/RenderWindow.cpp" "src/engine/UmbrellaRoot.h" "src/engine/UmbrellaRoot.cpp")
 target_link_libraries(unit_tests PRIVATE core Catch2::Catch2WithMain)
 
 catch_discover_tests(unit_tests)

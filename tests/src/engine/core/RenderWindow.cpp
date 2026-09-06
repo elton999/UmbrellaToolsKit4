@@ -1,5 +1,5 @@
 #include <catch2/catch_test_macros.hpp>
-#include "../../../../src/engine/core/render_window.h"
+#include "../../../../src/engine/core/RenderWindow.h"
 
 TEST_CASE("init without any integration", "[StartUp][backend == null]")
 {

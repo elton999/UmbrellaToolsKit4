@@ -1,5 +1,5 @@
 #include <catch2/catch_test_macros.hpp>
-#include "../../../../src/engine/core/RenderManager.h"
+#include "../../../../src/engine/core/render_manager.h"
 
 TEST_CASE("init without any integration", "[StartUp][backend == null]")
 {

@@ -30,7 +30,7 @@ enable_testing()
 include(CTest)
 include(Catch)
 
-add_executable(unit_tests "tests/src/engine/core/RenderManager.cpp")
+add_executable(unit_tests "tests/src/engine/core/render_manager.cpp")
 target_link_libraries(unit_tests PRIVATE core Catch2::Catch2WithMain)
 
 catch_discover_tests(unit_tests)

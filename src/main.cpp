@@ -2,7 +2,7 @@
 #include <sstream>
 
 #include "engine/core/debug/Log.h"
-#include "engine/core/RenderManager.h"
+#include "engine/core/render_manager.h"
 #include "engine/core/platform/graphics_wrappers/integrations/glwf_backend_integration.h"
 
 

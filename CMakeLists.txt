@@ -2,22 +2,23 @@
 
 project (game VERSION 0.1.0 LANGUAGES CXX)
 
-add_subdirectory ("src/engine/core")
+add_subdirectory ("src/engine")
+
 if (CMAKE_BUILD_TYPE STREQUAL "Debug")
 	add_subdirectory ("thirdparty/catch2")
 endif()
 
 
 if (WIN32 AND CMAKE_BUILD_TYPE STREQUAL "Debug")
-	add_executable (game "src/main.cpp" "src/engine/UmbrellaRoot.h" "src/engine/UmbrellaRoot.cpp" )
+	add_executable (game "src/main.cpp")
 else()
-	add_executable (game WIN32 "src/main.cpp" "src/engine/UmbrellaRoot.h" "src/engine/UmbrellaRoot.cpp")
+	add_executable (game WIN32 "src/main.cpp")
 endif()
 
 if (CMAKE_BUILD_TYPE STREQUAL "Debug")
-	target_link_libraries(game PRIVATE core)
+	target_link_libraries(game PRIVATE umbrella core)
 else()
-	target_link_libraries(game PRIVATE core)
+	target_link_libraries(game PRIVATE umbrella core)
 endif()
 
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
@@ -30,7 +31,12 @@ enable_testing()
 include(CTest)
 include(Catch)
 
-add_executable(unit_tests "tests/src/engine/core/RenderWindowTest.cpp" "tests/src/engine/core/platform/FileSystemTest.cpp")
-target_link_libraries(unit_tests PRIVATE core Catch2::Catch2WithMain)
+add_executable(
+	unit_tests 
+	"tests/src/engine/core/RenderWindowTest.cpp" 
+	"tests/src/engine/core/platform/FileSystemTest.cpp"
+)
+
+target_link_libraries(unit_tests PRIVATE umbrella core Catch2::Catch2WithMain)
 
 catch_discover_tests(unit_tests)

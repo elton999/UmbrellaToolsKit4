@@ -15,7 +15,17 @@ endif()
 add_library(core)
 target_sources(core PRIVATE 
 "${CMAKE_CURRENT_SOURCE_DIR}/debug/log.cpp"
-"${CMAKE_CURRENT_SOURCE_DIR}/debug/log.h" "RenderWindow.cpp" "platform/graphics_wrappers/GraphicBackend.h" "platform/graphics_wrappers/integrations/GlwfBackendIntegration.h" "platform/graphics_wrappers/integrations/GlwfBackendIntegration.cpp" "Timer.h" "Timer.cpp")
+"${CMAKE_CURRENT_SOURCE_DIR}/debug/log.h"
+"RenderWindow.h"
+"RenderWindow.cpp" 
+"platform/graphics_wrappers/GraphicBackend.h" 
+"platform/graphics_wrappers/integrations/GlwfBackendIntegration.h" 
+"platform/graphics_wrappers/integrations/GlwfBackendIntegration.cpp" 
+"Timer.h"
+"Timer.cpp" 
+"platform/FileSystem.h" 
+"platform/FileSystem.cpp"
+)
 
 target_include_directories(core PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/")
 

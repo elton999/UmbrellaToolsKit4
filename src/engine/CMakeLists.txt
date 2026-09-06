@@ -7,7 +7,7 @@ add_library(umbrella)
 target_sources(umbrella PRIVATE
 	"UmbrellaRoot.h"
 	"UmbrellaRoot.cpp"
-)
+ "resources/ResourceManager.h" "resources/ResourceManager.cpp")
 
 target_include_directories(umbrella PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/")
 

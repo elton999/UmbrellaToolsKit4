@@ -2,16 +2,16 @@
 #include "../../../../../src/engine/core/platform/FileSystem.h"
 #include <cstdlib>
 
-TEST_CASE("check write and read string", "[write and read][sting == null]")
+TEST_CASE("check write and read string", "[write and read]")
 {
-	int randomNum = rand() % 101;
+	srand(time(0));
+	int randomNum = rand();
+	std::string path = "Testing/Temporary/filesystem.txt";
 
-	Umbrella::FileSystem::Write("filesystem.txt", std::to_string(randomNum));
-	Umbrella::FileSystem::Write("filesystem.txt", std::to_string(randomNum));
-	Umbrella::FileSystem::Write("filesystem.txt", std::to_string(randomNum));
+	Umbrella::FileSystem::Write(path, std::to_string(randomNum) + "teste3");
 
-	std::string result = Umbrella::FileSystem::Read("filesystem.txt");
+	std::string result = Umbrella::FileSystem::Read(path);
 
-	REQUIRE(result == std::to_string(randomNum));
+	REQUIRE(result == std::to_string(randomNum)+"teste3");
 }
 

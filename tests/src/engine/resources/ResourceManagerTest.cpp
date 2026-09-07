@@ -39,3 +39,32 @@ TEST_CASE("Load only once", "[Load][lenght == 1]")
 
 	REQUIRE(resourceManager.Lenght() == 1);
 }
+
+TEST_CASE("Unload resource teste", "[Load][lenght == 0]")
+{
+	std::string path1 = "Testing/Temporary/loadResourceTest4.txt";
+	std::string path2 = "Testing/Temporary/loadResourceTest5.txt";
+	std::string content = "content content";
+	Umbrella::FileSystem::Write(path1, content);
+	Umbrella::FileSystem::Write(path2, content);
+
+	Umbrella::ResourceManager resourceManager = {};
+	resourceManager.Load<Umbrella::TextResource>(path1);
+	resourceManager.Load<Umbrella::TextResource>(path2);
+
+	REQUIRE(resourceManager.Lenght() == 2);
+
+	resourceManager.Unload(path1);
+
+	REQUIRE_FALSE(resourceManager.HasContent(path1));
+	REQUIRE(resourceManager.Lenght() == 1);
+
+	resourceManager.Load<Umbrella::TextResource>(path1);
+
+	REQUIRE(resourceManager.Lenght() == 2);
+
+	resourceManager.ShutDown();
+
+	REQUIRE_FALSE(resourceManager.HasContent(path1));
+	REQUIRE(resourceManager.Lenght() == 0);
+}

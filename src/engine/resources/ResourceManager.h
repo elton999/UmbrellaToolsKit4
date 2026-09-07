@@ -19,7 +19,42 @@ namespace Umbrella
 			template <typename T>
 			T* Load(std::string path)
 			{
-				return nullptr;
+				T* result;
+
+				// checking if the content is already loaded
+				{
+					if (HasContent(path))
+					{
+						try
+						{
+							result = dynamic_cast<T*>(_content.at(path));
+						}
+						catch(std::exception e)
+						{
+							result = nullptr;
+						}
+
+						return result;
+					}
+				}
+				
+				// load content
+				{
+					try
+					{
+						 Umbrella::ResourceContentIntegration* resourceLoad = dynamic_cast<Umbrella::ResourceContentIntegration*>(new T);
+						 resourceLoad->Load(path);
+						 result = dynamic_cast<T*>(resourceLoad);
+						 _content.insert({path, result});
+						 _lenght++;
+					}
+					catch(std::exception e)
+					{
+						result = nullptr;
+					}
+				}
+
+				return result;
 			}
 			void Unload(std::string path);
 

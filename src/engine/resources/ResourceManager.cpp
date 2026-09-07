@@ -19,3 +19,8 @@ void Umbrella::ResourceManager::Unload(std::string path)
 {
 
 }
+
+int Umbrella::ResourceManager::Lenght()
+{
+	return _lenght;
+}

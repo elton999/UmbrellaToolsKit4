@@ -9,6 +9,7 @@ namespace Umbrella
 	{
 		private:
 			std::map<std::string, Umbrella::ResourceContentIntegration*> _content;
+			int _lenght;
 
 		public:
 			void StartUp();
@@ -21,5 +22,7 @@ namespace Umbrella
 				return nullptr;
 			}
 			void Unload(std::string path);
+
+			int Lenght();
 	};
 }

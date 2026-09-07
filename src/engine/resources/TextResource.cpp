@@ -11,6 +11,6 @@ void Umbrella::TextResource::Unload()
 {
 	if (!_content.empty())
 	{
-		_content.clear();
+		_content = {};
 	}
 }

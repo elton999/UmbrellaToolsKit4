@@ -26,3 +26,16 @@ TEST_CASE("Load Resource", "[Load][resource != null]")
 
 	REQUIRE(textResourse);
 }
+
+TEST_CASE("Load only once", "[Load][lenght == 1]")
+{
+	std::string path = "Testing/Temporary/loadResourceTest3.txt";
+	std::string content = "content content";
+	Umbrella::FileSystem::Write(path, content);
+
+	Umbrella::ResourceManager resourceManager = {};
+	resourceManager.Load<Umbrella::TextResource>(path);
+	resourceManager.Load<Umbrella::TextResource>(path);
+
+	REQUIRE(resourceManager.Lenght() == 1);
+}

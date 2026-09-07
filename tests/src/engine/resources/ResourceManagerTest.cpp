@@ -25,6 +25,7 @@ TEST_CASE("Load Resource", "[Load][resource != null]")
 	Umbrella::TextResource *textResourse = resourceManager.Load<Umbrella::TextResource>(path);
 
 	REQUIRE(textResourse);
+	REQUIRE(textResourse->GetContent()->compare(content) == 0);
 }
 
 TEST_CASE("Load only once", "[Load][lenght == 1]")

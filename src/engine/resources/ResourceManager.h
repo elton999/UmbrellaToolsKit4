@@ -13,8 +13,13 @@ namespace Umbrella
 		public:
 			void StartUp();
 			void ShutDown();
-			bool HasItem(std::string path);
+			bool HasContent(std::string path);
 
-			Umbrella::ResourceContentIntegration* Load(std::string path);
+			template <typename T>
+			T* Load(std::string path)
+			{
+				return nullptr;
+			}
+			void Unload(std::string path);
 	};
 }

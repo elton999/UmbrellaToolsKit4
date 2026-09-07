@@ -35,7 +35,8 @@ add_executable(
 	unit_tests 
 	"tests/src/engine/core/RenderWindowTest.cpp" 
 	"tests/src/engine/core/platform/FileSystemTest.cpp"
-)
+	"tests/src/engine/resources/ResourceManagerTest.cpp"
+	"tests/src/engine/resources/TextResourceTest.cpp")
 
 target_link_libraries(unit_tests PRIVATE umbrella core Catch2::Catch2WithMain)
 

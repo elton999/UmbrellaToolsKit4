@@ -11,7 +11,7 @@ target_sources(umbrella PRIVATE
 	"resources/ResourceManager.h"
 	"resources/ResourceManager.cpp"
 	"resources/TextResource.h"
-	"resources/TextResource.cpp" "scene/Scene.h" "scene/Scene.cpp" "scene/SceneManager.h" "scene/SceneManager.cpp" "scene/GameObject.h")
+	"resources/TextResource.cpp" "scene/Scene.h" "scene/Scene.cpp" "scene/SceneManager.h" "scene/SceneManager.cpp" "scene/GameObject.h" "scene/IComponent.h")
 
 target_include_directories(umbrella PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/")
 

@@ -20,7 +20,7 @@ namespace Umbrella
 			virtual void OnDestroy() {}
 
 			virtual void OnUpdate(float deltaTime) {}
-			virtual void OnFixedUpdate(float dataDeltaTime) {}
+			virtual void OnUpdateData(float dataDeltaTime) {}
 
 			GameObject* GetGameObject() { return nullptr; }
 			Scene* GetScene() {return _scene; }

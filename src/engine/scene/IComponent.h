@@ -10,6 +10,7 @@ namespace Umbrella
 	{
 		private:
 			std::string _gameObjectId;
+			std::string _componentInstanceId;
 			Scene* _scene;
 
 		public:
@@ -22,8 +23,13 @@ namespace Umbrella
 			virtual void OnUpdate(float deltaTime) {}
 			virtual void OnUpdateData(float dataDeltaTime) {}
 
-			GameObject* GetGameObject() { return nullptr; }
-			Scene* GetScene() {return _scene; }
+			GameObject* GetGameObject()
+			{
+				return nullptr;
+			}
+
+			Scene* GetScene() { return _scene; }
+			std::string GetInstanceId() { return _componentInstanceId; }
 			
 	};
 }

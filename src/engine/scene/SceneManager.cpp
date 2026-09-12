@@ -16,6 +16,11 @@ void Umbrella::SceneManager::ShutDown()
 
 }
 
+Umbrella::Scene* Umbrella::SceneManager::CreateScene()
+{
+    return nullptr;
+}
+
 void Umbrella::SceneManager::LoadScene(Scene* scene)
 {
 

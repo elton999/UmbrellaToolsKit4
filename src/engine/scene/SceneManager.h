@@ -10,10 +10,7 @@ namespace Umbrella
             void Run();
             void ShutDown();
 
-            Scene* CreateScene()
-            {
-                return nullptr;
-            }
+            Scene* CreateScene();
             void LoadScene(Scene* scene);
             void UnloadScene(Scene* scene);
             bool IsSceneLoaded(Scene* scene);

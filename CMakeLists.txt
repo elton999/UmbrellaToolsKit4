@@ -1,27 +1,27 @@
 ﻿cmake_minimum_required (VERSION 3.10)
 
-project (game VERSION 0.1.0 LANGUAGES CXX)
+project(game VERSION 0.1.0 LANGUAGES CXX)
 
-add_subdirectory ("src/engine")
+add_subdirectory("src/engine")
 
-add_subdirectory ("thirdparty/catch2")
+add_subdirectory("thirdparty/catch2")
 
-if (WIN32 AND CMAKE_BUILD_TYPE STREQUAL "Debug")
-	add_executable (game "src/main.cpp")
+if(WIN32 AND CMAKE_BUILD_TYPE STREQUAL "Debug")
+  add_executable(game "src/main.cpp" "tests/src/engine/scene/SceneTest.cpp")
 else()
-	add_executable (game WIN32 "src/main.cpp")
-endif()
-
-if (CMAKE_BUILD_TYPE STREQUAL "Debug")
-	target_link_libraries(game PRIVATE umbrella core)
-else()
-	target_link_libraries(game PRIVATE umbrella core)
+  add_executable(game WIN32 "src/main.cpp")
 endif()
 
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
-    target_compile_definitions(game PRIVATE BUILD_DEBUG)
+  target_link_libraries(game PRIVATE umbrella core)
+else()
+  target_link_libraries(game PRIVATE umbrella core)
+endif()
+
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+  target_compile_definitions(game PRIVATE BUILD_DEBUG)
 elseif(CMAKE_BUILD_TYPE STREQUAL "Release")
-    target_compile_definitions(game PRIVATE BUILD_RELEASE)
+  target_compile_definitions(game PRIVATE BUILD_RELEASE)
 endif()
 
 enable_testing()
@@ -29,11 +29,11 @@ include(CTest)
 include(Catch)
 
 add_executable(
-	unit_tests 
-	"tests/src/engine/core/RenderWindowTest.cpp" 
-	"tests/src/engine/core/platform/FileSystemTest.cpp"
-	"tests/src/engine/resources/ResourceManagerTest.cpp"
-	"tests/src/engine/resources/TextResourceTest.cpp")
+ unit_tests
+ "tests/src/engine/core/RenderWindowTest.cpp"
+ "tests/src/engine/core/platform/FileSystemTest.cpp"
+ "tests/src/engine/resources/ResourceManagerTest.cpp"
+ "tests/src/engine/resources/TextResourceTest.cpp" "tests/src/engine/scene/SceneTest.cpp")
 
 target_link_libraries(unit_tests PRIVATE umbrella core Catch2::Catch2WithMain)
 

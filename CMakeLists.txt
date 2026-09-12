@@ -4,10 +4,7 @@ project (game VERSION 0.1.0 LANGUAGES CXX)
 
 add_subdirectory ("src/engine")
 
-if (CMAKE_BUILD_TYPE STREQUAL "Debug")
-	add_subdirectory ("thirdparty/catch2")
-endif()
-
+add_subdirectory ("thirdparty/catch2")
 
 if (WIN32 AND CMAKE_BUILD_TYPE STREQUAL "Debug")
 	add_executable (game "src/main.cpp")

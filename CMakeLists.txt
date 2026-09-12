@@ -7,7 +7,7 @@ add_subdirectory("src/engine")
 add_subdirectory("thirdparty/catch2")
 
 if(WIN32 AND CMAKE_BUILD_TYPE STREQUAL "Debug")
-  add_executable(game "src/main.cpp" "tests/src/engine/scene/SceneTest.cpp")
+  add_executable(game "src/main.cpp")
 else()
   add_executable(game WIN32 "src/main.cpp")
 endif()
@@ -33,7 +33,9 @@ add_executable(
  "tests/src/engine/core/RenderWindowTest.cpp"
  "tests/src/engine/core/platform/FileSystemTest.cpp"
  "tests/src/engine/resources/ResourceManagerTest.cpp"
- "tests/src/engine/resources/TextResourceTest.cpp" "tests/src/engine/scene/SceneTest.cpp")
+ "tests/src/engine/resources/TextResourceTest.cpp"
+ "tests/src/engine/scene/SceneTest.cpp"
+ "tests/src/engine/scene/SceneManagerTest.cpp")
 
 target_link_libraries(unit_tests PRIVATE umbrella core Catch2::Catch2WithMain)
 

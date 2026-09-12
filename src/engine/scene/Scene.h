@@ -13,14 +13,14 @@ namespace Umbrella
 			std::list<IComponent*> _components = {};
 
 		public:
-			void AddGameObject(GameObject * gameObject) {}
-			GameObject * CreateGameObject() { return nullptr; }
+			void AddGameObject(GameObject * gameObject);
+			GameObject * CreateGameObject();
 
 			template <typename TComponent>
-			TComponent* AddComponent(GameObject* gameObject){ return nullptr }
-			void RemoveComponent(IComponent* component) {}
+			TComponent* AddComponent(GameObject* gameObject);
+			void RemoveComponent(GameObject* gameobject, IComponent* component);
 
-			void Update(float deltaTime) {};
-			void UpdateData(float deltaTime) {};
+			void Update(float deltaTime);
+			void UpdateData(float deltaTime);
 	};
 }

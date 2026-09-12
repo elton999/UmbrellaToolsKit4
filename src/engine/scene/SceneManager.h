@@ -1,5 +1,7 @@
 #pragma once
 #include "Scene.h"
+#include "GameObject.h"
+#include "IComponent.h"
 
 namespace Umbrella
 {

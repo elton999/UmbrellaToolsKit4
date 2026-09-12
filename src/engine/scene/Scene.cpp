@@ -1,6 +1,11 @@
 #include "Scene.h"
 
-void Umbrella::Scene::AddGameObject(GameObject* gameobjec)
+void Umbrella::Scene::AddGameObject(GameObject* gameobject)
+{
+
+}
+
+void Umbrella::Scene::RemoveGameObject(GameObject* gameObject)
 {
 
 }
@@ -8,6 +13,11 @@ void Umbrella::Scene::AddGameObject(GameObject* gameobjec)
 GameObject* Umbrella::Scene::CreateGameObject()
 {
 	return nullptr;
+}
+
+bool Umbrella::Scene::HasGameObject(GameObject* gameObject)
+{
+    return false;
 }
 
 void Umbrella::Scene::RemoveComponent(GameObject* gameObject, IComponent* component)

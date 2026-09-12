@@ -24,7 +24,6 @@ TEST_CASE("Load Scene Check", "[LoadScene][IsSceneLoaded == true]")
     REQUIRE(sceneManager.IsSceneLoaded(scene));
 }
 
-
 TEST_CASE("unLoad Scene Check", "[UnloadScene][IsSceneLoaded == false]")
 {
     Umbrella::SceneManager sceneManager = {};

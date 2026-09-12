@@ -15,10 +15,12 @@ namespace Umbrella
 		public:
 			void AddGameObject(GameObject * gameObject);
 			GameObject * CreateGameObject();
+            void RemoveGameObject(GameObject* gameObject);
 
 			template <typename TComponent>
 			TComponent* AddComponent(GameObject* gameObject);
 			void RemoveComponent(GameObject* gameObject, IComponent* component);
+            bool HasGameObject(GameObject* gameObject);
 
 			void Update(float deltaTime);
 			void UpdateData(float deltaTime);

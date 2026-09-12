@@ -1,8 +1,9 @@
 #pragma once
 
 #include <string>
-#include "Scene.h"
 #include "GameObject.h"
+
+class Scene;
 
 namespace Umbrella
 {
@@ -11,7 +12,7 @@ namespace Umbrella
 		private:
 			std::string _gameObjectId;
 			std::string _componentInstanceId;
-			Scene* _scene;
+            Scene *_scene;
 
 		public:
 			virtual void OnStartUp() {}

@@ -18,7 +18,7 @@ namespace Umbrella
 
 			template <typename TComponent>
 			TComponent* AddComponent(GameObject* gameObject);
-			void RemoveComponent(GameObject* gameobject, IComponent* component);
+			void RemoveComponent(GameObject* gameObject, IComponent* component);
 
 			void Update(float deltaTime);
 			void UpdateData(float deltaTime);

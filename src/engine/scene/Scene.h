@@ -19,9 +19,11 @@ namespace Umbrella
 
 			template <typename TComponent>
 			TComponent* AddComponent(GameObject* gameObject);
+            void AddComponent(GameObject* gameObejct, IComponent* componet);
 			void RemoveComponent(GameObject* gameObject, IComponent* component);
-            bool HasGameObject(GameObject* gameObject);
+            bool HasComponent(GameObject* gameObject, IComponent* component);
 
+            bool HasGameObject(GameObject* gameObject);
 			void Update(float deltaTime);
 			void UpdateData(float deltaTime);
 	};

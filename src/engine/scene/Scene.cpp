@@ -20,7 +20,23 @@ bool Umbrella::Scene::HasGameObject(GameObject* gameObject)
     return false;
 }
 
+template <typename TComponent>
+TComponent* Umbrella::Scene::AddComponent(GameObject* gameObject)
+{
+
+}
+
+void Umbrella::Scene::AddComponent(GameObject* gameObject, IComponent* component)
+{
+
+}
+
 void Umbrella::Scene::RemoveComponent(GameObject* gameObject, IComponent* component)
+{
+
+}
+
+bool Umbrella::Scene::HasComponent(GameObject* gameObject, IComponent* component)
 {
 
 }

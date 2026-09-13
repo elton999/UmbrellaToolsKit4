@@ -27,4 +27,7 @@ if(CMAKE_BUILD_TYPE STREQUAL "Debug")
   target_compile_definitions(umbrella PRIVATE BUILD_DEBUG)
 elseif(CMAKE_BUILD_TYPE STREQUAL "Release")
   target_compile_definitions(umbrella PRIVATE BUILD_RELEASE)
+else()
+  target_compile_definitions(umbrella PRIVATE BUILD_RELEASE)
 endif()
+

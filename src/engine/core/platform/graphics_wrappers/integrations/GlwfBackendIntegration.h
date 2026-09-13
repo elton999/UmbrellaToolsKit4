@@ -2,11 +2,9 @@
 #include "../GraphicBackend.h"
 #include "../../../debug/Log.h"
 
-#include <iostream>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <string>
-#include <sstream>
 
 namespace Umbrella
 {

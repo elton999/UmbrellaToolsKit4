@@ -38,7 +38,7 @@ void Umbrella::Scene::RemoveComponent(GameObject* gameObject, IComponent* compon
 
 bool Umbrella::Scene::HasComponent(GameObject* gameObject, IComponent* component)
 {
-
+    return false;
 }
 
 void Umbrella::Scene::Update(float deltaTime)

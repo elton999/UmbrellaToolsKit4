@@ -24,7 +24,7 @@ target_sources(core PRIVATE
 "Timer.cpp"
 "platform/FileSystem.h"
 "platform/FileSystem.cpp"
-)
+ "UniqueId.h" "UniqueId.cpp")
 
 target_include_directories(core PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/")
 

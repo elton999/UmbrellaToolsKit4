@@ -9,7 +9,7 @@ TEST_CASE("Check Create GameObject", "[CreateGameObject]")
 
     GameObject* gameObject = scene.CreateGameObject();
 
-    REQUIRE(gameObject != nullptr);
+    REQUIRE_FALSE(gameObject == nullptr);
 }
 
 TEST_CASE("check add remove GameObject", "[HasGameObject]")
@@ -23,9 +23,10 @@ TEST_CASE("check add remove GameObject", "[HasGameObject]")
 
     scene.AddGameObject(gameObject1);
 
-    REQUIRE(scene.HasGameObject(gameObject1));
     REQUIRE_FALSE(scene.HasGameObject(gameObject2));
+    REQUIRE(scene.HasGameObject(gameObject1));
 
+    scene.AddGameObject(gameObject2);
     scene.RemoveGameObject(gameObject1);
 
     REQUIRE_FALSE(scene.HasGameObject(gameObject1));

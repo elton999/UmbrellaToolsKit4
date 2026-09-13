@@ -1,4 +1,5 @@
 #include "Scene.h"
+#include "../core/UniqueId.h"
 
 void Umbrella::Scene::AddGameObject(GameObject* gameobject)
 {
@@ -12,7 +13,10 @@ void Umbrella::Scene::RemoveGameObject(GameObject* gameObject)
 
 GameObject* Umbrella::Scene::CreateGameObject()
 {
-	return nullptr;
+    return new GameObject
+        {
+           Umbrella::UniqueId::GetId(),
+        };
 }
 
 bool Umbrella::Scene::HasGameObject(GameObject* gameObject)

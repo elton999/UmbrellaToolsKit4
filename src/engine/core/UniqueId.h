@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include "combaseapi.h"
 
 namespace Umbrella
 {

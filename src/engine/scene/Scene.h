@@ -18,7 +18,7 @@ namespace Umbrella
             void RemoveGameObject(GameObject* gameObject);
 
 			template <typename TComponent>
-			TComponent* AddComponent(GameObject* gameObject);
+			TComponent* AddComponent(GameObject* gameObject){ return nullptr; }
             void AddComponent(GameObject* gameObejct, IComponent* componet);
 			void RemoveComponent(GameObject* gameObject, IComponent* component);
             bool HasComponent(GameObject* gameObject, IComponent* component);

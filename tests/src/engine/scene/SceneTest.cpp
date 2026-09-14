@@ -108,6 +108,8 @@ TEST_CASE("check component flow methods", "[StartUp][Init][Enable]")
     GameObject* gameObject = scene.CreateGameObject();
     ComponentTest* componentTeste = scene.AddComponent<ComponentTest>(gameObject);
 
+    REQUIRE_FALSE(componentTeste == nullptr);
+
     REQUIRE(componentTeste->StartUp);
     REQUIRE_FALSE(componentTeste->Init);
     REQUIRE_FALSE(componentTeste->IsEnable);

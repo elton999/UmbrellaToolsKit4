@@ -1,9 +1,9 @@
 #pragma once
 
 #include <string>
-#include "GameObject.h"
 
 class Scene;
+struct GameObject;
 
 namespace Umbrella
 {
@@ -15,6 +15,14 @@ namespace Umbrella
             Scene *_scene;
 
 		public:
+
+            IComponent(std::string gameObjectId, Scene *scene, std::string componentId)
+            {
+                _gameObjectId = gameObjectId;
+                _scene = scene;
+                _componentInstanceId = componentId;
+            }
+
 			virtual void OnStartUp() {}
 			virtual void OnInit() {}
 			virtual void OnEnable() {}

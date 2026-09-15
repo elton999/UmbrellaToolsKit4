@@ -3,6 +3,8 @@
 #include <list>
 #include "GameObject.h"
 #include "IComponent.h"
+#include "../core/UniqueId.h"
+#include "../core/debug/Log.h"
 
 namespace Umbrella
 {
@@ -18,10 +20,32 @@ namespace Umbrella
             void RemoveGameObject(GameObject* gameObject);
 
 			template <typename TComponent>
-			TComponent* AddComponent(GameObject* gameObject){ return nullptr; }
+			TComponent* AddComponent(GameObject* gameObject)
+            {
+
+                if (!HasGameObject(gameObject))
+                {
+                    Log::MsgError("GameObject not found in the current scene");
+                    return nullptr;
+                }
+                TComponent* result;
+
+                try
+                {
+                    result = dynamic_cast<TComponent*>(gameObject->Id, this, UniqueId::GetId());
+                    _components.push_back(result);
+                }
+                catch (std::exception e)
+                {
+                    result = nullptr;
+                }
+
+                return result;
+
+            }
             void AddComponent(GameObject* gameObejct, IComponent* componet);
-			void RemoveComponent(GameObject* gameObject, IComponent* component);
-            bool HasComponent(GameObject* gameObject, IComponent* component);
+			void RemoveComponent(IComponent* component);
+            bool HasComponent(IComponent* component);
 
             bool HasGameObject(GameObject* gameObject);
 			void Update(float deltaTime);

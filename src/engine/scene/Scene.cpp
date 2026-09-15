@@ -1,5 +1,5 @@
 #include "Scene.h"
-#include "../core/UniqueId.h"
+
 
 void Umbrella::Scene::AddGameObject(GameObject* gameobject)
 {
@@ -36,16 +36,52 @@ bool Umbrella::Scene::HasGameObject(GameObject* gameObject)
 
 void Umbrella::Scene::AddComponent(GameObject* gameObject, IComponent* component)
 {
+    if (!HasGameObject(gameObject))
+    {
+        Log::MsgError("GameObject not found in the current scene");
+        return;
+    }
 
+    if (HasComponent(component))
+    {
+        Log::MsgWarning("Component already been in the current scene");
+    }
+
+    component->SetGameObejct(gameObject);
+    component->SetScene(this);
+    _components.push_back(component);
 }
 
-void Umbrella::Scene::RemoveComponent(GameObject* gameObject, IComponent* component)
+void Umbrella::Scene::RemoveComponent(IComponent* component)
 {
+    if (!HasGameObject(component->GetGameObject()))
+    {
+        Log::MsgError("GameObject not found in the current scene");
+        return;
+    }
 
+    if (HasComponent(component))
+    {
+        Log::MsgWarning("Component already been in the current scene");
+    }
 }
 
-bool Umbrella::Scene::HasComponent(GameObject* gameObject, IComponent* component)
+bool Umbrella::Scene::HasComponent(IComponent* component)
 {
+    if (!HasGameObject(component->GetGameObject()))
+    {
+        Log::MsgError("GameObject not found in the current scene");
+        return false;
+    }
+
+    for(auto componentItem : _components)
+    {
+        if (componentItem->GetInstanceId().compare(component->GetInstanceId()) == 0)
+        {
+            return true;
+        }
+    }
+
     return false;
 }
 

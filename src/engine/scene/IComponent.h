@@ -2,11 +2,12 @@
 
 #include <string>
 
-class Scene;
 struct GameObject;
 
 namespace Umbrella
 {
+    class Scene;
+
 	class IComponent
 	{
 		private:
@@ -31,6 +32,16 @@ namespace Umbrella
 
 			virtual void OnUpdate(float deltaTime) {}
 			virtual void OnUpdateData(float dataDeltaTime) {}
+
+            void SetGameObejct(GameObject* gameobejct)
+            {
+                _gameObjectId = gameobejct->Id;
+            }
+
+            void SetScene(Scene* scene)
+            {
+                _scene = scene;
+            }
 
 			GameObject* GetGameObject()
 			{

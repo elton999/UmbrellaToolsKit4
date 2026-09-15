@@ -87,18 +87,18 @@ TEST_CASE("check add component", "[AddComponent][HasComponent() == true]")
     ComponentTest* componentTeste1 = scene.AddComponent<ComponentTest>(gameObject);
     ComponentTest* componentTeste2 = scene.AddComponent<ComponentTest>(gameObject);
 
-    REQUIRE(scene.HasComponent(gameObject, componentTeste1));
-    REQUIRE(scene.HasComponent(gameObject, componentTeste2));
+    REQUIRE(scene.HasComponent(componentTeste1));
+    REQUIRE(scene.HasComponent(componentTeste2));
 
-    scene.RemoveComponent(gameObject, componentTeste1);
+    scene.RemoveComponent(componentTeste1);
 
-    REQUIRE_FALSE(scene.HasComponent(gameObject, componentTeste1));
-    REQUIRE(scene.HasComponent(gameObject, componentTeste2));
+    REQUIRE_FALSE(scene.HasComponent(componentTeste1));
+    REQUIRE(scene.HasComponent(componentTeste2));
 
-    scene.RemoveComponent(gameObject, componentTeste2);
+    scene.RemoveComponent(componentTeste2);
 
-    REQUIRE_FALSE(scene.HasComponent(gameObject, componentTeste1));
-    REQUIRE_FALSE(scene.HasComponent(gameObject, componentTeste2));
+    REQUIRE_FALSE(scene.HasComponent(componentTeste1));
+    REQUIRE_FALSE(scene.HasComponent(componentTeste2));
 }
 
 TEST_CASE("check component flow methods", "[StartUp][Init][Enable]")

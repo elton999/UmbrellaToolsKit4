@@ -106,6 +106,9 @@ TEST_CASE("check component flow methods", "[StartUp][Init][Enable]")
     Umbrella::Scene scene = {};
 
     GameObject* gameObject = scene.CreateGameObject();
+
+    REQUIRE_FALSE(gameObject == nullptr);
+
     ComponentTest* componentTeste = scene.AddComponent<ComponentTest>(gameObject);
 
     REQUIRE_FALSE(componentTeste == nullptr);
@@ -131,4 +134,15 @@ TEST_CASE("check component flow methods", "[StartUp][Init][Enable]")
 
     REQUIRE(componentTeste->TotalUpdateTime == 2);
     REQUIRE(componentTeste->TotalUpdateDataTime == 4);
+}
+
+TEST_CASE("check add a component in a gameobject that isn't in the scene", "[addcomponent]")
+ {
+    Umbrella::Scene scene = {};
+    Umbrella::Scene scene2 = {};
+
+    GameObject* gameObject = scene.CreateGameObject();
+    ComponentTest* componentTeste = scene2.AddComponent<ComponentTest>(gameObject);
+
+    REQUIRE(componentTeste == nullptr);
 }

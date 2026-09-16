@@ -22,7 +22,6 @@ namespace Umbrella
 			template <typename TComponent>
 			TComponent* AddComponent(GameObject* gameObject)
             {
-
                 if (!HasGameObject(gameObject))
                 {
                     Log::MsgError("GameObject not found in the current scene");
@@ -35,6 +34,7 @@ namespace Umbrella
                     IComponent* resultComponent = dynamic_cast<IComponent*>(new TComponent(gameObject->Id, this, UniqueId::GetId()));
                     result = dynamic_cast<TComponent*>(result);
                     _components.push_back(result);
+                    resultComponent->OnStartUp();
                 }
                 catch (std::exception e)
                 {
@@ -44,12 +44,20 @@ namespace Umbrella
                 return result;
 
             }
+
             void AddComponent(GameObject* gameObejct, IComponent* componet);
 			void RemoveComponent(IComponent* component);
             bool HasComponent(IComponent* component);
 
+            void DestroyGameObject(GameObject* gameObjec);
+            void SetActive(GameObject* gameObject, bool status);
+
             bool HasGameObject(GameObject* gameObject);
 			void Update(float deltaTime);
 			void UpdateData(float deltaTime);
+
+            void SetActiveScene(bool status);
+            void UnloadScene();
+            
 	};
 }

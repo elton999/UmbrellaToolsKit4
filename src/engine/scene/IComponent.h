@@ -13,7 +13,12 @@ namespace Umbrella
 		private:
 			std::string _gameObjectId;
 			std::string _componentInstanceId;
+
             Scene *_scene;
+
+            bool _isEnable = true;
+            bool _isStartUp = false;
+            bool _isStarted = false;
 
 		public:
 
@@ -22,6 +27,33 @@ namespace Umbrella
                 _gameObjectId = gameObjectId;
                 _scene = scene;
                 _componentInstanceId = componentId;
+            }
+
+            void Inicialization()
+            {
+                if (!GetActiveStatus()) return;
+                if (!_isStartUp)
+                    {
+                    OnStartUp();
+                    _isStartUp = true;
+                    }
+            }
+
+            void InicializationFirstFrame()
+            {
+                if (!GetActiveStatus()) return;
+                if (!_isStartUp)
+                {
+                    OnStartUp();
+                    _isStartUp = true;
+                }
+
+                if (!_isStarted)
+                {
+                    OnInit();
+                    OnEnable();
+                    _isStarted = true;
+                }
             }
 
 			virtual void OnStartUp() {}
@@ -33,7 +65,7 @@ namespace Umbrella
 			virtual void OnUpdate(float deltaTime) {}
 			virtual void OnUpdateData(float dataDeltaTime) {}
 
-            void SetGameObejct(GameObject* gameobejct)
+            void SetGameObject(GameObject* gameobejct)
             {
                 _gameObjectId = gameobejct->Id;
             }
@@ -49,6 +81,11 @@ namespace Umbrella
 			}
 
 			Scene* GetScene() { return _scene; }
-			std::string GetInstanceId() { return _componentInstanceId; }
+
+            std::string GetInstanceId() { return _componentInstanceId; }
+
+            void SetActive(bool status) { _isEnable = status; }
+
+            bool GetActiveStatus() { return _isEnable && GetGameObject()->IsEnable; }
 	};
 }

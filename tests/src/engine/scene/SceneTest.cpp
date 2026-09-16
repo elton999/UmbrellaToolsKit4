@@ -6,6 +6,10 @@
 class ComponentTest : public Umbrella::IComponent
 {
     public:
+
+        ComponentTest (std::string gameObjectId, Umbrella::Scene* scene, std::string componentId) : IComponent(gameObjectId, scene, componentId)
+        { }
+        
         bool StartUp = false;
         bool Init = false;
         bool IsEnable = false;

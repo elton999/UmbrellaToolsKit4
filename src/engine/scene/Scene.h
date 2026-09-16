@@ -32,7 +32,8 @@ namespace Umbrella
 
                 try
                 {
-                    result = dynamic_cast<TComponent*>(gameObject->Id, this, UniqueId::GetId());
+                    IComponent* resultComponent = dynamic_cast<IComponent*>(new TComponent(gameObject->Id, this, UniqueId::GetId()));
+                    result = dynamic_cast<TComponent*>(result);
                     _components.push_back(result);
                 }
                 catch (std::exception e)

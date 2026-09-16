@@ -50,6 +50,5 @@ namespace Umbrella
 
 			Scene* GetScene() { return _scene; }
 			std::string GetInstanceId() { return _componentInstanceId; }
-			
 	};
 }

@@ -1,6 +1,5 @@
 #include "Scene.h"
 
-
 void Umbrella::Scene::AddGameObject(GameObject* gameobject)
 {
     if (Umbrella::Scene::HasGameObject(gameobject)) return;
@@ -60,10 +59,13 @@ void Umbrella::Scene::RemoveComponent(IComponent* component)
         return;
     }
 
-    if (HasComponent(component))
+    if (!HasComponent(component))
     {
-        Log::MsgWarning("Component already been in the current scene");
+        Log::MsgError("Component not found in the current scene");
     }
+
+    _components.remove(component);
+    component->OnDestroy();
 }
 
 bool Umbrella::Scene::HasComponent(IComponent* component)

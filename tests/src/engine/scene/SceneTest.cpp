@@ -13,6 +13,7 @@ class ComponentTest : public Umbrella::IComponent
         bool StartUp = false;
         bool Init = false;
         bool IsEnable = false;
+        bool IsDestroyed = false;
 
         float TotalUpdateTime = 0;
         float TotalUpdateDataTime = 0;
@@ -141,7 +142,7 @@ TEST_CASE("check component flow methods", "[StartUp][Init][Enable]")
 }
 
 TEST_CASE("check add a component in a gameobject that isn't in the scene", "[addcomponent]")
- {
+{
     Umbrella::Scene scene = {};
     Umbrella::Scene scene2 = {};
 
@@ -150,3 +151,21 @@ TEST_CASE("check add a component in a gameobject that isn't in the scene", "[add
 
     REQUIRE(componentTeste == nullptr);
 }
+
+TEST_CASE("check remove component", "[RemoveComponent]")
+{
+    Umbrella::Scene scene = {};
+
+    GameObject* gameObject = scene.CreateGameObject();
+    ComponentTest* componentTeste = scene.AddComponent<ComponentTest>(gameObject);
+
+    REQUIRE_FALSE(componentTeste->IsEnable);
+
+    scene.Update(1);
+    scene.Update(2);
+    scene.RemoveComponent(componentTeste);
+
+    REQUIRE_FALSE(componentTeste->IsEnable);
+    REQUIRE(componentTeste->IsDestroyed);
+}
+

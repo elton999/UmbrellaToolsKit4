@@ -1,13 +1,25 @@
 #pragma once
-#include "Scene.h"
-#include "GameObject.h"
-#include "IComponent.h"
+
+#include <list>
 
 namespace Umbrella
 {
+    class UmbrellaRoot;
+    class Scene;
+    class Timer;
+
     class SceneManager
     {
+        private:
+            std::list<Scene*> _scenes;
+            UmbrellaRoot* _umbrellaRoot;
+            Timer* _timer;
+            float _dataDeltaTimerCoolDown;
+            float _maxDataDeltaTimer;
+
         public:
+            SceneManager(UmbrellaRoot* root);
+
             void StartUp();
             void Run();
             void ShutDown();
@@ -16,5 +28,7 @@ namespace Umbrella
             void LoadScene(Scene* scene);
             void UnloadScene(Scene* scene);
             bool IsSceneLoaded(Scene* scene);
+
+            UmbrellaRoot* GetUmbrellaRoot();
     };
 }

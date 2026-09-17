@@ -1,11 +1,15 @@
 #include <catch2/catch_test_macros.hpp>
 #include "../../../../src/engine/scene/SceneManager.h"
 #include "../../../../src/engine/scene/Scene.h"
+#include "../../../../src/engine/UmbrellaRoot.h"
 #include <string>
 
-/*TEST_CASE("Check if create a scene", "[CreateScene][Scene != null]")
+TEST_CASE("Check if create a scene", "[CreateScene][Scene != null]")
 {
-    Umbrella::SceneManager sceneManager = {};
+    Umbrella::UmbrellaRoot* root = new Umbrella::UmbrellaRoot;
+    root->StartUp();
+    Umbrella::SceneManager sceneManager = { root };
+
     sceneManager.StartUp();
 
     REQUIRE(sceneManager.CreateScene() != nullptr);
@@ -13,7 +17,9 @@
 
 TEST_CASE("Load Scene Check", "[LoadScene][IsSceneLoaded == true]")
 {
-    Umbrella::SceneManager sceneManager = {};
+    Umbrella::UmbrellaRoot* root = new Umbrella::UmbrellaRoot;
+    root->StartUp();
+    Umbrella::SceneManager sceneManager = { root };
     sceneManager.StartUp();
     Umbrella::Scene* scene = sceneManager.CreateScene();
 
@@ -26,7 +32,10 @@ TEST_CASE("Load Scene Check", "[LoadScene][IsSceneLoaded == true]")
 
 TEST_CASE("unLoad Scene Check", "[UnloadScene][IsSceneLoaded == false]")
 {
-    Umbrella::SceneManager sceneManager = {};
+    Umbrella::UmbrellaRoot* root = new Umbrella::UmbrellaRoot;
+    root->StartUp();
+    Umbrella::SceneManager sceneManager = { root };
+
     sceneManager.StartUp();
     Umbrella::Scene* scene1 = sceneManager.CreateScene();
     Umbrella::Scene* scene2 = sceneManager.CreateScene();
@@ -44,6 +53,4 @@ TEST_CASE("unLoad Scene Check", "[UnloadScene][IsSceneLoaded == false]")
     sceneManager.ShutDown();
 
     REQUIRE_FALSE(sceneManager.IsSceneLoaded(scene2));
-}*/
-
-
+}

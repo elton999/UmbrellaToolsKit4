@@ -1,6 +1,7 @@
 #include "Scene.h"
 #include "GameObject.h"
 #include "IComponent.h"
+#include "SceneManager.h"
 
 void Umbrella::Scene::AddGameObject(GameObject* gameobject)
 {
@@ -200,4 +201,14 @@ void Umbrella::Scene::UnloadScene()
     }
 
     cloneList.clear();
+}
+
+void Umbrella::Scene::SetSceneManager(Umbrella::SceneManager* sceneManager)
+{
+    _sceneManager = sceneManager;
+}
+
+Umbrella::SceneManager* Umbrella::Scene::GetSceneManager()
+{
+    return _sceneManager;
 }

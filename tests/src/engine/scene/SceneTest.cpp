@@ -188,11 +188,12 @@ TEST_CASE("Start disable gameobject", "[AddComponent]")
 
     REQUIRE_FALSE(componentTeste == nullptr);
 
-    scene.SetActive(gameObject, true);
 
     REQUIRE_FALSE(componentTeste->StartUp);
     REQUIRE_FALSE(componentTeste->Init);
     REQUIRE_FALSE(componentTeste->IsEnable);
+
+    scene.SetActive(gameObject, true);
 
     scene.Update(1);
     scene.UpdateData(2);

@@ -12,6 +12,13 @@ void Umbrella::Scene::RemoveGameObject(GameObject* gameObject)
 {
     if (!Umbrella::Scene::HasGameObject(gameObject)) return;
     Umbrella::Scene::_gameObjects.remove(gameObject);
+
+    std::list<IComponent*> cloneList = _components;
+    for (auto component : cloneList)
+    {
+        RemoveComponent(component);
+    }
+    cloneList.clear();
 }
 
 GameObject* Umbrella::Scene::CreateGameObject()
@@ -95,11 +102,13 @@ bool Umbrella::Scene::HasComponent(IComponent* component)
 
 void Umbrella::Scene::Update(float deltaTime)
 {
+    if (!_isEnable) return;
+
     for (auto componentItem : _components)
     {
-        componentItem->InicializationFirstFrame();
         if (componentItem->GetActiveStatus())
         {
+            componentItem->InicializationFirstFrame();
             componentItem->OnUpdate(deltaTime);
         }
     }
@@ -107,9 +116,10 @@ void Umbrella::Scene::Update(float deltaTime)
 
 void Umbrella::Scene::UpdateData(float deltaTime)
 {
+    if (!_isEnable) return;
+
     for (auto componentItem : _components)
     {
-        componentItem->InicializationFirstFrame();
         if (componentItem->GetActiveStatus())
         {
             componentItem->OnUpdateData(deltaTime);
@@ -178,8 +188,16 @@ GameObject* Umbrella::Scene::GetGameObject(std::string gameObjectId)
 
 void Umbrella::Scene::SetActiveScene(bool status)
 {
+    _isEnable = status;
 }
 
 void Umbrella::Scene::UnloadScene()
 {
+    std::list<GameObject*> cloneList = _gameObjects;
+    for(auto gameObject : cloneList)
+    {
+        RemoveGameObject(gameObject);
+    }
+
+    cloneList.clear();
 }

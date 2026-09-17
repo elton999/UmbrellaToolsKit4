@@ -17,6 +17,7 @@ namespace Umbrella
 		private:
 			std::list<GameObject*> _gameObjects = {};
 			std::list<IComponent*> _components = {};
+            bool _isEnable = true;
 
 		public:
 			void AddGameObject(GameObject * gameObject);

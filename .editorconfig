@@ -1,7 +1,6 @@
 root = true
 [*.{cpp,cc,cxx,h,hpp}]
-indent_style = tab
-indent_size = 4
+indent_style = space
 tab_width = 4
 
 insert_final_newline = true
@@ -15,12 +14,9 @@ cpp_new_line_before_open_brace = all
 
 # Indentation
 cpp_indent_block_contents = true
-cpp_indent_braces = false
+cpp_indent_braces = true
 cpp_indent_case_contents = true
 cpp_indent_switch_labels = true
-
-# Includes
-cpp_sort_includes = true
 
 # Naming / style
 cpp_style_pointer_reference_alignment = left

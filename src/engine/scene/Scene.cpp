@@ -1,4 +1,6 @@
 #include "Scene.h"
+#include "GameObject.h"
+#include "IComponent.h"
 
 void Umbrella::Scene::AddGameObject(GameObject* gameobject)
 {
@@ -154,4 +156,25 @@ void Umbrella::Scene::SetActive(GameObject* gameObject, bool status)
         else
             componentItem->OnDisable();
     }
+}
+
+GameObject* Umbrella::Scene::GetGameObject(std::string gameObjectId)
+{
+    for (auto gameObject : _gameObjects)
+    {
+        if (gameObject->Id.compare(gameObjectId) == 0)
+        {
+            return gameObject;
+        }
+    }
+
+    return nullptr;
+}
+
+void Umbrella::Scene::SetActiveScene(bool status)
+{
+}
+
+void Umbrella::Scene::UnloadScene()
+{
 }

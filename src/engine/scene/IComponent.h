@@ -21,40 +21,16 @@ namespace Umbrella
             bool _isStarted = false;
 
 		public:
-
-            IComponent(std::string gameObjectId, Scene *scene, std::string componentId)
+            Umbrella::IComponent(std::string gameObjectId, Scene *scene, std::string componentId)
             {
                 _gameObjectId = gameObjectId;
                 _scene = scene;
                 _componentInstanceId = componentId;
             }
 
-            void Inicialization()
-            {
-                if (!GetActiveStatus()) return;
-                if (!_isStartUp)
-                    {
-                    OnStartUp();
-                    _isStartUp = true;
-                    }
-            }
+            void Inicialization();
 
-            void InicializationFirstFrame()
-            {
-                if (!GetActiveStatus()) return;
-                if (!_isStartUp)
-                {
-                    OnStartUp();
-                    _isStartUp = true;
-                }
-
-                if (!_isStarted)
-                {
-                    OnInit();
-                    OnEnable();
-                    _isStarted = true;
-                }
-            }
+            void InicializationFirstFrame();
 
 			virtual void OnStartUp() {}
 			virtual void OnInit() {}
@@ -65,27 +41,12 @@ namespace Umbrella
 			virtual void OnUpdate(float deltaTime) {}
 			virtual void OnUpdateData(float dataDeltaTime) {}
 
-            void SetGameObject(GameObject* gameobejct)
-            {
-                _gameObjectId = gameobejct->Id;
-            }
-
-            void SetScene(Scene* scene)
-            {
-                _scene = scene;
-            }
-
-			GameObject* GetGameObject()
-			{
-				return nullptr;
-			}
-
-			Scene* GetScene() { return _scene; }
-
-            std::string GetInstanceId() { return _componentInstanceId; }
-
-            void SetActive(bool status) { _isEnable = status; }
-
-            bool GetActiveStatus() { return _isEnable && GetGameObject()->IsEnable; }
+            void SetGameObject(GameObject* gameobejct);
+            void SetScene(Scene* scene);
+            GameObject* GetGameObject();
+            Umbrella::Scene* GetScene();
+            std::string GetInstanceId();
+            void SetActive(bool status);
+            bool GetActiveStatus();
 	};
 }

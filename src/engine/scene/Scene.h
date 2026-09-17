@@ -1,13 +1,17 @@
 #pragma once
 
 #include <list>
-#include "GameObject.h"
-#include "IComponent.h"
 #include "../core/UniqueId.h"
 #include "../core/debug/Log.h"
+#include "IComponent.h"
+#include "GameObject.h"
+
+struct GameObject;
 
 namespace Umbrella
 {
+    class Icomponent;
+
 	class Scene
 	{
 		private:
@@ -34,7 +38,7 @@ namespace Umbrella
                     IComponent* resultComponent = dynamic_cast<IComponent*>(new TComponent(gameObject->Id, this, UniqueId::GetId()));
                     result = dynamic_cast<TComponent*>(result);
                     _components.push_back(result);
-                    resultComponent->OnStartUp();
+                    result->Inicialization();
                 }
                 catch (std::exception e)
                 {
@@ -42,7 +46,6 @@ namespace Umbrella
                 }
 
                 return result;
-
             }
 
             void AddComponent(GameObject* gameObejct, IComponent* componet);
@@ -58,6 +61,7 @@ namespace Umbrella
 
             void SetActiveScene(bool status);
             void UnloadScene();
-            
+
+            GameObject* GetGameObject(std::string gameObjectId);
 	};
 }

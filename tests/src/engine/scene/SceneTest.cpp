@@ -1,6 +1,5 @@
 #include <catch2/catch_test_macros.hpp>
 #include "../../../../src/engine/scene/Scene.h"
-#include "../../../../src/engine/scene/GameObject.h"
 #include <string>
 
 class ComponentTest : public Umbrella::IComponent
@@ -158,6 +157,8 @@ TEST_CASE("check remove component", "[RemoveComponent]")
 
     GameObject* gameObject = scene.CreateGameObject();
     ComponentTest* componentTeste = scene.AddComponent<ComponentTest>(gameObject);
+
+    REQUIRE_FALSE(componentTeste == nullptr);
 
     REQUIRE_FALSE(componentTeste->IsEnable);
 

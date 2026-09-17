@@ -1,5 +1,7 @@
 #include "Log.h"
+#ifdef BUILD_DEBUG
 #include <iostream>
+#endif
 
 void Log::Msg(const std::string& msg)
 {

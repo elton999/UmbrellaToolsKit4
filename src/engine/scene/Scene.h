@@ -11,6 +11,7 @@ struct GameObject;
 namespace Umbrella
 {
     class Icomponent;
+    class SceneManager;
 
 	class Scene
 	{
@@ -18,6 +19,7 @@ namespace Umbrella
 			std::list<GameObject*> _gameObjects = {};
 			std::list<IComponent*> _components = {};
             bool _isEnable = true;
+            SceneManager* _sceneManager;
 
 		public:
 			void AddGameObject(GameObject * gameObject);
@@ -63,5 +65,8 @@ namespace Umbrella
             void UnloadScene();
 
             GameObject* GetGameObject(std::string gameObjectId);
+
+            void SetSceneManager(SceneManager* sceneManager);
+            SceneManager* GetSceneManager();
 	};
 }

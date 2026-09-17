@@ -32,11 +32,10 @@ namespace Umbrella
                     return nullptr;
                 }
                 TComponent* result;
-
                 try
                 {
                     IComponent* resultComponent = dynamic_cast<IComponent*>(new TComponent(gameObject->Id, this, UniqueId::GetId()));
-                    result = dynamic_cast<TComponent*>(result);
+                    result = dynamic_cast<TComponent*>(resultComponent);
                     _components.push_back(result);
                     result->Inicialization();
                 }

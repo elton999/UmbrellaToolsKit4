@@ -16,10 +16,12 @@ void Umbrella::Scene::RemoveGameObject(GameObject* gameObject)
 
 GameObject* Umbrella::Scene::CreateGameObject()
 {
-    return new GameObject
+    GameObject* gameObject = new GameObject
     {
         Umbrella::UniqueId::GetId()
     };
+
+    return gameObject;
 }
 
 bool Umbrella::Scene::HasGameObject(GameObject* gameObject)
@@ -110,7 +112,7 @@ void Umbrella::Scene::UpdateData(float deltaTime)
         componentItem->InicializationFirstFrame();
         if (componentItem->GetActiveStatus())
         {
-            componentItem->OnUpdate(deltaTime);
+            componentItem->OnUpdateData(deltaTime);
         }
     }
 }
@@ -149,12 +151,15 @@ void Umbrella::Scene::SetActive(GameObject* gameObject, bool status)
     }
 
     gameObject->IsEnable = status;
+
+    if (status)
+    {
+        return;
+    }
+
     for (auto componentItem : _components)
     {
-        if (status)
-            componentItem->OnEnable();
-        else
-            componentItem->OnDisable();
+        componentItem->OnDisable();
     }
 }
 

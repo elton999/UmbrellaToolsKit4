@@ -39,7 +39,7 @@ class ComponentTest : public Umbrella::IComponent
 
         void OnDestroy() override
         {
-
+            IsDestroyed = true;
         }
 
         void OnUpdate(float deltaTime) override
@@ -88,6 +88,7 @@ TEST_CASE("check add component", "[AddComponent][HasComponent() == true]")
     Umbrella::Scene scene = {};
 
     GameObject* gameObject = scene.CreateGameObject();
+    scene.AddGameObject(gameObject);
     ComponentTest* componentTeste1 = scene.AddComponent<ComponentTest>(gameObject);
     ComponentTest* componentTeste2 = scene.AddComponent<ComponentTest>(gameObject);
 
@@ -113,6 +114,8 @@ TEST_CASE("check component flow methods", "[StartUp][Init][Enable]")
 
     REQUIRE_FALSE(gameObject == nullptr);
 
+    scene.AddGameObject(gameObject);
+
     ComponentTest* componentTeste = scene.AddComponent<ComponentTest>(gameObject);
 
     REQUIRE_FALSE(componentTeste == nullptr);
@@ -124,7 +127,7 @@ TEST_CASE("check component flow methods", "[StartUp][Init][Enable]")
     REQUIRE(componentTeste->TotalUpdateDataTime == 0);
 
     scene.Update(1);
-    scene.Update(2);
+    scene.UpdateData(2);
 
     REQUIRE(componentTeste->StartUp);
     REQUIRE(componentTeste->Init);
@@ -134,7 +137,7 @@ TEST_CASE("check component flow methods", "[StartUp][Init][Enable]")
     REQUIRE(componentTeste->TotalUpdateDataTime == 2);
 
     scene.Update(1);
-    scene.Update(2);
+    scene.UpdateData(2);
 
     REQUIRE(componentTeste->TotalUpdateTime == 2);
     REQUIRE(componentTeste->TotalUpdateDataTime == 4);
@@ -156,17 +159,45 @@ TEST_CASE("check remove component", "[RemoveComponent]")
     Umbrella::Scene scene = {};
 
     GameObject* gameObject = scene.CreateGameObject();
+    scene.AddGameObject(gameObject);
     ComponentTest* componentTeste = scene.AddComponent<ComponentTest>(gameObject);
 
     REQUIRE_FALSE(componentTeste == nullptr);
 
+    REQUIRE(componentTeste->StartUp);
     REQUIRE_FALSE(componentTeste->IsEnable);
+    REQUIRE_FALSE(componentTeste->IsDestroyed);
 
     scene.Update(1);
-    scene.Update(2);
+    scene.UpdateData(2);
     scene.RemoveComponent(componentTeste);
 
     REQUIRE_FALSE(componentTeste->IsEnable);
     REQUIRE(componentTeste->IsDestroyed);
 }
 
+
+TEST_CASE("Start disable gameobject", "[AddComponent]")
+{
+    Umbrella::Scene scene = {};
+
+    GameObject* gameObject = scene.CreateGameObject();
+    scene.AddGameObject(gameObject);
+    scene.SetActive(gameObject, false);
+    ComponentTest* componentTeste = scene.AddComponent<ComponentTest>(gameObject);
+
+    REQUIRE_FALSE(componentTeste == nullptr);
+
+    scene.SetActive(gameObject, true);
+
+    REQUIRE_FALSE(componentTeste->StartUp);
+    REQUIRE_FALSE(componentTeste->Init);
+    REQUIRE_FALSE(componentTeste->IsEnable);
+
+    scene.Update(1);
+    scene.UpdateData(2);
+
+    REQUIRE(componentTeste->StartUp);
+    REQUIRE(componentTeste->Init);
+    REQUIRE(componentTeste->IsEnable);
+}

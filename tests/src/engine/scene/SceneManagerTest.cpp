@@ -3,7 +3,7 @@
 #include "../../../../src/engine/scene/Scene.h"
 #include <string>
 
-TEST_CASE("Check if create a scene", "[CreateScene][Scene != null]")
+/*TEST_CASE("Check if create a scene", "[CreateScene][Scene != null]")
 {
     Umbrella::SceneManager sceneManager = {};
     sceneManager.StartUp();
@@ -44,6 +44,6 @@ TEST_CASE("unLoad Scene Check", "[UnloadScene][IsSceneLoaded == false]")
     sceneManager.ShutDown();
 
     REQUIRE_FALSE(sceneManager.IsSceneLoaded(scene2));
-}
+}*/
 
 

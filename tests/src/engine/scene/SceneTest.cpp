@@ -201,3 +201,44 @@ TEST_CASE("Start disable gameobject", "[AddComponent]")
     REQUIRE(componentTeste->Init);
     REQUIRE(componentTeste->IsEnable);
 }
+
+TEST_CASE("check if the scene has gameobject and component", "[UnloadScene]")
+{
+    Umbrella::Scene scene = {};
+
+    GameObject* gameObject = scene.CreateGameObject();
+    scene.AddGameObject(gameObject);
+
+    ComponentTest* componentTeste1 = scene.AddComponent<ComponentTest>(gameObject);
+    ComponentTest* componentTeste2 = scene.AddComponent<ComponentTest>(gameObject);
+
+    REQUIRE_FALSE(componentTeste1 == nullptr);
+    REQUIRE_FALSE(componentTeste2 == nullptr);
+
+    scene.UnloadScene();
+
+    REQUIRE_FALSE(scene.HasComponent(componentTeste1));
+    REQUIRE_FALSE(scene.HasComponent(componentTeste2));
+
+    REQUIRE_FALSE(scene.HasGameObject(gameObject));
+}
+
+TEST_CASE("deactive scene", "[SetAction]")
+{
+    Umbrella::Scene scene = {};
+
+    GameObject* gameObject = scene.CreateGameObject();
+    scene.AddGameObject(gameObject);
+
+    ComponentTest* componentTeste = scene.AddComponent<ComponentTest>(gameObject);
+
+    scene.SetActiveScene(false);
+    scene.Update(1);
+
+    REQUIRE(componentTeste->TotalUpdateTime == 0);
+
+    scene.SetActiveScene(true);
+    scene.Update(1);
+
+    REQUIRE(componentTeste->TotalUpdateTime == 1);
+}

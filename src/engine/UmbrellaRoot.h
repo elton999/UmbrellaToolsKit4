@@ -3,6 +3,7 @@
 #include "core/debug/Log.h"
 #include "core/RenderWindow.h"
 #include "core/Timer.h"
+#include "scene/SceneManager.h"
 #include "core/platform/graphics_wrappers/integrations/GlwfBackendIntegration.h"
 
 namespace Umbrella
@@ -11,8 +12,9 @@ namespace Umbrella
 	{
 
 		public:
-			Umbrella::RenderWindow *RenderWindow;
-			Umbrella::Timer *Timer;
+			Umbrella::RenderWindow* RenderWindow;
+			Umbrella::Timer* Timer;
+            Umbrella::SceneManager* SceneManager;
 		
 			void StartUp();
 			void Run();

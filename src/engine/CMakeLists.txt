@@ -17,7 +17,17 @@ target_sources(umbrella PRIVATE
  "scene/SceneManager.h"
  "scene/SceneManager.cpp"
  "scene/GameObject.h"
- "scene/IComponent.h" "scene/IComponent.cpp" "render/RenderManager.cpp" "render/RenderManager.h" "render/Material.h" "render/Material.cpp" "render/Shader.h" "render/Shader.cpp" "render/Mesh.h" "render/Mesh.cpp")
+ "scene/IComponent.h"
+ "scene/IComponent.cpp"
+ "render/RenderManager.cpp"
+ "render/RenderManager.h"
+ "render/Material.h"
+ "render/Material.cpp"
+ "render/Shader.h"
+ "render/Shader.cpp"
+ "render/Mesh.h"
+ "render/Mesh.cpp"
+ "render/IRenderComponent.h")
 
 target_include_directories(umbrella PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/")
 

@@ -14,6 +14,11 @@ namespace Umbrella
                 _position = position;
             }
 
+            glm::vec3 GetPosition()
+            {
+                return _position;
+            }
+
             virtual void Draw();
     };
 }

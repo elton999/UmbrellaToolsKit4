@@ -20,7 +20,7 @@ namespace Umbrella
             void ShutDown();
 
             void AddRenderComponent(IRenderComponent* renderComponent);
-            void AddRenderComponent(IRenderComponent *renderComponent, std::string layer);
+            void AddRenderComponent(IRenderComponent* renderComponent, std::string layer);
             void RemoveRenderComponet(IRenderComponent* renderComponent);
             bool HasComponent(IRenderComponent* renderComponent);
 

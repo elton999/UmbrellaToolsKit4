@@ -27,12 +27,5 @@ namespace Umbrella
             void SetVec3(std::string name, glm::vec3 value);
             void SetVec2(std::string name, glm::vec2 value);
             void SetMatrix4(std::string name, glm::mat4 value);
-
-            bool GetBool(std::string name);
-            int GetInt(std::string name);
-            float GetFloat(std::string name);
-            glm::vec3 GetVec3(std::string name);
-            glm::vec2 GetVec2(std::string name);
-            glm::mat4 GetMatrix4(std::string name);
     };
 }

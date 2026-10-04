@@ -7,7 +7,7 @@ namespace Umbrella
     class Texture2D : public ResourceContentIntegration
     {
         private:
-            unsigned int _mHeight, _mWidth;
+            unsigned int _height, _width = 0;
 
         public:
             Texture2D();

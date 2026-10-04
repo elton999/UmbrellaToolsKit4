@@ -21,3 +21,11 @@ void Umbrella::Texture2D::Generate(unsigned int width, unsigned int height, unsi
 void Umbrella::Texture2D::Bind()
 {
 }
+
+void Umbrella::Texture2D::Load(std::string path)
+{
+}
+
+void Umbrella::Texture2D::Unload()
+{
+}

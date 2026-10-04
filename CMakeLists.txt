@@ -49,7 +49,8 @@ add_executable(
  "tests/src/engine/resources/ResourceManagerTest.cpp"
  "tests/src/engine/resources/TextResourceTest.cpp"
  "tests/src/engine/scene/SceneTest.cpp"
- "tests/src/engine/scene/SceneManagerTest.cpp")
+ "tests/src/engine/scene/SceneManagerTest.cpp"
+ "tests/src/engine/render/Texture2DTest.cpp")
 
 target_link_libraries(unit_tests PRIVATE umbrella core Catch2::Catch2WithMain)
 

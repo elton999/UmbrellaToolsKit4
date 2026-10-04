@@ -2,6 +2,7 @@
 
 #include <glm/glm.hpp>
 #include <string>
+#include <map>
 
 namespace Umbrella
 {
@@ -13,6 +14,13 @@ namespace Umbrella
         private:
             Shader* _shader;
             Texture2D* _texture;
+
+            std::map<std::string, bool> _booleanValues;
+            std::map<std::string, int> _intValues;
+            std::map<std::string, float> _floatValues;
+            std::map<std::string, glm::vec2> _vec2Values;
+            std::map<std::string, glm::vec3> _vec3Values;
+            std::map<std::string, glm::mat4> _matrix4Values;
 
         public:
 

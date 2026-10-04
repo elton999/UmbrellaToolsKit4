@@ -10,7 +10,7 @@ namespace Umbrella
     class RenderManager
     {
         private:
-            std::list<std::string, Umbrella::IRenderComponent*> _layersAndComponents;
+            std::map<std::string, Umbrella::IRenderComponent*> _layersAndComponents;
 
         public:
             RenderManager(UmbrellaRoot* root);

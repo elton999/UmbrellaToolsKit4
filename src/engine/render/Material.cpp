@@ -9,7 +9,7 @@ void Umbrella::Material::SetShader(Shader* shader)
 
 Umbrella::Shader* Umbrella::Material::GetShader()
 {
-
+    return nullptr;
 }
 
 bool Umbrella::Material::HasShader()

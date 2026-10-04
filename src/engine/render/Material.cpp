@@ -1,5 +1,6 @@
 #include "Material.h"
 #include "Shader.h"
+#include "Texture2D.h"
 
 void Umbrella::Material::SetShader(Shader* shader)
 {
@@ -11,12 +12,24 @@ Umbrella::Shader* Umbrella::Material::GetShader()
 
 }
 
-
 bool Umbrella::Material::HasShader()
 {
     return false;
 }
 
+void Umbrella::Material::SetTexture(Umbrella::Texture2D* texute)
+{
+}
+
+Umbrella::Texture2D* Umbrella::Material::GetTexture()
+{
+    return nullptr;
+}
+
+bool Umbrella::Material::HasTexture()
+{
+    return false;
+}
 
 void Umbrella::Material::SetBool(std::string name, bool value)
 {

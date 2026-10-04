@@ -6,17 +6,23 @@
 namespace Umbrella
 {
     class Shader;
+    class Texture2D;
 
     class Material
     {
         private:
             Shader* _shader;
+            Texture2D* _texture;
 
         public:
 
             void SetShader(Shader* shader);
             Shader* GetShader();
             bool HasShader();
+
+            void SetTexture(Texture2D* texture);
+            Texture2D* GetTexture();
+            bool HasTexture();
 
             void SetBool(std::string name, bool value);
             void SetInt(std::string name, int value);

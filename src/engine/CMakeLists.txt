@@ -27,11 +27,13 @@ target_sources(umbrella PRIVATE
  "render/Shader.cpp"
  "render/Mesh.h"
  "render/Mesh.cpp"
- "render/IRenderComponent.h" "render/Texture2D.h" "render/Texture2D.cpp")
+ "render/IRenderComponent.h"
+ "render/Texture2D.h"
+ "render/Texture2D.cpp")
 
 target_include_directories(umbrella PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/")
 
-target_link_libraries(umbrella PUBLIC core glm glfw glad imgui)
+target_link_libraries(umbrella PUBLIC core glm glfw glad imgui stbi)
 
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
   target_compile_definitions(umbrella PRIVATE BUILD_DEBUG)

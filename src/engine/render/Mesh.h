@@ -8,15 +8,13 @@ namespace Umbrella
     class Mesh
     {
         private:
-            std::vector<glm::vec3>* _mVertices;
-            std::vector<glm::vec3>* _mVerticesColors;
-            std::vector<glm::vec2>* _mTexCoords;
-
-            bool _mHasShader = false;
+            std::vector<glm::vec3>* _vertices;
+            std::vector<glm::vec3>* _verticesColors;
+            std::vector<glm::vec2>* _texCoords;
 
         protected:
             unsigned int mVBO, mVAO;
-            unsigned int _mVertexCount;
+            unsigned int _vertexCount;
 
         public:
             void Load(std::vector<glm::vec3>& vertices);

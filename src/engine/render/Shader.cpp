@@ -15,36 +15,55 @@ void Umbrella::Shader::Load(std::string path)
     std::string vertexCode = FileSystem::Read(path + ".vert");
     std::string fragmentCode = FileSystem::Read(path + ".frag");
 
-    Load(vertexCode.c_str(), fragmentCode.c_str());
+    if (!vertexCode.empty() && !fragmentCode.empty())
+    {
+        Load(vertexCode.c_str(), fragmentCode.c_str());
+    }
+    else
+    {
+        Log::MsgError("Shader not found: " + path);
+    }
 }
 
 void Umbrella::Shader::Load(const char* vertexCode, const char* fragmentCode)
 {
     unsigned int vertex, fragment;
+    _isReady = true;
 
     vertex = glCreateShader(GL_VERTEX_SHADER);
     glShaderSource(vertex, 1, &vertexCode, NULL);
     glCompileShader(vertex);
-    checkCompileErrors(vertex, "VERTEX");
+    if (!CheckCompileErrors(vertex, "VERTEX"))
+    {
+        _isReady = false;
+    }
 
     fragment = glCreateShader(GL_FRAGMENT_SHADER);
     glShaderSource(fragment, 1, &fragmentCode, NULL);
     glCompileShader(fragment);
-    checkCompileErrors(fragment, "FRAGMENT");
+    if (!CheckCompileErrors(fragment, "FRAGMENT"))
+    {
+        _isReady = false;
+    }
 
     ID = glCreateProgram();
     glAttachShader(ID, vertex);
     glAttachShader(ID, fragment);
     glLinkProgram(ID);
-    checkCompileErrors(ID, "PROGRAM");
+    if (!CheckCompileErrors(ID, "PROGRAM"))
+    {
+        _isReady = false;
+    }
 
     glDeleteShader(vertex);
     glDeleteShader(fragment);
+
 }
 
 void Umbrella::Shader::Unload()
 {
     glDeleteProgram(ID);
+    _isReady = false;
 }
 
 void Umbrella::Shader::Use()
@@ -82,7 +101,7 @@ void Umbrella::Shader::SetMatrix4(std::string name, glm::mat4 value)
     glUniformMatrix4fv(glGetUniformLocation(ID, name.c_str()), 1, GL_FALSE, &value[0][0]);
 }
 
-void Umbrella::Shader::checkCompileErrors(unsigned int shader, std::string type)
+bool Umbrella::Shader::CheckCompileErrors(unsigned int shader, std::string type)
 {
     int success;
     char infoLog[1024];
@@ -95,9 +114,10 @@ void Umbrella::Shader::checkCompileErrors(unsigned int shader, std::string type)
             glGetShaderInfoLog(shader, 1024, NULL, infoLog);
             Log::MsgError("SHADER_COMPILATION_ERROR of type: " + type + "\n"+
             infoLog + "\n ------------------------------------------------------- ");
+            return false;
         }
 
-        return;
+        return true;
     }
 
     glGetProgramiv(shader, GL_LINK_STATUS, &success);
@@ -106,5 +126,13 @@ void Umbrella::Shader::checkCompileErrors(unsigned int shader, std::string type)
         glGetProgramInfoLog(shader, 1024, NULL, infoLog);
         Log::MsgError("SHADER_COMPILATION_ERROR of type: " + type + "\n" +
         infoLog + "\n ------------------------------------------------------- ");
+        return false;
     }
+
+    return true;
+}
+
+bool Umbrella::Shader::IsShaderReady()
+{
+    return _isReady;
 }

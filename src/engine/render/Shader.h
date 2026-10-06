@@ -14,7 +14,9 @@ namespace Umbrella
     class Shader : public ResourceContentIntegration
     {
         private:
-            void checkCompileErrors(unsigned int shader, std::string type);
+            bool _isReady;
+
+            bool CheckCompileErrors(unsigned int shader, std::string type);
 
         public:
             unsigned int ID;
@@ -22,6 +24,7 @@ namespace Umbrella
             void Load(std::string path) override;
             void Load(const char* vertexCode, const char* fragmentCode);
             void Unload() override;
+            bool IsShaderReady();
 
             void Use();
 

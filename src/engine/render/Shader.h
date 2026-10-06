@@ -1,5 +1,7 @@
 #pragma once
 
+#include "../resources/ResourceContentIntegration.h"
+
 #include <glm/glm.hpp>
 
 #include <string>
@@ -9,7 +11,7 @@
 
 namespace Umbrella
 {
-    class Shader
+    class Shader : public ResourceContentIntegration
     {
         private:
             void checkCompileErrors(unsigned int shader, std::string type);
@@ -17,7 +19,9 @@ namespace Umbrella
         public:
             unsigned int ID;
 
-            Shader(const char* vertexCode, const char* fragmentCode);
+            void Load(std::string path) override;
+            void Load(const char* vertexCode, const char* fragmentCode);
+            void Unload() override;
 
             void Use();
 

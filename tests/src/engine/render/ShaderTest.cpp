@@ -1,10 +1,18 @@
 #include <catch2/catch_test_macros.hpp>
+#include <string>
+
 #include "../../../../src/engine/render/Shader.h"
 #include "../../../../src/engine/core/platform/FileSystem.h"
-#include <string>
+#include "../../../../src/engine/core/RenderWindow.h"
+#include "../../../../src/engine/core/platform/graphics_wrappers/integrations/GlwfBackendIntegration.h"
 
 TEST_CASE("Check if the Shader is loaded", "[Load]")
 {
+
+    Umbrella::RenderWindow renderWindow = {};
+    renderWindow.BackendIntegration = new Umbrella::GLWF_BackendIntegration;
+    renderWindow.StartUp();
+
     const char* vertexCode =
         "#version 330 core\n"
         "layout(location = 0) in vec3 position;\n"

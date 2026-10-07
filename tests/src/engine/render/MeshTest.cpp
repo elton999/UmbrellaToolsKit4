@@ -81,7 +81,7 @@ TEST_CASE("Check if the Mesh is loaded", "[Load(vertices, vertices colors, tex c
     REQUIRE(mesh.GetVerticesColorsCount() == 0);
     REQUIRE(mesh.GetTexCoordsCount() == 0);
 
-    mesh.Load(square);
+    mesh.Load(square, colors, texCoords);
 
     REQUIRE(mesh.GetVerticesCount() == 6);
     REQUIRE(mesh.GetVerticesColorsCount() == 6);

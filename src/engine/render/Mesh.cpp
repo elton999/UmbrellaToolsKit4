@@ -58,30 +58,39 @@ void Umbrella::Mesh::Load(std::vector<glm::vec3>& vertices, std::vector<glm::vec
 
 std::vector<glm::vec3>* Umbrella::Mesh::GetVertices()
 {
-    return nullptr;
+    return _vertices;
 }
 
 std::vector<glm::vec3>* Umbrella::Mesh::GetVerticesColors()
 {
-    return nullptr;
+    return _verticesColors;
 }
 
 std::vector<glm::vec2>* Umbrella::Mesh::GetTexCoords()
 {
-    return nullptr;
+    return _texCoords;
 }
 
 int Umbrella::Mesh::GetVerticesCount()
 {
-    return 0;
+    if (_vertices != nullptr)
+        return _vertices->size();
+    else
+        return 0;
 }
 
 int Umbrella::Mesh::GetVerticesColorsCount()
 {
-    return 0;
+    if (_verticesColors != nullptr)
+        return _verticesColors->size();
+    else
+        return 0;
 }
 
 int Umbrella::Mesh::GetTexCoordsCount()
 {
-    return 0;
+    if (_texCoords != nullptr)
+        return _texCoords->size();
+    else
+        return 0;
 }

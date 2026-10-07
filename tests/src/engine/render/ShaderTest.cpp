@@ -66,5 +66,4 @@ TEST_CASE("Check if the Shader is loaded", "[Load]")
     shader3.Load(path + "2");
 
     REQUIRE_FALSE(shader3.IsShaderReady());
-
 }

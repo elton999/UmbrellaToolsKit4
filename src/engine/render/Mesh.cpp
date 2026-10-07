@@ -70,3 +70,18 @@ std::vector<glm::vec2>* Umbrella::Mesh::GetTexCoords()
 {
     return nullptr;
 }
+
+int Umbrella::Mesh::GetVerticesCount()
+{
+    return 0;
+}
+
+int Umbrella::Mesh::GetVerticesColorsCount()
+{
+    return 0;
+}
+
+int Umbrella::Mesh::GetTexCoordsCount()
+{
+    return 0;
+}

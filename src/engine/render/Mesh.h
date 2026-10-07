@@ -23,5 +23,9 @@ namespace Umbrella
             std::vector<glm::vec3>* GetVertices();
             std::vector<glm::vec3>* GetVerticesColors();
             std::vector<glm::vec2>* GetTexCoords();
+
+            int GetVerticesCount();
+            int GetVerticesColorsCount();
+            int GetTexCoordsCount();
     };
 }

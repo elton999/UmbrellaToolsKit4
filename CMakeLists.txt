@@ -51,7 +51,8 @@ add_executable(
  "tests/src/engine/scene/SceneTest.cpp"
  "tests/src/engine/scene/SceneManagerTest.cpp"
  "tests/src/engine/render/Texture2DTest.cpp"
- "tests/src/engine/render/ShaderTest.cpp")
+ "tests/src/engine/render/ShaderTest.cpp"
+ "tests/src/engine/render/MeshTest.cpp")
 
 target_link_libraries(unit_tests PRIVATE umbrella core Catch2::Catch2WithMain)
 

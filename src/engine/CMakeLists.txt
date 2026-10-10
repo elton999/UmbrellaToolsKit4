@@ -29,7 +29,10 @@ target_sources(umbrella PRIVATE
  "render/Mesh.cpp"
  "render/IRenderComponent.h"
  "render/Texture2D.h"
- "render/Texture2D.cpp")
+ "render/Texture2D.cpp"
+ "render/component/MeshRenderComponent.h"
+ "render/component/MeshRenderComponent.cpp"
+ "render/component/SpriteRenderComponent.h")
 
 target_include_directories(umbrella PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/")
 

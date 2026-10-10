@@ -4,31 +4,40 @@
 
 void Umbrella::Material::SetShader(Shader* shader)
 {
-
+    _shader = shader;
 }
 
 Umbrella::Shader* Umbrella::Material::GetShader()
 {
+    if (HasShader())
+        return _shader;
     return nullptr;
 }
 
 bool Umbrella::Material::HasShader()
 {
-    return false;
+    if (_shader == nullptr)
+        return false;
+    return true;
 }
 
-void Umbrella::Material::SetTexture(Umbrella::Texture2D* texute)
+void Umbrella::Material::SetTexture(Umbrella::Texture2D* texture)
 {
+    _texture = texture;
 }
 
 Umbrella::Texture2D* Umbrella::Material::GetTexture()
 {
+    if (HasTexture())
+        return _texture;
     return nullptr;
 }
 
 bool Umbrella::Material::HasTexture()
 {
-    return false;
+    if (_texture == nullptr)
+        return false;
+    return true;
 }
 
 void Umbrella::Material::SetBool(std::string name, bool value)

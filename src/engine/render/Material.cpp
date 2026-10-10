@@ -33,54 +33,96 @@ bool Umbrella::Material::HasTexture()
 
 void Umbrella::Material::SetBool(std::string name, bool value)
 {
+    if (_booleanValues.find(name) == _booleanValues.end())
+        _booleanValues.insert({ name, value });
+    else
+        _booleanValues[name] = value;
 }
 
 void Umbrella::Material::SetInt(std::string name, int value)
 {
+    if (_intValues.find(name) == _intValues.end())
+        _intValues.insert({ name, value });
+    else
+        _intValues[name] = value;
 }
 
 void Umbrella::Material::SetFloat(std::string name, float value)
 {
+    if (_floatValues.find(name) == _floatValues.end())
+        _floatValues.insert({ name, value });
+    else
+        _floatValues[name] = value;
 }
 
 void Umbrella::Material::SetVec3(std::string name, glm::vec3 value)
 {
+    if (_vec3Values.find(name) == _vec3Values.end())
+        _vec3Values.insert({ name, value });
+    else
+        _vec3Values[name] = value;
 }
 
 void Umbrella::Material::SetVec2(std::string name, glm::vec2 value)
 {
+    if (_vec2Values.find(name) == _vec2Values.end())
+        _vec2Values.insert({ name, value });
+    else
+        _vec2Values[name] = value;
 }
 
 void Umbrella::Material::SetMatrix4(std::string name, glm::mat4 value)
 {
+    if (_matrix4Values.find(name) == _matrix4Values.end())
+        _matrix4Values.insert({ name, value });
+    else
+        _matrix4Values[name] = value;
 }
 
 bool Umbrella::Material::GetBool(std::string name)
 {
-    return false;
+    if (_booleanValues.find(name) == _booleanValues.end())
+        return false;
+    else
+        return _booleanValues[name];
 }
 
 int Umbrella::Material::GetInt(std::string name)
 {
-    return 0;
+    if (_intValues.find(name) == _intValues.end())
+        return 0;
+    else
+        return _intValues[name];
 }
 
 float Umbrella::Material::GetFloat(std::string name)
 {
-    return 0.0;
+    if (_floatValues.find(name) == _floatValues.end())
+        return 0.0;
+    else
+        return _floatValues[name];
 }
 
 glm::vec3 Umbrella::Material::GetVec3(std::string name)
 {
-    return glm::vec3(0, 0, 0);
+    if (_vec3Values.find(name) == _vec3Values.end())
+        return glm::vec3(0, 0, 0);
+    else
+        return _vec3Values[name];
 }
 
 glm::vec2 Umbrella::Material::GetVec2(std::string name)
 {
-    return glm::vec2(0, 0);
+    if (_vec2Values.find(name) == _vec2Values.end())
+        return glm::vec2(0, 0);
+    else
+        return _vec2Values[name];
 }
 
 glm::mat4 Umbrella::Material::GetMatrix4(std::string name)
 {
-    return glm::mat4();
+    if (_matrix4Values.find(name) == _matrix4Values.end())
+        return glm::mat4();
+    else
+        return _matrix4Values[name];
 }

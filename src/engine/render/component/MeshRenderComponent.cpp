@@ -3,33 +3,42 @@
 #include "../Material.h"
 #include "../Mesh.h"
 
-void Umbrella::MeshRenderComponent::SetMaterial(Umbrella::Material)
+void Umbrella::MeshRenderComponent::SetMaterial(Umbrella::Material* material)
 {
-
+    _material = material;
 }
 
-Umbrella::Material Umbrella::MeshRenderComponent::GetMaterial()
+Umbrella::Material* Umbrella::MeshRenderComponent::GetMaterial()
 {
+    if (HasMaterial())
+        return _material;
     return nullptr;
 }
 
 bool Umbrella::MeshRenderComponent::HasMaterial()
 {
-    return false;
+    if (_material == nullptr)
+        return false;
+    return true;
 }
 
-void Umbrella::MeshRenderComponent::SetMesh(Mesh mesh)
+void Umbrella::MeshRenderComponent::SetMesh(Mesh* mesh)
 {
+    _mesh = mesh;
 }
 
-Umbrella::Mesh Umbrella::MeshRenderComponent::GetMesh()
+Umbrella::Mesh* Umbrella::MeshRenderComponent::GetMesh()
 {
+    if (HasMesh())
+        return _mesh;
     return nullptr;
 }
 
 bool Umbrella::MeshRenderComponent::HasMesh()
 {
-    return false;
+    if (_mesh == nullptr)
+        return false;
+    return true;
 }
 
 void Umbrella::MeshRenderComponent::Draw()

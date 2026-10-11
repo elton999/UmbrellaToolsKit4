@@ -23,7 +23,6 @@ namespace Umbrella
             std::map<std::string, glm::mat4> _matrix4Values;
 
         public:
-
             void SetShader(Shader* shader);
             Shader* GetShader();
             bool HasShader();
@@ -45,5 +44,7 @@ namespace Umbrella
             glm::vec3 GetVec3(std::string name);
             glm::vec2 GetVec2(std::string name);
             glm::mat4 GetMatrix4(std::string name);
+
+            void Use();
     };
 }

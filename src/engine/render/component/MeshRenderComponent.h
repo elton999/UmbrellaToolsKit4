@@ -10,17 +10,21 @@ namespace Umbrella
     class MeshRenderComponent : public IRenderComponent
     {
         private:
-            Material _material;
-            Mesh _mesh;
+            Material* _material = nullptr;
+            Mesh* _mesh = nullptr;
 
         public:
 
-            void SetMaterial(Material material);
-            Material GetMaterial();
+            MeshRenderComponent(std::string gameObjectId, Umbrella::Scene* scene, std::string componentId) : IRenderComponent(gameObjectId, scene, componentId)
+            {
+            }
+
+            void SetMaterial(Material* material);
+            Material* GetMaterial();
             bool HasMaterial();
 
-            void SetMesh(Mesh mesh);
-            Mesh GetMesh();
+            void SetMesh(Mesh* mesh);
+            Mesh* GetMesh();
             bool HasMesh();
 
             void Draw() override;

@@ -135,3 +135,7 @@ glm::mat4 Umbrella::Material::GetMatrix4(std::string name)
     else
         return _matrix4Values[name];
 }
+
+void Umbrella::Material::Use()
+{
+}

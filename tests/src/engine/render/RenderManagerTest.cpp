@@ -88,15 +88,18 @@ TEST_CASE("add and remove render componet", "[destroy render component]")
 
     GameObject* gameObject = scene->CreateGameObject();
     scene->AddGameObject(gameObject);
-    Umbrella::MeshRenderComponent* meshRender = scene->AddComponent<Umbrella::MeshRenderComponent>(gameObject);
+    Umbrella::MeshRenderComponent* meshRender1 = scene->AddComponent<Umbrella::MeshRenderComponent>(gameObject);
+    Umbrella::MeshRenderComponent* meshRender2 = scene->AddComponent<Umbrella::MeshRenderComponent>(gameObject);
 
     Umbrella::RenderManager* renderManager = root->RenderManager;
 
-    REQUIRE(renderManager->HasComponent(meshRender));
+    REQUIRE(renderManager->HasComponent(meshRender1));
+    REQUIRE(renderManager->HasComponent(meshRender2));
 
     scene->DestroyGameObject(gameObject);
 
-    REQUIRE_FALSE(renderManager->HasComponent(meshRender));
+    REQUIRE_FALSE(renderManager->HasComponent(meshRender1));
+    REQUIRE_FALSE(renderManager->HasComponent(meshRender2));
 }
 
 TEST_CASE("Draw render component behaviour", "[Run]")
@@ -121,6 +124,13 @@ TEST_CASE("Draw render component behaviour", "[Run]")
     REQUIRE(renderComponent->DrawCount == 0);
 
     scene->SetActive(gameObject, true);
+    root->SceneManager->Run();
+    root->RenderManager->Run();
+
+    REQUIRE(renderComponent->DrawCount == 1);
+
+    scene->SetActive(gameObject, false);
+
     root->SceneManager->Run();
     root->RenderManager->Run();
 

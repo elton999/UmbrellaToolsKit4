@@ -1,6 +1,5 @@
 #pragma once
 
-#include "IRenderComponent.h"
 #include <string>
 #include <map>
 #include <list>
@@ -8,6 +7,7 @@
 namespace Umbrella
 {
     class UmbrellaRoot;
+    class IRenderComponent;
 
     class RenderManager
     {

@@ -1,3 +1,4 @@
+#include "IRenderComponent.h"
 #include "RenderManager.h"
 #include "../UmbrellaRoot.h"
 
@@ -21,7 +22,10 @@ void Umbrella::RenderManager::Run()
     {
         for (auto component : layer.second)
         {
-            component->Draw();
+            if (component->GetActiveStatus())
+            {
+                component->Draw();
+            }
         }
     }
 }

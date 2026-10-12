@@ -77,9 +77,9 @@ void Umbrella::Scene::RemoveComponent(IComponent* component)
         Log::MsgError("Component not found in the current scene");
     }
 
-    _components.remove(component);
     component->OnDisable();
     component->OnDestroy();
+    _components.remove(component);
 }
 
 bool Umbrella::Scene::HasComponent(IComponent* component)
@@ -136,12 +136,23 @@ void Umbrella::Scene::DestroyGameObject(GameObject* gameObject)
         return;
     }
 
-    for (auto componentItem : _components)
+    bool hasComponents = true;
+    while (hasComponents)
     {
-        if (componentItem->GetGameObject()->Id.compare(gameObject->Id) == 0)
+        bool continueLoop = true;
+
+        for (auto componentItem : _components)
         {
-            RemoveComponent(componentItem);
+            if (componentItem->GetGameObject()->Id.compare(gameObject->Id) == 0)
+            {
+                RemoveComponent(componentItem);
+                continueLoop = false;
+                break;
+            }
         }
+
+        if (continueLoop)
+            hasComponents = false;
     }
 
     _gameObjects.remove(gameObject);

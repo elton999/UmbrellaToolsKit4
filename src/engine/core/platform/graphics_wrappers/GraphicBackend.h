@@ -17,4 +17,5 @@ class GraphicBackend
 		virtual void SetSize(int wight, int height) {}
 		virtual void SetWindowName(const std::string text) {}
 		virtual float GetTime() { return 0; }
+        virtual void ClearScreen() {}
 };

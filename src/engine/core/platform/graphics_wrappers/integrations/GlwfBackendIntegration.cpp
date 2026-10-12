@@ -37,7 +37,6 @@ void Umbrella::GLWF_BackendIntegration::Update()
 	glViewport(0, 0, display_w, display_h);
 	glClearColor(0.45f, 0.55f, 0.60f, 1.00f);
 	glClear(GL_COLOR_BUFFER_BIT);
-	glfwSwapBuffers(_window);
 }
 
 void Umbrella::GLWF_BackendIntegration::Close()
@@ -64,4 +63,9 @@ void Umbrella::GLWF_BackendIntegration::SetWindowName(const std::string text)
 float Umbrella::GLWF_BackendIntegration::GetTime()
 {
 	return (float)glfwGetTime();
+}
+
+void Umbrella::GLWF_BackendIntegration::ClearScreen()
+{
+    glfwSwapBuffers(_window);
 }

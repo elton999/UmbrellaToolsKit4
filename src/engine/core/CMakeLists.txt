@@ -7,6 +7,7 @@ add_subdirectory("${THIRDPARTY_DIR}/glm" "${CMAKE_CURRENT_BINARY_DIR}/glm")
 add_subdirectory("${THIRDPARTY_DIR}/glfw" "${CMAKE_CURRENT_BINARY_DIR}/glfw")
 add_subdirectory("${THIRDPARTY_DIR}/glad" "${CMAKE_CURRENT_BINARY_DIR}/glad")
 add_subdirectory("${THIRDPARTY_DIR}/imgui_lib" "${CMAKE_CURRENT_BINARY_DIR}/imgui_lib")
+add_subdirectory("${THIRDPARTY_DIR}/stb_lib" "${CMAKE_CURRENT_BINARY_DIR}/stb_lib")
 
 
 add_library(core)
@@ -27,7 +28,7 @@ target_sources(core PRIVATE
 
 target_include_directories(core PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/")
 
-target_link_libraries(core PUBLIC glm glfw glad imgui)
+target_link_libraries(core PUBLIC glm glfw glad imgui stbi)
 
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
 	target_compile_definitions(core PRIVATE BUILD_DEBUG)

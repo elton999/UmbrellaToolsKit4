@@ -14,10 +14,8 @@ namespace Umbrella
             Mesh* _mesh = nullptr;
 
         public:
-
             MeshRenderComponent(std::string gameObjectId, Umbrella::Scene* scene, std::string componentId) : IRenderComponent(gameObjectId, scene, componentId)
-            {
-            }
+            {}
 
             void SetMaterial(Material* material);
             Material* GetMaterial();

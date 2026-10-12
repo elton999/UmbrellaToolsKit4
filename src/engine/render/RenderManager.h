@@ -4,16 +4,17 @@
 #include "IRenderComponent.h"
 #include <string>
 #include <map>
+#include <list>
 
 namespace Umbrella
 {
     class RenderManager
     {
         private:
-            std::map<std::string, Umbrella::IRenderComponent*> _layersAndComponents;
+            std::map<std::string, std::list<Umbrella::IRenderComponent*>> _layersAndComponents;
+            std::list<Umbrella::IRenderComponent*> _allComponents;
 
         public:
-            RenderManager(UmbrellaRoot* root);
 
             void StartUp();
             void Run();

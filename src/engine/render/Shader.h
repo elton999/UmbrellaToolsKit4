@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../resources/ResourceContentIntegration.h"
+#include "../render/Texture2D.h"
 
 #include <glm/glm.hpp>
 
@@ -34,5 +35,6 @@ namespace Umbrella
             void SetVec3(std::string name, glm::vec3 value);
             void SetVec2(std::string name, glm::vec2 value);
             void SetMatrix4(std::string name, glm::mat4 value);
+            void SetTexture(Texture2D* texture);
     };
 }

@@ -43,5 +43,17 @@ bool Umbrella::MeshRenderComponent::HasMesh()
 
 void Umbrella::MeshRenderComponent::Draw()
 {
+    if (!HasMesh()) return;
 
+    glBindVertexArray(GetMesh()->GetVAO());
+    if (!HasMaterial())
+    {
+        glDrawArrays(GL_TRIANGLES, 0, GetMesh()->GetVerticesCount());
+        glBindVertexArray(0);
+        return;
+    }
+
+    GetMaterial()->Use();
+    glDrawArrays(GL_TRIANGLES, 0, GetMesh()->GetVerticesCount());
+    glBindVertexArray(0);
 }

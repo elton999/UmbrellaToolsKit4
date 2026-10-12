@@ -138,4 +138,28 @@ glm::mat4 Umbrella::Material::GetMatrix4(std::string name)
 
 void Umbrella::Material::Use()
 {
+    if (!HasShader()) return;
+
+    GetShader()->Use();
+
+    for (auto value : _booleanValues)
+        GetShader()->SetBool(value.first, value.second);
+
+    for (auto value : _intValues)
+        GetShader()->SetInt(value.first, value.second);
+
+    for (auto value : _floatValues)
+        GetShader()->SetFloat(value.first, value.second);
+
+    for (auto value : _vec2Values)
+        GetShader()->SetVec2(value.first, value.second);
+
+    for (auto value : _vec3Values)
+        GetShader()->SetVec3(value.first, value.second);
+
+    for (auto value : _matrix4Values)
+        GetShader()->SetMatrix4(value.first, value.second);
+
+    if (HasTexture())
+        GetShader()->SetTexture(GetTexture());
 }

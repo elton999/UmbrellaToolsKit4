@@ -12,8 +12,8 @@ namespace Umbrella
     class Material
     {
         private:
-            Shader* _shader;
-            Texture2D* _texture;
+            Shader* _shader = nullptr;
+            Texture2D* _texture = nullptr;
 
             std::map<std::string, bool> _booleanValues;
             std::map<std::string, int> _intValues;

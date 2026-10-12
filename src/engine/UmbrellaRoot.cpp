@@ -25,6 +25,7 @@ void Umbrella::UmbrellaRoot::Run()
         SceneManager->Run();
 
         RenderManager->Run();
+        RenderWindow->BackendIntegration->ClearScreen();
 	}
 }
 

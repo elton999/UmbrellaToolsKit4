@@ -27,5 +27,8 @@ namespace Umbrella
             int GetVerticesCount();
             int GetVerticesColorsCount();
             int GetTexCoordsCount();
+
+            int GetVBO();
+            int GetVAO();
     };
 }

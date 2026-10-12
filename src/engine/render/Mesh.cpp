@@ -74,7 +74,7 @@ std::vector<glm::vec2>* Umbrella::Mesh::GetTexCoords()
 int Umbrella::Mesh::GetVerticesCount()
 {
     if (_vertices != nullptr)
-        return _vertices->size();
+        return _vertexCount;
     else
         return 0;
 }
@@ -93,4 +93,14 @@ int Umbrella::Mesh::GetTexCoordsCount()
         return _texCoords->size();
     else
         return 0;
+}
+
+int Umbrella::Mesh::GetVBO()
+{
+    return mVBO;
+}
+
+int Umbrella::Mesh::GetVAO()
+{
+    return mVAO;
 }

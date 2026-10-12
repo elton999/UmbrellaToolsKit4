@@ -57,7 +57,6 @@ void Umbrella::Shader::Load(const char* vertexCode, const char* fragmentCode)
 
     glDeleteShader(vertex);
     glDeleteShader(fragment);
-
 }
 
 void Umbrella::Shader::Unload()
@@ -99,6 +98,12 @@ void Umbrella::Shader::SetVec2(std::string name, glm::vec2 value)
 void Umbrella::Shader::SetMatrix4(std::string name, glm::mat4 value)
 {
     glUniformMatrix4fv(glGetUniformLocation(ID, name.c_str()), 1, GL_FALSE, &value[0][0]);
+}
+
+void Umbrella::Shader::SetTexture(Texture2D* texture)
+{
+    glActiveTexture(GL_TEXTURE0);
+    texture->Bind();
 }
 
 bool Umbrella::Shader::CheckCompileErrors(unsigned int shader, std::string type)

@@ -1,5 +1,10 @@
 #include "RenderManager.h"
+#include "../UmbrellaRoot.h"
 
+Umbrella::RenderManager::RenderManager(Umbrella::UmbrellaRoot* root)
+{
+    _root = root;
+}
 
 void Umbrella::RenderManager::StartUp()
 {

@@ -1,6 +1,5 @@
 #pragma once
 
-#include "../UmbrellaRoot.h"
 #include "IRenderComponent.h"
 #include <string>
 #include <map>
@@ -8,13 +7,17 @@
 
 namespace Umbrella
 {
+    class UmbrellaRoot;
+
     class RenderManager
     {
         private:
             std::map<std::string, std::list<Umbrella::IRenderComponent*>> _layersAndComponents;
             std::list<Umbrella::IRenderComponent*> _allComponents;
+            Umbrella::UmbrellaRoot* _root;
 
         public:
+            RenderManager(UmbrellaRoot* root);
 
             void StartUp();
             void Run();

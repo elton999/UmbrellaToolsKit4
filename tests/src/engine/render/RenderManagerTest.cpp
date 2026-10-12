@@ -8,12 +8,12 @@
 #include "../../../../src/engine/core/RenderWindow.h"
 #include "../../../../src/engine/core/platform/graphics_wrappers/integrations/GlwfBackendIntegration.h"
 #include "../../../../src/engine/scene/Scene.h"
+#include "../../../../src/engine/UmbrellaRoot.h"
 
 TEST_CASE("add render component", "[AddRenderComponent(mesh)]")
 {
-    Umbrella::RenderWindow renderWindow = {};
-    renderWindow.BackendIntegration = new Umbrella::GLWF_BackendIntegration;
-    renderWindow.StartUp();
+    Umbrella::UmbrellaRoot* root = new Umbrella::UmbrellaRoot;
+    root->StartUp();
 
     Umbrella::Scene scene = {};
 
@@ -21,7 +21,7 @@ TEST_CASE("add render component", "[AddRenderComponent(mesh)]")
     scene.AddGameObject(gameObject);
     Umbrella::MeshRenderComponent* meshRender = scene.AddComponent<Umbrella::MeshRenderComponent>(gameObject);
 
-    Umbrella::RenderManager renderManager = {};
+    Umbrella::RenderManager renderManager = { root };
 
     renderManager.StartUp();
 
@@ -39,9 +39,8 @@ TEST_CASE("add render component", "[AddRenderComponent(mesh)]")
 
 TEST_CASE("add render component with layer", "[AddRenderComponent(mesh, layer)]")
 {
-    Umbrella::RenderWindow renderWindow = {};
-    renderWindow.BackendIntegration = new Umbrella::GLWF_BackendIntegration;
-    renderWindow.StartUp();
+    Umbrella::UmbrellaRoot* root = new Umbrella::UmbrellaRoot;
+    root->StartUp();
 
     Umbrella::Scene scene = {};
 
@@ -49,7 +48,7 @@ TEST_CASE("add render component with layer", "[AddRenderComponent(mesh, layer)]"
     scene.AddGameObject(gameObject);
     Umbrella::MeshRenderComponent* meshRender = scene.AddComponent<Umbrella::MeshRenderComponent>(gameObject);
 
-    Umbrella::RenderManager renderManager = {};
+    Umbrella::RenderManager renderManager = { root };
     renderManager.StartUp();
 
     REQUIRE_FALSE(renderManager.HasComponent(meshRender));

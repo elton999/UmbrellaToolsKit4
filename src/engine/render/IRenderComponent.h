@@ -11,6 +11,7 @@ namespace Umbrella
     {
         private:
             glm::vec3 _position;
+            glm::vec3 _rotation;
 
         public:
             IRenderComponent(std::string gameObjectId, Umbrella::Scene* scene, std::string componentId) : IComponent(gameObjectId, scene, componentId)
@@ -27,6 +28,16 @@ namespace Umbrella
             glm::vec3 GetPosition()
             {
                 return _position;
+            }
+
+            void SetRotation(glm::vec3 rotation)
+            {
+                _rotation = rotation;
+            }
+
+            glm::vec3 GetRotation()
+            {
+                return _rotation;
             }
 
             void OnDestroy() override

@@ -41,16 +41,16 @@ namespace Umbrella
 
                     "#version 330 core\n"
                     "out vec4 FragColor;\n"
-                    "uniform vec4 colorMesh;\n"
+                    "uniform vec4 color;\n"
                     "void main()\n"
                     "{\n"
-                    "   FragColor = colorMesh;\n"
+                    "   FragColor = color;\n"
                     "}\n"
                     );
 
                 material->SetShader(shader);
                 SetMaterial(material);
-                material->SetVec4("colorMesh", glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
+                material->SetVec4("color", glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
 
                 mesh->Load(square);
                 SetMesh(mesh);

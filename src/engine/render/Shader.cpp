@@ -4,6 +4,7 @@
 
 #include <glad/glad.h>
 #include <glm/glm.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 #include <string>
 #include <fstream>
@@ -70,39 +71,39 @@ void Umbrella::Shader::Use()
     glUseProgram(ID);
 }
 
-void Umbrella::Shader::SetBool(std::string name, bool value)
+void Umbrella::Shader::SetBool(const std::string &name, const bool &value) const
 {
     glUniform1i(glGetUniformLocation(ID, name.c_str()), (GLint)value);
 }
 
-void Umbrella::Shader::SetInt(std::string name, int value)
+void Umbrella::Shader::SetInt(const std::string &name, const int &value) const
 {
     glUniform1i(glGetUniformLocation(ID, name.c_str()), value);
 }
 
-void Umbrella::Shader::SetFloat(std::string name, float value)
+void Umbrella::Shader::SetFloat(const std::string &name, const float &value) const
 {
     glUniform1f(glGetUniformLocation(ID, name.c_str()), value);
 }
 
-void Umbrella::Shader::SetVec2(std::string name, glm::vec2 value)
+void Umbrella::Shader::SetVec2(const std::string &name, const glm::vec2 &value) const
 {
-    glUniform3fv(glGetUniformLocation(ID, name.c_str()), 1, &value[0]);
+    glUniform2fv(glGetUniformLocation(ID, name.c_str()), 1, glm::value_ptr(value));
 }
 
-void Umbrella::Shader::SetVec3(std::string name, glm::vec3 value)
+void Umbrella::Shader::SetVec3(const std::string &name, const glm::vec3 &value) const
 {
-    glUniform2fv(glGetUniformLocation(ID, name.c_str()), 1, &value[0]);
+    glUniform3fv(glGetUniformLocation(ID, name.c_str()), 1, glm::value_ptr(value));
 }
 
-void Umbrella::Shader::SetVec4(std::string name, glm::vec4 value)
+void Umbrella::Shader::SetVec4(const std::string &name, const glm::vec4 &value) const
 {
-    glUniform2fv(glGetUniformLocation(ID, name.c_str()), 1, &value[0]);
+    glUniform4fv(glGetUniformLocation(ID, name.c_str()), 1, glm::value_ptr(value));
 }
 
-void Umbrella::Shader::SetMatrix4(std::string name, glm::mat4 value)
+void Umbrella::Shader::SetMatrix4(const std::string &name, const glm::mat4 &value) const
 {
-    glUniformMatrix4fv(glGetUniformLocation(ID, name.c_str()), 1, GL_FALSE, &value[0][0]);
+    glUniformMatrix4fv(glGetUniformLocation(ID, name.c_str()), 1, GL_FALSE, glm::value_ptr(value));
 }
 
 void Umbrella::Shader::SetTexture(Texture2D* texture)

@@ -85,14 +85,19 @@ void Umbrella::Shader::SetFloat(std::string name, float value)
     glUniform1f(glGetUniformLocation(ID, name.c_str()), value);
 }
 
+void Umbrella::Shader::SetVec2(std::string name, glm::vec2 value)
+{
+    glUniform3fv(glGetUniformLocation(ID, name.c_str()), 1, &value[0]);
+}
+
 void Umbrella::Shader::SetVec3(std::string name, glm::vec3 value)
 {
     glUniform2fv(glGetUniformLocation(ID, name.c_str()), 1, &value[0]);
 }
 
-void Umbrella::Shader::SetVec2(std::string name, glm::vec2 value)
+void Umbrella::Shader::SetVec4(std::string name, glm::vec4 value)
 {
-    glUniform3fv(glGetUniformLocation(ID, name.c_str()), 1, &value[0]);
+    glUniform2fv(glGetUniformLocation(ID, name.c_str()), 1, &value[0]);
 }
 
 void Umbrella::Shader::SetMatrix4(std::string name, glm::mat4 value)

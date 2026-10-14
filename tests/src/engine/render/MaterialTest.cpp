@@ -85,6 +85,22 @@ TEST_CASE("check set vec2", "[SetVec2]")
     REQUIRE(material.GetVec2("test2") == glm::vec2(4, 4));
 }
 
+TEST_CASE("check set vec4", "[SetVec4]")
+{
+    Umbrella::Material material = {};
+    material.SetVec4("test1", glm::vec4(1, 1, 1, 1));
+    material.SetVec4("test2", glm::vec4(2, 2, 2, 2));
+
+    REQUIRE(material.GetVec4("test1") == glm::vec4(1, 1, 1, 1));
+    REQUIRE(material.GetVec4("test2") == glm::vec4(2, 2, 2, 2));
+
+    material.SetVec4("test1", glm::vec4(3, 3, 3, 3));
+    material.SetVec4("test2", glm::vec4(4, 4, 4, 4));
+
+    REQUIRE(material.GetVec4("test1") == glm::vec4(3, 3, 3, 3));
+    REQUIRE(material.GetVec4("test2") == glm::vec4(4, 4, 4, 4));
+}
+
 TEST_CASE("check set mat4", "[SetMatrix4]")
 {
     Umbrella::Material material = {};

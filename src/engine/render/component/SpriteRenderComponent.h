@@ -19,6 +19,7 @@ namespace Umbrella
             glm::vec4 _fillSpriteColor = glm::vec4(1, 1, 1, 0);
             float _transparence = 1.0f;
             Sprite* _sprite = nullptr;
+            Texture2D* _texture = nullptr;
 
         public:
             SpriteRenderComponent(std::string gameObjectId, Umbrella::Scene* scene, std::string componentId) : MeshRenderComponent(gameObjectId, scene, componentId)

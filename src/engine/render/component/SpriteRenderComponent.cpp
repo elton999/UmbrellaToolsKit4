@@ -80,6 +80,13 @@ void Umbrella::SpriteRenderComponent::OnStartUp()
 
 void Umbrella::SpriteRenderComponent::OnUpdate(float deltaTime)
 {
+    GetMaterial()->SetVec2("scale", GetScale());
+    GetMaterial()->SetVec3("rotation", GetRotation());
+    GetMaterial()->SetFloat("transparence", GetTransparence());
+    GetMaterial()->SetVec4("color", GetSpriteColor());
+    GetMaterial()->SetVec4("fillColor", GetFillSpriteColor());
+    if (HasSprite())
+        GetMaterial()->SetTexture(_texture);
 }
 
 void Umbrella::SpriteRenderComponent::SetScale(float scale)
@@ -141,6 +148,7 @@ float Umbrella::SpriteRenderComponent::GetRotation2D()
 void Umbrella::SpriteRenderComponent::SetSprite(Sprite* sprite)
 {
     _sprite = sprite;
+    _texture = GetScene()->GetSceneManager()->GetUmbrellaRoot()->ResourceManager->Load<Texture2D>(sprite->Path);
 }
 
 Umbrella::Sprite* Umbrella::SpriteRenderComponent::GetSprite()

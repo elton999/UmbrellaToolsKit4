@@ -76,9 +76,81 @@ void Umbrella::SpriteRenderComponent::OnStartUp()
 
     mesh->Load(square, colors, texCoords);
     SetMesh(mesh);
-
 }
 
 void Umbrella::SpriteRenderComponent::OnUpdate(float deltaTime)
 {
+}
+
+void Umbrella::SpriteRenderComponent::SetScale(float scale)
+{
+    _scale = glm::vec2(scale, scale);
+}
+
+void Umbrella::SpriteRenderComponent::SetScale(glm::vec2 scale)
+{
+    _scale = scale;
+}
+
+glm::vec2 Umbrella::SpriteRenderComponent::GetScale()
+{
+    return _scale;
+}
+
+void Umbrella::SpriteRenderComponent::SetTransparence(float transparence)
+{
+    _transparence = transparence;
+}
+
+float Umbrella::SpriteRenderComponent::GetTransparence()
+{
+    return _transparence;
+}
+
+void Umbrella::SpriteRenderComponent::SetSpriteColor(glm::vec4 color)
+{
+    _spriteColor = color;
+}
+
+glm::vec4 Umbrella::SpriteRenderComponent::GetSpriteColor()
+{
+    return _spriteColor;
+}
+
+void Umbrella::SpriteRenderComponent::SetFillSpriteColor(glm::vec4 color)
+{
+    _fillSpriteColor = color;
+}
+
+glm::vec4 Umbrella::SpriteRenderComponent::GetFillSpriteColor()
+{
+    return _fillSpriteColor;
+}
+
+void Umbrella::SpriteRenderComponent::SetRotation2D(float rotation)
+{
+    glm::vec3 rotationValue = GetRotation();
+    SetRotation(glm::vec3(rotationValue.x, rotation, rotationValue.z));
+}
+
+float Umbrella::SpriteRenderComponent::GetRotation2D()
+{
+    return GetRotation().y;
+}
+
+void Umbrella::SpriteRenderComponent::SetSprite(Sprite* sprite)
+{
+    _sprite = sprite;
+}
+
+Umbrella::Sprite* Umbrella::SpriteRenderComponent::GetSprite()
+{
+    if (HasSprite())
+        return _sprite;
+    return nullptr;
+}
+
+bool Umbrella::SpriteRenderComponent::HasSprite()
+{
+    return _sprite != nullptr;
 }

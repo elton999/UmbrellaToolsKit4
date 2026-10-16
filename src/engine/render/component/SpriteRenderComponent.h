@@ -14,13 +14,16 @@ namespace Umbrella
     class SpriteRenderComponent : public MeshRenderComponent
     {
         private:
-            glm::vec2 _scale;
-            glm::vec4 _spriteColor;
-            glm::vec4 _fillSpriteColor;
-            float _transparence;
-            Sprite* _sprite;
+            glm::vec2 _scale = glm::vec2(1, 1);
+            glm::vec4 _spriteColor = glm::vec4(1, 1, 1, 1);
+            glm::vec4 _fillSpriteColor = glm::vec4(1, 1, 1, 0);
+            float _transparence = 1.0f;
+            Sprite* _sprite = nullptr;
 
         public:
+            SpriteRenderComponent(std::string gameObjectId, Umbrella::Scene* scene, std::string componentId) : MeshRenderComponent(gameObjectId, scene, componentId)
+            {}
+
             void OnStartUp() override;
             void OnUpdate(float deltaTime) override;
 
@@ -37,7 +40,7 @@ namespace Umbrella
             void SetFillSpriteColor(glm::vec4 color);
             glm::vec4 GetFillSpriteColor();
 
-            void SetRotation(float rotation);
+            void SetRotation2D(float rotation);
             float GetRotation2D();
 
             void SetSprite(Sprite* sprite);

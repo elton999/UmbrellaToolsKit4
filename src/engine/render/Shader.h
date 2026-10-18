@@ -29,12 +29,13 @@ namespace Umbrella
 
             void Use();
 
-            void SetBool(std::string name, bool value);
-            void SetInt(std::string name, int value) ;
-            void SetFloat(std::string name, float value);
-            void SetVec3(std::string name, glm::vec3 value);
-            void SetVec2(std::string name, glm::vec2 value);
-            void SetMatrix4(std::string name, glm::mat4 value);
+            void SetBool(const std::string &name, const bool value) const;
+            void SetInt(const std::string &name, const int value) const;
+            void SetFloat(const std::string &name, const float value) const;
+            void SetVec2(const std::string &name, const glm::vec2 &value) const;
+            void SetVec3(const std::string &name, const glm::vec3 &value) const;
+            void SetVec4(const std::string &name, const glm::vec4 &value) const;
+            void SetMatrix4(const std::string &name, const glm::mat4 &value) const;
             void SetTexture(Texture2D* texture);
     };
 }

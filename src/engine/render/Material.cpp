@@ -72,6 +72,14 @@ void Umbrella::Material::SetVec3(std::string name, glm::vec3 value)
         _vec3Values[name] = value;
 }
 
+void Umbrella::Material::SetVec4(std::string name, glm::vec4 value)
+{
+    if (_vec4Values.find(name) == _vec4Values.end())
+        _vec4Values.insert({ name, value });
+    else
+        _vec4Values[name] = value;
+}
+
 void Umbrella::Material::SetVec2(std::string name, glm::vec2 value)
 {
     if (_vec2Values.find(name) == _vec2Values.end())
@@ -112,6 +120,14 @@ float Umbrella::Material::GetFloat(std::string name)
         return _floatValues[name];
 }
 
+glm::vec2 Umbrella::Material::GetVec2(std::string name)
+{
+    if (_vec2Values.find(name) == _vec2Values.end())
+        return glm::vec2(0, 0);
+    else
+        return _vec2Values[name];
+}
+
 glm::vec3 Umbrella::Material::GetVec3(std::string name)
 {
     if (_vec3Values.find(name) == _vec3Values.end())
@@ -120,12 +136,12 @@ glm::vec3 Umbrella::Material::GetVec3(std::string name)
         return _vec3Values[name];
 }
 
-glm::vec2 Umbrella::Material::GetVec2(std::string name)
+glm::vec4 Umbrella::Material::GetVec4(std::string name)
 {
-    if (_vec2Values.find(name) == _vec2Values.end())
-        return glm::vec2(0, 0);
+    if (_vec4Values.find(name) == _vec4Values.end())
+        return glm::vec4(0, 0, 0, 0);
     else
-        return _vec2Values[name];
+        return _vec4Values[name];
 }
 
 glm::mat4 Umbrella::Material::GetMatrix4(std::string name)
@@ -156,6 +172,9 @@ void Umbrella::Material::Use()
 
     for (auto value : _vec3Values)
         GetShader()->SetVec3(value.first, value.second);
+
+    for (auto value : _vec4Values)
+        GetShader()->SetVec4(value.first, value.second);
 
     for (auto value : _matrix4Values)
         GetShader()->SetMatrix4(value.first, value.second);

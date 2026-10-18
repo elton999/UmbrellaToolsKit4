@@ -27,6 +27,9 @@ void Umbrella::GLWF_BackendIntegration::Init()
 		Log::MsgError("Failed to initialize GLAD");
 		return;
 	}
+
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
 void Umbrella::GLWF_BackendIntegration::Update()

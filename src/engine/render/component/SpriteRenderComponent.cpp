@@ -1,4 +1,5 @@
 #include "SpriteRenderComponent.h"
+#include <glm/gtc/matrix_transform.hpp>
 
 void Umbrella::SpriteRenderComponent::OnStartUp()
 {
@@ -51,9 +52,9 @@ void Umbrella::SpriteRenderComponent::OnStartUp()
     const char* fragmentCode =
         "#version 330 core\n"
         "in vec2 TexCoords;\n"
-        "out vec4 color;\n"
+        "out vec4 colorOut;\n"
         "uniform sampler2D image;\n"
-        "uniform vec3 spriteColor;\n"
+        "uniform vec4 color;\n"
         "// texOffset: (offsetX, offsetY) in normalized coords\n"
         "// texScale:  (scaleX, scaleY) in normalized coords\n"
         "uniform vec2 texOffset;\n"
@@ -61,7 +62,7 @@ void Umbrella::SpriteRenderComponent::OnStartUp()
         "void main()\n"
         "{\n"
         "    vec2 uv = texOffset + texScale * TexCoords;\n"
-        "    color = vec4(spriteColor, 1.0) * texture(image, uv);\n"
+        "    colorOut = color * texture(image, uv);\n"
         "}\n";
 
 
@@ -69,24 +70,70 @@ void Umbrella::SpriteRenderComponent::OnStartUp()
     Umbrella::Material* material = new Umbrella::Material;
     Umbrella::Shader* shader = new Umbrella::Shader;
 
+    mesh->Load(square, colors, texCoords);
     shader->Load(vertexCode, fragmentCode);
 
     material->SetShader(shader);
+    shader->SetInt("image", 0);
     SetMaterial(material);
 
-    mesh->Load(square, colors, texCoords);
     SetMesh(mesh);
 }
 
 void Umbrella::SpriteRenderComponent::OnUpdate(float deltaTime)
 {
+    if (!HasMaterial()) return;
+    if (!GetMaterial()->HasShader()) return;
+    if (!GetMaterial()->GetShader()->IsShaderReady()) return;
+
+    GetMaterial()->SetMatrix4("projection", glm::ortho(0.0f, 1280.0f, 720.0f, 0.0f, -1.0f, 1.0f));
     GetMaterial()->SetVec2("scale", GetScale());
     GetMaterial()->SetVec3("rotation", GetRotation());
     GetMaterial()->SetFloat("transparence", GetTransparence());
     GetMaterial()->SetVec4("color", GetSpriteColor());
     GetMaterial()->SetVec4("fillColor", GetFillSpriteColor());
+
+    glm::mat4 model = glm::mat4(1.0f);
+    model = glm::translate(model, glm::vec3(GetPosition()));
+
+    int width = 0;
+    int height = 0;
+
     if (HasSprite())
+    {
+        if (_sprite->Width == 0 || _sprite->Height == 0)
+        {
+            width = _texture->GetWidth();
+            height = _texture->GetHight();
+        }
+        else
+        {
+            width = _sprite->Width;
+            height = _sprite->Height;
+        }
+    }
+
+    glm::vec2 baseSize = glm::vec2((float)width, (float)height);
+    glm::vec2 finalSize = baseSize * _scale;
+
+    model = glm::translate(model, glm::vec3(0.5f * finalSize.x, 0.5f * finalSize.y, 0.0f));
+    model = glm::rotate(model, glm::radians(GetRotation2D()), glm::vec3(0.0f, 0.0f, 1.0f));
+    model = glm::translate(model, glm::vec3(-0.5f * finalSize.x, -0.5f * finalSize.y, 0.0f));
+
+    model = glm::scale(model, glm::vec3(finalSize, 1.0f));
+
+    GetMaterial()->SetMatrix4("model", model);
+
+    if (HasSprite())
+    {
+        float texY = 1.0f - (_sprite->Y + height) / (float)_texture->GetHight();
+        glm::vec2 texOffset = glm::vec2(_sprite->X / (float)_texture->GetWidth(), texY);
+        glm::vec2 texScale = glm::vec2( width / (float)_texture->GetWidth(), height / (float)_texture->GetHight());
+
+        GetMaterial()->SetVec2("texOffset", texOffset);
+        GetMaterial()->SetVec2("texScale", texScale);
         GetMaterial()->SetTexture(_texture);
+    }
 }
 
 void Umbrella::SpriteRenderComponent::SetScale(float scale)

@@ -8,8 +8,8 @@ namespace Umbrella
         public:
             std::string Path;
 
-            unsigned int Wight;
-            unsigned int Height;
+            unsigned int Width = 0;
+            unsigned int Height = 0;
 
             int X;
             int Y;

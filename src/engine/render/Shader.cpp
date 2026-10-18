@@ -71,17 +71,17 @@ void Umbrella::Shader::Use()
     glUseProgram(ID);
 }
 
-void Umbrella::Shader::SetBool(const std::string &name, const bool &value) const
+void Umbrella::Shader::SetBool(const std::string &name, const bool value) const
 {
     glUniform1i(glGetUniformLocation(ID, name.c_str()), (GLint)value);
 }
 
-void Umbrella::Shader::SetInt(const std::string &name, const int &value) const
+void Umbrella::Shader::SetInt(const std::string &name, const int value) const
 {
     glUniform1i(glGetUniformLocation(ID, name.c_str()), value);
 }
 
-void Umbrella::Shader::SetFloat(const std::string &name, const float &value) const
+void Umbrella::Shader::SetFloat(const std::string &name, const float value) const
 {
     glUniform1f(glGetUniformLocation(ID, name.c_str()), value);
 }

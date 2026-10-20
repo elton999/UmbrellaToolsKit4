@@ -65,9 +65,10 @@ void Umbrella::SquareRenderComponent::OnUpdate(float deltaTime)
 
 void Umbrella::SquareRenderComponent::SetSize(glm::vec2 size)
 {
+    _size = size;
 }
 
 glm::vec2 Umbrella::SquareRenderComponent::GetSize()
 {
-    return { 0, 0 };
+    return _size;
 }

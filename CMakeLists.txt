@@ -56,7 +56,8 @@ add_executable(
  "tests/src/engine/render/component/MeshRenderComponentTest.cpp"
  "tests/src/engine/render/MaterialTest.cpp"
  "tests/src/engine/render/RenderManagerTest.cpp" 
- "tests/src/engine/render/component/SpriteRenderComponentTest.cpp")
+ "tests/src/engine/render/component/SpriteRenderComponentTest.cpp"
+ "tests/src/engine/render/component/SquareRenderComponentTest.cpp")
 
 target_link_libraries(unit_tests PRIVATE umbrella core Catch2::Catch2WithMain)
 

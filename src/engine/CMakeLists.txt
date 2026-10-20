@@ -33,7 +33,10 @@ target_sources(umbrella PRIVATE
  "render/component/MeshRenderComponent.h"
  "render/component/MeshRenderComponent.cpp"
  "render/component/SpriteRenderComponent.h"
- "render/component/SquareRenderComponent.h" "render/component/SpriteRenderComponent.cpp" "render/Sprite.h")
+ "render/component/SquareRenderComponent.h"
+ "render/component/SpriteRenderComponent.cpp"
+ "render/Sprite.h"
+ "render/component/SquareRenderComponent.cpp")
 
 target_include_directories(umbrella PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/")
 

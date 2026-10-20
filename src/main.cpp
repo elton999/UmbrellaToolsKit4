@@ -13,18 +13,25 @@ int main()
 
 	umbrellaToolsKit.RenderWindow->BackendIntegration->SetWindowName("Game made with UmbrellaToolsKit4");
 
-    GameObject* gameObject = mainScene->CreateGameObject();
-    mainScene->AddGameObject(gameObject);
-    auto* spriteRender = mainScene->AddComponent<Umbrella::SpriteRenderComponent>(gameObject);
+    //exemples
+    {
+        GameObject* gameObject = mainScene->CreateGameObject();
+        mainScene->AddGameObject(gameObject);
 
-    auto* sprite = new Umbrella::Sprite;
-    sprite->Path = "Testing/Temporary/texture_test.png";
-    sprite->X = 0;
-    sprite->Y = 0;
-    spriteRender->SetSprite(sprite);
+        auto* squareRender = mainScene->AddComponent<Umbrella::SquareRenderComponent>(gameObject);
+        squareRender->SetPosition({ 10, 10, 1 });
+        squareRender->SetSize({40, 40});
 
-	umbrellaToolsKit.Run();
+        auto* spriteRender = mainScene->AddComponent<Umbrella::SpriteRenderComponent>(gameObject);
+        auto* sprite = new Umbrella::Sprite;
+        sprite->Path = "Testing/Temporary/texture_test.png";
+        sprite->X = 0;
+        sprite->Y = 0;
+        spriteRender->SetSprite(sprite);
+        spriteRender->SetRotation2D(0.5f);
+    }
 
+    umbrellaToolsKit.Run();
 	umbrellaToolsKit.ShutDown();
 
 	return 0;

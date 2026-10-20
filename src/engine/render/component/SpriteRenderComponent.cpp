@@ -55,6 +55,7 @@ void Umbrella::SpriteRenderComponent::OnStartUp()
         "out vec4 colorOut;\n"
         "uniform sampler2D image;\n"
         "uniform vec4 color;\n"
+        "uniform float transparence;\n"
         "// texOffset: (offsetX, offsetY) in normalized coords\n"
         "// texScale:  (scaleX, scaleY) in normalized coords\n"
         "uniform vec2 texOffset;\n"
@@ -63,6 +64,8 @@ void Umbrella::SpriteRenderComponent::OnStartUp()
         "{\n"
         "    vec2 uv = texOffset + texScale * TexCoords;\n"
         "    colorOut = color * texture(image, uv);\n"
+        "    float transpareceOut = max(0.0, colorOut.w - transparence);\n"
+        "    colorOut = vec4(colorOut.x, colorOut.y, colorOut.z, transpareceOut);\n"
         "}\n";
 
 
@@ -88,8 +91,7 @@ void Umbrella::SpriteRenderComponent::OnUpdate(float deltaTime)
 
     GetMaterial()->SetMatrix4("projection", glm::ortho(0.0f, 1280.0f, 720.0f, 0.0f, -1.0f, 1.0f));
     GetMaterial()->SetVec2("scale", GetScale());
-    GetMaterial()->SetVec3("rotation", GetRotation());
-    GetMaterial()->SetFloat("transparence", GetTransparence());
+    GetMaterial()->SetFloat("transparence", 1.0f - GetTransparence());
     GetMaterial()->SetVec4("color", GetSpriteColor());
     GetMaterial()->SetVec4("fillColor", GetFillSpriteColor());
 
@@ -117,7 +119,7 @@ void Umbrella::SpriteRenderComponent::OnUpdate(float deltaTime)
     glm::vec2 finalSize = baseSize * _scale;
 
     model = glm::translate(model, glm::vec3(0.5f * finalSize.x, 0.5f * finalSize.y, 0.0f));
-    model = glm::rotate(model, glm::radians(GetRotation2D()), glm::vec3(0.0f, 0.0f, 1.0f));
+    model = glm::rotate(model, GetRotation2D(), glm::vec3(0.0f, 0.0f, 1.0f));
     model = glm::translate(model, glm::vec3(-0.5f * finalSize.x, -0.5f * finalSize.y, 0.0f));
 
     model = glm::scale(model, glm::vec3(finalSize, 1.0f));

@@ -10,8 +10,8 @@ namespace Umbrella
     class IRenderComponent : public IComponent
     {
         private:
-            glm::vec3 _position = glm::vec3(0, 0, 0);
-            glm::vec3 _rotation =  glm::vec3(0, 0, 0);
+            glm::vec3 _position = {0, 0, 0};
+            glm::vec3 _rotation = { 0, 0, 0 };
 
         public:
             IRenderComponent(std::string gameObjectId, Umbrella::Scene* scene, std::string componentId) : IComponent(gameObjectId, scene, componentId)

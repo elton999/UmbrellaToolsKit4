@@ -4,7 +4,7 @@
 #include <glad/glad.h>
 #include "../core/debug/Log.h"
 
-Umbrella::Texture2D::Texture2D() : Internal_Format(GL_RGB), Image_Format(GL_RGB), Wrap_S(GL_REPEAT), Wrap_T(GL_REPEAT), Filter_Min(GL_LINEAR), Filter_Max(GL_LINEAR)
+Umbrella::Texture2D::Texture2D() : Internal_Format(GL_RGBA), Image_Format(GL_RGBA), Wrap_S(GL_REPEAT), Wrap_T(GL_REPEAT), Filter_Min(GL_LINEAR), Filter_Max(GL_LINEAR)
 {
     glGenTextures(1, &this->ID);
     _height = _width = 0;
@@ -27,7 +27,7 @@ void Umbrella::Texture2D::Generate(unsigned int width, unsigned int height, unsi
 
     glBindTexture(GL_TEXTURE_2D, ID);
     Bind();
-    glTexImage2D(GL_TEXTURE_2D, 0, Internal_Format, width, height, 0, Image_Format, GL_UNSIGNED_BYTE, data);
+    glTexImage2D(GL_TEXTURE_2D, 0, Internal_Format, _width, _height, 0, Image_Format, GL_UNSIGNED_BYTE, data);
 
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, Wrap_S);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, Wrap_T);

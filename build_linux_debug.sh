@@ -1,0 +1,1 @@
+cmake -S . -B out/build/linux_debug -DCMAKE_BUILD_TYPE=Debug

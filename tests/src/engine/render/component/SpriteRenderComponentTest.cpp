@@ -1,20 +1,22 @@
 #include <catch2/catch_test_macros.hpp>
 #include <string>
 
-#include "../../../../../src/engine/render/Mesh.h"
+#include "../../../../../src/engine/UmbrellaRoot.h"
+#include "../../../../../src/engine/render/IRenderComponent.h"
 #include "../../../../../src/engine/render/Material.h"
-#include "../../../../../src/engine/render/IRenderComponent.h" 
+#include "../../../../../src/engine/render/Mesh.h"
 #include "../../../../../src/engine/render/component/SpriteRenderComponent.h"
 #include "../../../../../src/engine/scene/Scene.h"
 
-
 TEST_CASE("Check Scale methods", "[SetScale]")
 {
-    Umbrella::Scene scene = {};
+    Umbrella::UmbrellaRoot root = {};
+    root.StartUp();
+    Umbrella::Scene* scene = root.SceneManager->CreateScene();
 
-    GameObject* gameObject = scene.CreateGameObject();
-    scene.AddGameObject(gameObject);
-    Umbrella::SpriteRenderComponent* spriteComponent = scene.AddComponent<Umbrella::SpriteRenderComponent>(gameObject);
+    GameObject* gameObject = scene->CreateGameObject();
+    scene->AddGameObject(gameObject);
+    Umbrella::SpriteRenderComponent* spriteComponent = scene->AddComponent<Umbrella::SpriteRenderComponent>(gameObject);
 
     REQUIRE(spriteComponent->GetScale() == glm::vec2(1.0f, 1.0f));
 
@@ -29,11 +31,13 @@ TEST_CASE("Check Scale methods", "[SetScale]")
 
 TEST_CASE("Check transparence methods", "[SetTransparence]")
 {
-    Umbrella::Scene scene = {};
+    Umbrella::UmbrellaRoot root = {};
+    root.StartUp();
+    Umbrella::Scene* scene = root.SceneManager->CreateScene();
 
-    GameObject* gameObject = scene.CreateGameObject();
-    scene.AddGameObject(gameObject);
-    Umbrella::SpriteRenderComponent* spriteComponent = scene.AddComponent<Umbrella::SpriteRenderComponent>(gameObject);
+    GameObject* gameObject = scene->CreateGameObject();
+    scene->AddGameObject(gameObject);
+    Umbrella::SpriteRenderComponent* spriteComponent = scene->AddComponent<Umbrella::SpriteRenderComponent>(gameObject);
 
     REQUIRE(spriteComponent->GetTransparence() == 1.0f);
 
@@ -44,26 +48,30 @@ TEST_CASE("Check transparence methods", "[SetTransparence]")
 
 TEST_CASE("Check color methods", "[SetSpriteColor]")
 {
-    Umbrella::Scene scene = {};
+    Umbrella::UmbrellaRoot root = {};
+    root.StartUp();
+    Umbrella::Scene* scene = root.SceneManager->CreateScene();
 
-    GameObject* gameObject = scene.CreateGameObject();
-    scene.AddGameObject(gameObject);
-    Umbrella::SpriteRenderComponent* spriteComponent = scene.AddComponent<Umbrella::SpriteRenderComponent>(gameObject);
+    GameObject* gameObject = scene->CreateGameObject();
+    scene->AddGameObject(gameObject);
+    Umbrella::SpriteRenderComponent* spriteComponent = scene->AddComponent<Umbrella::SpriteRenderComponent>(gameObject);
 
     REQUIRE(spriteComponent->GetSpriteColor() == glm::vec4(1, 1, 1, 1));
 
-    spriteComponent->SetSpriteColor(glm::vec4(5.0f,2.0f,5.0f,1.0f));
+    spriteComponent->SetSpriteColor(glm::vec4(5.0f, 2.0f, 5.0f, 1.0f));
 
     REQUIRE(spriteComponent->GetSpriteColor() == glm::vec4(5.0f, 2.0f, 5.0f, 1.0f));
- }
+}
 
 TEST_CASE("Check SetFillSpriteColor methods", "[SetFillSpriteColor]")
 {
-    Umbrella::Scene scene = {};
+    Umbrella::UmbrellaRoot root = {};
+    root.StartUp();
+    Umbrella::Scene* scene = root.SceneManager->CreateScene();
 
-    GameObject* gameObject = scene.CreateGameObject();
-    scene.AddGameObject(gameObject);
-    Umbrella::SpriteRenderComponent* spriteComponent = scene.AddComponent<Umbrella::SpriteRenderComponent>(gameObject);
+    GameObject* gameObject = scene->CreateGameObject();
+    scene->AddGameObject(gameObject);
+    Umbrella::SpriteRenderComponent* spriteComponent = scene->AddComponent<Umbrella::SpriteRenderComponent>(gameObject);
 
     REQUIRE(spriteComponent->GetFillSpriteColor() == glm::vec4(1, 1, 1, 0));
 
@@ -74,13 +82,15 @@ TEST_CASE("Check SetFillSpriteColor methods", "[SetFillSpriteColor]")
 
 TEST_CASE("Check SetRotation methods", "[SetRotation]")
 {
-    Umbrella::Scene scene = {};
+    Umbrella::UmbrellaRoot root = {};
+    root.StartUp();
+    Umbrella::Scene* scene = root.SceneManager->CreateScene();
 
-    GameObject* gameObject = scene.CreateGameObject();
-    scene.AddGameObject(gameObject);
-    Umbrella::SpriteRenderComponent* spriteComponent = scene.AddComponent<Umbrella::SpriteRenderComponent>(gameObject);
+    GameObject* gameObject = scene->CreateGameObject();
+    scene->AddGameObject(gameObject);
+    Umbrella::SpriteRenderComponent* spriteComponent = scene->AddComponent<Umbrella::SpriteRenderComponent>(gameObject);
 
-    REQUIRE(spriteComponent->GetRotation() == glm::vec3(0,0,0));
+    REQUIRE(spriteComponent->GetRotation() == glm::vec3(0, 0, 0));
     REQUIRE(spriteComponent->GetRotation2D() == 0);
 
     spriteComponent->SetRotation2D(1.0f);
@@ -88,7 +98,7 @@ TEST_CASE("Check SetRotation methods", "[SetRotation]")
     REQUIRE(spriteComponent->GetRotation() == glm::vec3(0, 1.0f, 0));
     REQUIRE(spriteComponent->GetRotation2D() == 1.0f);
 
-    spriteComponent->SetRotation(glm::vec3(2.0f,2.0f,2.0f));
+    spriteComponent->SetRotation(glm::vec3(2.0f, 2.0f, 2.0f));
 
     REQUIRE(spriteComponent->GetRotation() == glm::vec3(2.0f, 2.0f, 2.0f));
     REQUIRE(spriteComponent->GetRotation2D() == 2.0f);
@@ -104,7 +114,6 @@ TEST_CASE("Check SetSprite methods", "[SetSprite]")
     root->StartUp();
     Umbrella::Scene* scene = root->SceneManager->CreateScene();
     root->SceneManager->LoadScene(scene);
-    
 
     GameObject* gameObject = scene->CreateGameObject();
     scene->AddGameObject(gameObject);
@@ -124,12 +133,14 @@ TEST_CASE("Check SetSprite methods", "[SetSprite]")
 
 TEST_CASE("Check Material on sprite render")
 {
-    Umbrella::Scene scene = {};
+    Umbrella::UmbrellaRoot* root = new Umbrella::UmbrellaRoot;
+    root->StartUp();
+    Umbrella::Scene* scene = root->SceneManager->CreateScene();
+    root->SceneManager->LoadScene(scene);
 
-    GameObject* gameObject = scene.CreateGameObject();
-    scene.AddGameObject(gameObject);
-    Umbrella::SpriteRenderComponent* spriteComponent = scene.AddComponent<Umbrella::SpriteRenderComponent>(gameObject);
-    
+    GameObject* gameObject = scene->CreateGameObject();
+    scene->AddGameObject(gameObject);
+    Umbrella::SpriteRenderComponent* spriteComponent = scene->AddComponent<Umbrella::SpriteRenderComponent>(gameObject);
 
     Umbrella::Sprite* sprite = new Umbrella::Sprite;
 
@@ -142,7 +153,7 @@ TEST_CASE("Check Material on sprite render")
     spriteComponent->OnUpdate(0.0f);
 
     REQUIRE(spriteComponent->GetMaterial()->GetVec2("scale") == glm::vec2(1.5f, 1.5f));
-    REQUIRE(spriteComponent->GetMaterial()->GetVec3("rotation") == glm::vec3(0.0f , 1.0f, 0.0f));
+    REQUIRE(spriteComponent->GetMaterial()->GetVec3("rotation") == glm::vec3(0.0f, 1.0f, 0.0f));
     REQUIRE(spriteComponent->GetMaterial()->GetFloat("transparence") == 0.1f);
     REQUIRE(spriteComponent->GetMaterial()->GetVec4("color") == glm::vec4(5.0f, 2.0f, 5.0f, 1.0f));
     REQUIRE(spriteComponent->GetMaterial()->GetVec4("fillColor") == glm::vec4(6.0f, 2.0f, 6.0f, 1.0f));

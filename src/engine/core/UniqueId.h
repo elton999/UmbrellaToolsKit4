@@ -1,6 +1,5 @@
 #pragma once
 #include <string>
-#include "combaseapi.h"
 
 namespace Umbrella
 {
@@ -10,4 +9,4 @@ namespace Umbrella
             static std::string GetId();
     };
 
-}
+} // namespace Umbrella

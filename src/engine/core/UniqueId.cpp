@@ -1,22 +1,16 @@
 #include "UniqueId.h"
+#include <boost/uuid/uuid.hpp>
+#include <boost/uuid/uuid_generators.hpp>
+#include <boost/uuid/uuid_io.hpp>
 
 std::string Umbrella::UniqueId::GetId()
 {
-    GUID guid;
-    HRESULT hCreateGuid = CoCreateGuid(&guid);
+    std::string str;
 
-    if (FAILED(hCreateGuid))
-        return "";
+    boost::uuids::random_generator generator;
+    boost::uuids::uuid uuid = generator();
 
-    wchar_t wStrBuffer[40];
-
-    int result = StringFromGUID2(guid, wStrBuffer, 40);
-
-    if (result == 0)
-        return "";
-
-    std::wstring wstr(wStrBuffer);
-    std::string str(wstr.begin(), wstr.end());
+    str = boost::uuids::to_string(uuid);
 
     return str;
 }

@@ -1,10 +1,18 @@
+#include "IComponent.h"
 #include "GameObject.h"
 #include "Scene.h"
-#include "IComponent.h"
+
+Umbrella::IComponent::IComponent(std::string gameObjectId, Scene* scene, std::string componentId)
+{
+    _gameObjectId = gameObjectId;
+    _scene = scene;
+    _componentInstanceId = componentId;
+}
 
 void Umbrella::IComponent::Inicialization()
 {
-    if (!GetActiveStatus()) return;
+    if (!GetActiveStatus())
+        return;
     if (!_isStartUp)
     {
         OnStartUp();
@@ -14,7 +22,8 @@ void Umbrella::IComponent::Inicialization()
 
 void Umbrella::IComponent::InicializationFirstFrame()
 {
-    if (!GetActiveStatus()) return;
+    if (!GetActiveStatus())
+        return;
     if (!_isStartUp)
     {
         OnStartUp();
@@ -47,7 +56,7 @@ GameObject* Umbrella::IComponent::GetGameObject()
     }
 
     return _scene->GetGameObject(_gameObjectId);
- }
+}
 
 void Umbrella::IComponent::SetGameObject(GameObject* gameobejct)
 {

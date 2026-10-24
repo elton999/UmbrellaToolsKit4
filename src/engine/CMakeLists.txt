@@ -19,6 +19,8 @@ target_sources(umbrella PRIVATE
  "scene/GameObject.h"
  "scene/IComponent.h"
  "scene/IComponent.cpp"
+ "scene/camera/Camera.h"
+ "scene/camera/Camera.cpp"
  "render/RenderManager.cpp"
  "render/RenderManager.h"
  "render/Material.h"
@@ -36,7 +38,8 @@ target_sources(umbrella PRIVATE
  "render/component/SquareRenderComponent.h"
  "render/component/SpriteRenderComponent.cpp"
  "render/Sprite.h"
- "render/component/SquareRenderComponent.cpp")
+ "render/component/SquareRenderComponent.cpp"
+)
 
 target_include_directories(umbrella PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/")
 

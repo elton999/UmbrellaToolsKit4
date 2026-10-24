@@ -26,3 +26,17 @@ glm::vec3 Umbrella::Camera::GetScale()
 {
     return {0, 0, 0};
 }
+
+void Umbrella::Camera::SetSize(glm::ivec2 size)
+{
+}
+
+glm::ivec2 Umbrella::Camera::GetSize()
+{
+    return {0, 0};
+}
+
+glm::mat4 Umbrella::Camera::GetCameraMatrix()
+{
+    return glm::mat4(0);
+}

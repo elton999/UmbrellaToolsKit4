@@ -1,5 +1,4 @@
 #pragma once
-#include "glm/ext/vector_float3.hpp"
 #include <glm/glm.hpp>
 
 namespace Umbrella
@@ -11,6 +10,8 @@ namespace Umbrella
             glm::vec3 _rotation;
             glm::vec3 _scale;
 
+            glm::ivec2 _size;
+
         public:
             void SetPosition(glm::vec3 position);
             glm::vec3 GetPosition();
@@ -20,5 +21,10 @@ namespace Umbrella
 
             void SetScale(glm::vec3 scale);
             glm::vec3 GetScale();
+
+            void SetSize(glm::ivec2);
+            glm::ivec2 GetSize();
+
+            glm::mat4 GetCameraMatrix();
     };
 } // namespace Umbrella

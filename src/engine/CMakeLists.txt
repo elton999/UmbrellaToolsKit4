@@ -21,6 +21,8 @@ target_sources(umbrella PRIVATE
  "scene/IComponent.cpp"
  "scene/camera/Camera.h"
  "scene/camera/Camera.cpp"
+ "scene/camera/CameraManager.h"
+ "scene/camera/CameraManager.cpp"
  "render/RenderManager.cpp"
  "render/RenderManager.h"
  "render/Material.h"

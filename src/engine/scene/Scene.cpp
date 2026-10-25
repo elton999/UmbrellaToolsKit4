@@ -12,13 +12,19 @@ void Umbrella::Scene::AddGameObject(GameObject* gameobject)
 void Umbrella::Scene::RemoveGameObject(GameObject* gameObject)
 {
     if (!Umbrella::Scene::HasGameObject(gameObject)) return;
-    Umbrella::Scene::_gameObjects.remove(gameObject);
 
-    std::list<IComponent*> cloneList = _components;
+    std::list<IComponent*> cloneList = {};
+    for (auto* component : _components)
+    {
+        cloneList.push_back(component);
+    }
+
     for (auto component : cloneList)
     {
         RemoveComponent(component);
     }
+
+    Umbrella::Scene::_gameObjects.remove(gameObject);
     cloneList.clear();
 }
 

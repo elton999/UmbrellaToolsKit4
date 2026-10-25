@@ -1,9 +1,9 @@
 #include "MeshRenderComponent.h"
-
 #include "../../scene/camera/Camera.h"
 #include "../../scene/camera/CameraManager.h"
 #include "../Material.h"
 #include "../Mesh.h"
+#include <glad/glad.h>
 
 void Umbrella::MeshRenderComponent::SetMaterial(Umbrella::Material* material)
 {

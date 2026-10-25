@@ -4,7 +4,7 @@
 #include <glad/glad.h>
 #include "../core/debug/Log.h"
 
-Umbrella::Texture2D::Texture2D() : Internal_Format(GL_RGBA), Image_Format(GL_RGBA), Wrap_S(GL_REPEAT), Wrap_T(GL_REPEAT), Filter_Min(GL_LINEAR), Filter_Max(GL_LINEAR)
+Umbrella::Texture2D::Texture2D()
 {
     glGenTextures(1, &this->ID);
     _height = _width = 0;
@@ -25,14 +25,13 @@ void Umbrella::Texture2D::Generate(unsigned int width, unsigned int height, unsi
     _width = width;
     _height = height;
 
-    glBindTexture(GL_TEXTURE_2D, ID);
     Bind();
-    glTexImage2D(GL_TEXTURE_2D, 0, Internal_Format, _width, _height, 0, Image_Format, GL_UNSIGNED_BYTE, data);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, _width, _height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, Wrap_S);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, Wrap_T);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, Filter_Min);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, Filter_Max);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
     glBindTexture(GL_TEXTURE_2D, 0);
 }
@@ -44,9 +43,6 @@ void Umbrella::Texture2D::Bind()
 
 void Umbrella::Texture2D::Load(std::string path)
 {
-    Internal_Format = GL_RGBA;
-    Image_Format = GL_RGBA;
-
     int width, height, nrChannels;
     unsigned char* data = stbi_load(path.c_str(), &width, &height, &nrChannels, 0);
 

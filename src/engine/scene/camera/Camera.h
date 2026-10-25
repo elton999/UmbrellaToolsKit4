@@ -6,13 +6,18 @@ namespace Umbrella
     class Camera
     {
         private:
-            glm::vec3 _position;
-            glm::vec3 _rotation;
-            glm::vec3 _scale;
+            glm::vec3 _position = glm::vec3(1, 1, 1);
+            glm::vec3 _rotation = glm::vec3(0, 0, 0);
+            glm::vec3 _scale = glm::vec3(1, 1, 1);
 
-            glm::ivec2 _size;
+            glm::ivec2 _size = glm::ivec2(224, 135);
 
         public:
+            Camera()
+            {
+                _position = glm::vec3(1, 1, 1);
+            }
+
             void SetPosition(glm::vec3 position);
             glm::vec3 GetPosition();
 

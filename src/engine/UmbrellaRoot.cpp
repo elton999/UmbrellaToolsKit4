@@ -1,4 +1,6 @@
 #include "UmbrellaRoot.h"
+#include "scene/camera/Camera.h"
+#include "scene/camera/CameraManager.h"
 
 void Umbrella::UmbrellaRoot::StartUp()
 {
@@ -8,12 +10,14 @@ void Umbrella::UmbrellaRoot::StartUp()
     Timer = new Umbrella::Timer(RenderWindow->BackendIntegration);
     SceneManager = new Umbrella::SceneManager(this);
     RenderManager = new Umbrella::RenderManager(this);
+    CameraManager = new Umbrella::CameraManager;
 
     RenderWindow->StartUp();
     ResourceManager->StartUp();
     Timer->StartUp();
     SceneManager->StartUp();
     RenderManager->StartUp();
+    CameraManager->StartUp();
 }
 
 void Umbrella::UmbrellaRoot::Run()
@@ -36,4 +40,5 @@ void Umbrella::UmbrellaRoot::ShutDown()
     RenderManager->ShutDown();
     ResourceManager->ShutDown();
     RenderWindow->ShutDown();
+    CameraManager->ShutDown();
 }

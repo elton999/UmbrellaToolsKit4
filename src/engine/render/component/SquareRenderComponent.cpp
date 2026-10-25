@@ -1,4 +1,5 @@
 #include "SquareRenderComponent.h"
+#include "../../scene/camera/Camera.h"
 #include <glm/gtc/matrix_transform.hpp>
 #include <vector>
 
@@ -23,9 +24,10 @@ void Umbrella::SquareRenderComponent::OnStartUp()
         "layout (location = 0) in vec3 position;\n"
         "uniform mat4 model;\n"
         "uniform mat4 projection;\n"
+        "uniform mat4 view;\n"
         "void main()\n"
         "{\n"
-        "    gl_Position = projection * model * vec4(position, 1.0);\n"
+        "    gl_Position = projection * view * model * vec4(position, 1.0);\n"
         "}\n",
 
         "#version 330 core\n"
@@ -34,8 +36,7 @@ void Umbrella::SquareRenderComponent::OnStartUp()
         "void main()\n"
         "{\n"
         "   FragColor = color;\n"
-        "}\n"
-    );
+        "}\n");
 
     material->SetShader(shader);
     SetMaterial(material);
@@ -45,15 +46,18 @@ void Umbrella::SquareRenderComponent::OnStartUp()
     SetMesh(mesh);
 }
 
-
 void Umbrella::SquareRenderComponent::OnUpdate(float deltaTime)
 {
-    if (!HasMaterial()) return;
-    if (!GetMaterial()->HasShader()) return;
-    if (!GetMaterial()->GetShader()->IsShaderReady()) return;
+    if (!HasMaterial())
+        return;
+    if (!GetMaterial()->HasShader())
+        return;
+    if (!GetMaterial()->GetShader()->IsShaderReady())
+        return;
 
-
-    GetMaterial()->SetMatrix4("projection", glm::ortho(0.0f, 1280.0f, 720.0f, 0.0f, -1.0f, 1.0f));
+    auto* camera = GetCamera();
+    GetMaterial()->SetMatrix4("view", camera->GetCameraMatrix());
+    GetMaterial()->SetMatrix4("projection", glm::ortho(0.0f, (float)camera->GetSize().x, (float)camera->GetSize().y, 0.0f, -1.0f, 1.0f));
 
     glm::mat4 model = glm::mat4(1.0f);
     model = glm::translate(model, glm::vec3(GetPosition()));
@@ -61,7 +65,6 @@ void Umbrella::SquareRenderComponent::OnUpdate(float deltaTime)
 
     GetMaterial()->SetMatrix4("model", model);
 }
-
 
 void Umbrella::SquareRenderComponent::SetSize(glm::vec2 size)
 {

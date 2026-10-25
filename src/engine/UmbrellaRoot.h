@@ -7,6 +7,7 @@
 #include "render/RenderManager.h"
 #include "resources/ResourceManager.h"
 #include "scene/SceneManager.h"
+#include "scene/camera/CameraManager.h"
 
 namespace Umbrella
 {
@@ -18,6 +19,7 @@ namespace Umbrella
             Umbrella::Timer* Timer;
             Umbrella::SceneManager* SceneManager;
             Umbrella::RenderManager* RenderManager;
+            Umbrella::CameraManager* CameraManager;
 
             void StartUp();
             void Run();

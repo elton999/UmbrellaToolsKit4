@@ -43,7 +43,7 @@ glm::ivec2 Umbrella::Camera::GetSize()
 
 glm::mat4 Umbrella::Camera::GetCameraMatrix()
 {
-    glm::mat4 view = {};
+    glm::mat4 view = glm::mat4(1.0f);
     view = glm::translate(view, GetPosition());
     view = glm::rotate(view, GetRotation().x, glm::vec3(1, 0, 0));
     view = glm::rotate(view, GetRotation().y, glm::vec3(0, 1, 0));

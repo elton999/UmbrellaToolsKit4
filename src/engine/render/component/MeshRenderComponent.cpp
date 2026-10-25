@@ -1,5 +1,7 @@
 #include "MeshRenderComponent.h"
 
+#include "../../scene/camera/Camera.h"
+#include "../../scene/camera/CameraManager.h"
 #include "../Material.h"
 #include "../Mesh.h"
 
@@ -43,12 +45,20 @@ bool Umbrella::MeshRenderComponent::HasMesh()
 
 void Umbrella::MeshRenderComponent::Draw()
 {
-    if (!HasMesh()) return;
-    if (!HasMaterial()) return;
+    if (!HasMesh())
+        return;
+    if (!HasMaterial())
+        return;
 
     GetMaterial()->Use();
 
     glBindVertexArray(GetMesh()->GetVAO());
     glDrawArrays(GL_TRIANGLES, 0, GetMesh()->GetVerticesCount());
     glBindVertexArray(0);
+}
+
+Umbrella::Camera* Umbrella::MeshRenderComponent::GetCamera()
+{
+    std::string layer = GetScene()->GetSceneManager()->GetUmbrellaRoot()->RenderManager->GetComponentLayer(this);
+    return GetScene()->GetSceneManager()->GetUmbrellaRoot()->CameraManager->GetCamera(layer);
 }

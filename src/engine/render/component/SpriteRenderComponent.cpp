@@ -1,4 +1,5 @@
 #include "SpriteRenderComponent.h"
+#include "../../scene/camera/Camera.h"
 #include <glm/gtc/matrix_transform.hpp>
 
 void Umbrella::SpriteRenderComponent::OnStartUp()
@@ -44,9 +45,10 @@ void Umbrella::SpriteRenderComponent::OnStartUp()
         "out vec2 TexCoords;\n"
         "uniform mat4 model;\n"
         "uniform mat4 projection;\n"
+        "uniform mat4 view;\n"
         "void main() {\n"
         "    TexCoords = texCoords;\n"
-        "    gl_Position = projection * model * vec4(position, 1.0);\n"
+        "    gl_Position = projection * view * model * vec4(position, 1.0);\n"
         "}\n";
 
     const char* fragmentCode =
@@ -68,7 +70,6 @@ void Umbrella::SpriteRenderComponent::OnStartUp()
         "    colorOut = vec4(colorOut.x, colorOut.y, colorOut.z, transpareceOut);\n"
         "}\n";
 
-
     Umbrella::Mesh* mesh = new Umbrella::Mesh;
     Umbrella::Material* material = new Umbrella::Material;
     Umbrella::Shader* shader = new Umbrella::Shader;
@@ -85,11 +86,16 @@ void Umbrella::SpriteRenderComponent::OnStartUp()
 
 void Umbrella::SpriteRenderComponent::OnUpdate(float deltaTime)
 {
-    if (!HasMaterial()) return;
-    if (!GetMaterial()->HasShader()) return;
-    if (!GetMaterial()->GetShader()->IsShaderReady()) return;
+    if (!HasMaterial())
+        return;
+    if (!GetMaterial()->HasShader())
+        return;
+    if (!GetMaterial()->GetShader()->IsShaderReady())
+        return;
 
-    GetMaterial()->SetMatrix4("projection", glm::ortho(0.0f, 1280.0f, 720.0f, 0.0f, -1.0f, 1.0f));
+    auto* camera = GetCamera();
+    GetMaterial()->SetMatrix4("view", camera->GetCameraMatrix());
+    GetMaterial()->SetMatrix4("projection", glm::ortho(0.0f, (float)camera->GetSize().x, (float)camera->GetSize().y, 0.0f, -1.0f, 1.0f));
     GetMaterial()->SetVec2("scale", GetScale());
     GetMaterial()->SetFloat("transparence", 1.0f - GetTransparence());
     GetMaterial()->SetVec4("color", GetSpriteColor());
@@ -130,7 +136,7 @@ void Umbrella::SpriteRenderComponent::OnUpdate(float deltaTime)
     {
         float texY = 1.0f - (_sprite->Y + height) / (float)_texture->GetHight();
         glm::vec2 texOffset = glm::vec2(_sprite->X / (float)_texture->GetWidth(), texY);
-        glm::vec2 texScale = glm::vec2( width / (float)_texture->GetWidth(), height / (float)_texture->GetHight());
+        glm::vec2 texScale = glm::vec2(width / (float)_texture->GetWidth(), height / (float)_texture->GetHight());
 
         GetMaterial()->SetVec2("texOffset", texOffset);
         GetMaterial()->SetVec2("texScale", texScale);

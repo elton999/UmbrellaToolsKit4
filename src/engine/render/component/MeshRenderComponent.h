@@ -6,6 +6,7 @@ namespace Umbrella
 {
     class Material;
     class Mesh;
+    class Camera;
 
     class MeshRenderComponent : public IRenderComponent
     {
@@ -14,8 +15,10 @@ namespace Umbrella
             Mesh* _mesh = nullptr;
 
         public:
-            MeshRenderComponent(std::string gameObjectId, Umbrella::Scene* scene, std::string componentId) : IRenderComponent(gameObjectId, scene, componentId)
-            {}
+            MeshRenderComponent(std::string gameObjectId, Umbrella::Scene* scene, std::string componentId)
+                : IRenderComponent(gameObjectId, scene, componentId)
+            {
+            }
 
             void SetMaterial(Material* material);
             Material* GetMaterial();
@@ -26,5 +29,7 @@ namespace Umbrella
             bool HasMesh();
 
             void Draw() override;
+
+            Camera* GetCamera();
     };
-}
+} // namespace Umbrella

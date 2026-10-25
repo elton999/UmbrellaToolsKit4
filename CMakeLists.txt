@@ -5,44 +5,44 @@ project(game VERSION 0.1.0 LANGUAGES CXX)
 add_subdirectory("src/engine")
 
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
-	add_subdirectory("thirdparty/catch2")
+  add_subdirectory("thirdparty/catch2")
 endif()
 
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
-	add_executable(game "src/main.cpp")
+  add_executable(game "src/main.cpp")
 elseif(WIN32 AND CMAKE_BUILD_TYPE STREQUAL "Release")
-	add_executable(game WIN32 "src/main.cpp")
-	if(MSVC)
-		target_link_options(game PRIVATE "/SUBSYSTEM:WINDOWS" "/ENTRY:mainCRTStartup")
-	endif()
+  add_executable(game WIN32 "src/main.cpp")
+  if(MSVC)
+    target_link_options(game PRIVATE "/SUBSYSTEM:WINDOWS" "/ENTRY:mainCRTStartup")
+  endif()
 
-	if(MINGW)
-		target_link_options(game PRIVATE "-mwindows")
-	endif()
+  if(MINGW)
+    target_link_options(game PRIVATE "-mwindows")
+  endif()
 else()
-	add_executable(game "src/main.cpp")
+  add_executable(game "src/main.cpp")
 endif()
 
 
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
-	target_link_libraries(game PRIVATE umbrella core)
+  target_link_libraries(game PRIVATE umbrella core)
 else()
-	target_link_libraries(game PRIVATE umbrella core)
+  target_link_libraries(game PRIVATE umbrella core)
 endif()
 
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
-	target_compile_definitions(game PRIVATE BUILD_DEBUG)
+  target_compile_definitions(game PRIVATE BUILD_DEBUG)
 else()
-	target_compile_definitions(game PRIVATE BUILD_RELEASE)
+  target_compile_definitions(game PRIVATE BUILD_RELEASE)
 endif()
 
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
 
-enable_testing()
-include(CTest)
-include(Catch)
+  enable_testing()
+  include(CTest)
+  include(Catch)
 
-add_executable(
+  add_executable(
  unit_tests
  "tests/src/engine/core/RenderWindowTest.cpp"
  "tests/src/engine/core/platform/FileSystemTest.cpp"
@@ -50,17 +50,20 @@ add_executable(
  "tests/src/engine/resources/TextResourceTest.cpp"
  "tests/src/engine/scene/SceneTest.cpp"
  "tests/src/engine/scene/SceneManagerTest.cpp"
+ "tests/src/engine/scene/camera/CameraTest.cpp"
+ "tests/src/engine/scene/camera/CameraManagerTest.cpp"
  "tests/src/engine/render/Texture2DTest.cpp"
  "tests/src/engine/render/ShaderTest.cpp"
  "tests/src/engine/render/MeshTest.cpp"
  "tests/src/engine/render/component/MeshRenderComponentTest.cpp"
  "tests/src/engine/render/MaterialTest.cpp"
- "tests/src/engine/render/RenderManagerTest.cpp" 
+ "tests/src/engine/render/RenderManagerTest.cpp"
  "tests/src/engine/render/component/SpriteRenderComponentTest.cpp"
- "tests/src/engine/render/component/SquareRenderComponentTest.cpp")
+ "tests/src/engine/render/component/SquareRenderComponentTest.cpp"
+  )
 
-target_link_libraries(unit_tests PRIVATE umbrella core Catch2::Catch2WithMain)
+  target_link_libraries(unit_tests PRIVATE umbrella core Catch2::Catch2WithMain)
 
-catch_discover_tests(unit_tests)
+  catch_discover_tests(unit_tests)
 
 endif()

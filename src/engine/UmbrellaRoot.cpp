@@ -1,5 +1,5 @@
 #include "UmbrellaRoot.h"
-#include "scene/camera/Camera.h"
+#include "core/platform/graphics_wrappers/integrations/GlwfBackendIntegration.h"
 #include "scene/camera/CameraManager.h"
 
 void Umbrella::UmbrellaRoot::StartUp()

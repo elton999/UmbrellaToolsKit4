@@ -2,8 +2,6 @@
 
 #include "core/RenderWindow.h"
 #include "core/Timer.h"
-#include "core/debug/Log.h"
-#include "core/platform/graphics_wrappers/integrations/GlwfBackendIntegration.h"
 #include "render/RenderManager.h"
 #include "resources/ResourceManager.h"
 #include "scene/SceneManager.h"

@@ -51,6 +51,7 @@ if(CMAKE_BUILD_TYPE STREQUAL "Debug")
  "tests/src/engine/scene/SceneTest.cpp"
  "tests/src/engine/scene/SceneManagerTest.cpp"
  "tests/src/engine/scene/camera/CameraTest.cpp"
+ "tests/src/engine/scene/camera/CameraManagerTest.cpp"
  "tests/src/engine/render/Texture2DTest.cpp"
  "tests/src/engine/render/ShaderTest.cpp"
  "tests/src/engine/render/MeshTest.cpp"

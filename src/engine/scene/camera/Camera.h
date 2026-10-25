@@ -13,11 +13,6 @@ namespace Umbrella
             glm::ivec2 _size = glm::ivec2(224, 135);
 
         public:
-            Camera()
-            {
-                _position = glm::vec3(1, 1, 1);
-            }
-
             void SetPosition(glm::vec3 position);
             glm::vec3 GetPosition();
 

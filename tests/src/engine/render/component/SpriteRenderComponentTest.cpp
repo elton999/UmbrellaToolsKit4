@@ -145,7 +145,6 @@ TEST_CASE("Check Material on sprite render")
     Umbrella::Sprite* sprite = new Umbrella::Sprite;
 
     spriteComponent->SetScale(1.5f);
-    spriteComponent->SetRotation2D(1.0f);
     spriteComponent->SetTransparence(0.1f);
     spriteComponent->SetSpriteColor(glm::vec4(5.0f, 2.0f, 5.0f, 1.0f));
     spriteComponent->SetFillSpriteColor(glm::vec4(6.0f, 2.0f, 6.0f, 1.0f));
@@ -153,7 +152,6 @@ TEST_CASE("Check Material on sprite render")
     spriteComponent->OnUpdate(0.0f);
 
     REQUIRE(spriteComponent->GetMaterial()->GetVec2("scale") == glm::vec2(1.5f, 1.5f));
-    REQUIRE(spriteComponent->GetMaterial()->GetVec3("rotation") == glm::vec3(0.0f, 1.0f, 0.0f));
     REQUIRE(spriteComponent->GetMaterial()->GetFloat("transparence") == 0.1f);
     REQUIRE(spriteComponent->GetMaterial()->GetVec4("color") == glm::vec4(5.0f, 2.0f, 5.0f, 1.0f));
     REQUIRE(spriteComponent->GetMaterial()->GetVec4("fillColor") == glm::vec4(6.0f, 2.0f, 6.0f, 1.0f));

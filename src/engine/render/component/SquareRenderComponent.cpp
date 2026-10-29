@@ -60,7 +60,8 @@ void Umbrella::SquareRenderComponent::OnUpdate(float deltaTime)
     GetMaterial()->SetMatrix4("projection", glm::ortho(0.0f, (float)camera->GetSize().x, (float)camera->GetSize().y, 0.0f, -1.0f, 1.0f));
 
     glm::mat4 model = glm::mat4(1.0f);
-    model = glm::translate(model, glm::vec3(GetPosition()));
+    glm::vec3 position = GetPosition() - glm::vec3(1, 1, 0);
+    model = glm::translate(model, glm::vec3(position));
     model = glm::scale(model, glm::vec3(_size, 1.0f));
 
     GetMaterial()->SetMatrix4("model", model);

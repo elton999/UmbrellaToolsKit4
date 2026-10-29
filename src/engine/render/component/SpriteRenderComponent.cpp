@@ -102,7 +102,8 @@ void Umbrella::SpriteRenderComponent::OnUpdate(float deltaTime)
     GetMaterial()->SetVec4("fillColor", GetFillSpriteColor());
 
     glm::mat4 model = glm::mat4(1.0f);
-    model = glm::translate(model, glm::vec3(GetPosition()));
+    glm::vec3 position = GetPosition() - glm::vec3(1, 1, 0);
+    model = glm::translate(model, glm::vec3(position));
 
     int width = 0;
     int height = 0;

@@ -26,7 +26,12 @@ target_sources(core PRIVATE
 "platform/FileSystem.h"
 "platform/FileSystem.cpp"
 "UniqueId.h"
-"UniqueId.cpp")
+"UniqueId.cpp"
+"io/input/InputHandler.h"
+"io/input/InputHandler.cpp"
+"io/input/InputKeys.h"
+"io/input/IInputIntegration.h"
+)
 
 target_include_directories(core PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/")
 

@@ -26,7 +26,11 @@ namespace Umbrella
                 if (keyId == -1)
                     return false;
 
-                int state = glfwGetKey(_window, keyId);
+                int state = 0;
+                if (key == InputKeys::MOUSE_BUTTON_LEFT || key == InputKeys::MOUSE_BUTTON_RIGHT || key == InputKeys::MOUSE_SCROLL)
+                    state = glfwGetMouseButton(_window, keyId);
+                else
+                    state = glfwGetKey(_window, keyId);
                 return state == GLFW_PRESS;
             }
 

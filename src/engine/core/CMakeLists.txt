@@ -31,6 +31,7 @@ target_sources(core PRIVATE
 "io/input/InputHandler.cpp"
 "io/input/InputKeys.h"
 "io/input/IInputIntegration.h"
+"platform/input/GlfwInputIntegration.h"
 )
 
 target_include_directories(core PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/")

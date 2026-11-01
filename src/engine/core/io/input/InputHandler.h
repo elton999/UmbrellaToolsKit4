@@ -1,6 +1,5 @@
 #pragma once
-#include "InputKeys.h"
-#include "glm/ext/vector_float2.hpp"
+#include "IInputIntegration.h"
 #include <glm/glm.hpp>
 #include <string>
 
@@ -8,7 +7,11 @@ namespace Umbrella
 {
     class InputHandler
     {
+        private:
+            IInputIntegration* _inputIntegration;
+
         public:
+            InputHandler(IInputIntegration* integration);
             void StartUp();
             void Run();
             void ShutDown();

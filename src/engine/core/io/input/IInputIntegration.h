@@ -7,12 +7,26 @@ namespace Umbrella
     class IInputIntegration
     {
         public:
-            virtual bool IsKeyDown(InputKeys key);
-            virtual bool IsKeyUp(InputKeys key);
+            virtual bool IsKeyDown(InputKeys key)
+            {
+                return false;
+            }
 
-            virtual float GetFloat(InputKeys key);
-            virtual glm::vec2 GetVector2(InputKeys key);
+            virtual bool IsKeyUp(InputKeys key)
+            {
+                return false;
+            }
 
-            virtual void Run();
+            virtual float GetFloat(InputKeys key)
+            {
+                return 0;
+            }
+
+            virtual glm::vec2 GetVector2(InputKeys key)
+            {
+                return glm::vec2(0, 0);
+            }
+
+            virtual void Run() {}
     };
 } // namespace Umbrella

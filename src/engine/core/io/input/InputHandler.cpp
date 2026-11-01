@@ -1,4 +1,10 @@
 #include "InputHandler.h"
+#include "io/input/IInputIntegration.h"
+
+Umbrella::InputHandler::InputHandler(Umbrella::IInputIntegration* integration)
+{
+    _inputIntegration = integration;
+}
 
 void Umbrella::InputHandler::StartUp()
 {

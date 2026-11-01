@@ -1,6 +1,8 @@
 #pragma once
 #include "IInputIntegration.h"
 #include <glm/glm.hpp>
+#include <list>
+#include <map>
 #include <string>
 
 namespace Umbrella
@@ -9,6 +11,13 @@ namespace Umbrella
     {
         private:
             IInputIntegration* _inputIntegration;
+            std::list<InputKeys> _keyPressed;
+            std::map<std::string, std::list<InputKeys>> _inputBind;
+            std::map<InputKeys, bool> _keyDownProxy;
+            std::map<InputKeys, bool> _keyUpProxy;
+
+            bool HasKeyProxy(InputKeys key);
+            void AddKeyProxy(InputKeys key);
 
         public:
             InputHandler(IInputIntegration* integration);

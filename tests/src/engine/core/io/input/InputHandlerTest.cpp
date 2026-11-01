@@ -8,6 +8,10 @@ class InputIntegrationTest : public Umbrella::IInputIntegration
 {
     private:
         std::list<Umbrella::InputKeys> _keysPressed = {};
+        std::list<Umbrella::InputKeys> _keysReleased = {};
+        std::list<Umbrella::InputKeys> _tempKeyPressed = {};
+        std::list<Umbrella::InputKeys> _tempKeyReleased = {};
+
         glm::vec2 _position = {0, 0};
         float _scrollValue;
 
@@ -26,19 +30,34 @@ class InputIntegrationTest : public Umbrella::IInputIntegration
 
         bool IsKeyUp(Umbrella::InputKeys key) override
         {
-            for (auto keyInList : _keysPressed)
+            for (auto keyInList : _keysReleased)
             {
                 if (key == keyInList)
                 {
-                    return false;
+                    return true;
                 }
             }
 
-            return true;
+            return false;
         }
 
         void Run() override
         {
+            _keysPressed.clear();
+            _keysReleased.clear();
+
+            for (auto key : _tempKeyPressed)
+            {
+                _keysPressed.push_back(key);
+            }
+
+            for (auto key : _tempKeyReleased)
+            {
+                _keysReleased.push_back(key);
+            }
+
+            _tempKeyReleased.clear();
+            _tempKeyPressed.clear();
         }
 
         float GetFloat(Umbrella::InputKeys key) override
@@ -53,20 +72,12 @@ class InputIntegrationTest : public Umbrella::IInputIntegration
 
         void PressKey(Umbrella::InputKeys key)
         {
-            for (auto keyInList : _keysPressed)
-            {
-                if (key == keyInList)
-                {
-                    return;
-                }
-            }
-
-            _keysPressed.push_back(key);
+            _tempKeyPressed.push_back(key);
         }
 
         void ReleaseKey(Umbrella::InputKeys key)
         {
-            _keysPressed.remove(key);
+            _tempKeyReleased.push_back(key);
         }
 
         void SetMousePosition(glm::vec2 position)
@@ -90,8 +101,8 @@ TEST_CASE("Test input click simple")
     REQUIRE_FALSE(inputHandler->KeyPressed(Umbrella::InputKeys::MOUSE_BUTTON_LEFT));
     REQUIRE_FALSE(inputHandler->KeyDown(Umbrella::InputKeys::MOUSE_BUTTON_LEFT));
     REQUIRE_FALSE(inputHandler->KeyPressed(Umbrella::InputKeys::MOUSE_BUTTON_RIGHT));
-    REQUIRE(inputHandler->KeyUp(Umbrella::InputKeys::MOUSE_BUTTON_LEFT));
-    REQUIRE(inputHandler->KeyUp(Umbrella::InputKeys::MOUSE_BUTTON_RIGHT));
+    REQUIRE_FALSE(inputHandler->KeyUp(Umbrella::InputKeys::MOUSE_BUTTON_LEFT));
+    REQUIRE_FALSE(inputHandler->KeyUp(Umbrella::InputKeys::MOUSE_BUTTON_RIGHT));
 
     inputBackEnd->PressKey(Umbrella::InputKeys::MOUSE_BUTTON_LEFT);
     inputHandler->Run();
@@ -100,7 +111,7 @@ TEST_CASE("Test input click simple")
     REQUIRE(inputHandler->KeyDown(Umbrella::InputKeys::MOUSE_BUTTON_LEFT));
     REQUIRE_FALSE(inputHandler->KeyPressed(Umbrella::InputKeys::MOUSE_BUTTON_RIGHT));
     REQUIRE_FALSE(inputHandler->KeyUp(Umbrella::InputKeys::MOUSE_BUTTON_LEFT));
-    REQUIRE(inputHandler->KeyUp(Umbrella::InputKeys::MOUSE_BUTTON_RIGHT));
+    REQUIRE_FALSE(inputHandler->KeyUp(Umbrella::InputKeys::MOUSE_BUTTON_RIGHT));
 
     inputHandler->Run();
 
@@ -108,16 +119,16 @@ TEST_CASE("Test input click simple")
     REQUIRE_FALSE(inputHandler->KeyDown(Umbrella::InputKeys::MOUSE_BUTTON_LEFT));
     REQUIRE_FALSE(inputHandler->KeyPressed(Umbrella::InputKeys::MOUSE_BUTTON_RIGHT));
     REQUIRE_FALSE(inputHandler->KeyUp(Umbrella::InputKeys::MOUSE_BUTTON_LEFT));
-    REQUIRE(inputHandler->KeyUp(Umbrella::InputKeys::MOUSE_BUTTON_RIGHT));
+    REQUIRE_FALSE(inputHandler->KeyUp(Umbrella::InputKeys::MOUSE_BUTTON_RIGHT));
 
     inputBackEnd->ReleaseKey(Umbrella::InputKeys::MOUSE_BUTTON_LEFT);
-    inputBackEnd->Run();
+    inputHandler->Run();
 
     REQUIRE_FALSE(inputHandler->KeyPressed(Umbrella::InputKeys::MOUSE_BUTTON_LEFT));
     REQUIRE_FALSE(inputHandler->KeyDown(Umbrella::InputKeys::MOUSE_BUTTON_LEFT));
     REQUIRE_FALSE(inputHandler->KeyPressed(Umbrella::InputKeys::MOUSE_BUTTON_RIGHT));
     REQUIRE(inputHandler->KeyUp(Umbrella::InputKeys::MOUSE_BUTTON_LEFT));
-    REQUIRE(inputHandler->KeyUp(Umbrella::InputKeys::MOUSE_BUTTON_RIGHT));
+    REQUIRE_FALSE(inputHandler->KeyUp(Umbrella::InputKeys::MOUSE_BUTTON_RIGHT));
 }
 
 TEST_CASE("Test input bind")
@@ -138,8 +149,8 @@ TEST_CASE("Test input bind")
     REQUIRE_FALSE(inputHandler->KeyPressed(mouse_left));
     REQUIRE_FALSE(inputHandler->KeyDown(mouse_left));
     REQUIRE_FALSE(inputHandler->KeyPressed(mouse_right));
-    REQUIRE(inputHandler->KeyUp(mouse_left));
-    REQUIRE(inputHandler->KeyUp(mouse_right));
+    REQUIRE_FALSE(inputHandler->KeyUp(mouse_left));
+    REQUIRE_FALSE(inputHandler->KeyUp(mouse_right));
 
     inputBackEnd->PressKey(Umbrella::InputKeys::MOUSE_BUTTON_LEFT);
     inputHandler->Run();
@@ -148,7 +159,7 @@ TEST_CASE("Test input bind")
     REQUIRE(inputHandler->KeyDown(mouse_left));
     REQUIRE_FALSE(inputHandler->KeyPressed(mouse_right));
     REQUIRE_FALSE(inputHandler->KeyUp(mouse_left));
-    REQUIRE(inputHandler->KeyUp(mouse_left));
+    REQUIRE_FALSE(inputHandler->KeyUp(mouse_left));
 
     inputHandler->Run();
 
@@ -156,16 +167,16 @@ TEST_CASE("Test input bind")
     REQUIRE_FALSE(inputHandler->KeyDown(mouse_left));
     REQUIRE_FALSE(inputHandler->KeyPressed(mouse_right));
     REQUIRE_FALSE(inputHandler->KeyUp(mouse_left));
-    REQUIRE(inputHandler->KeyUp(mouse_right));
+    REQUIRE_FALSE(inputHandler->KeyUp(mouse_right));
 
     inputBackEnd->ReleaseKey(Umbrella::InputKeys::MOUSE_BUTTON_LEFT);
-    inputBackEnd->Run();
+    inputHandler->Run();
 
     REQUIRE_FALSE(inputHandler->KeyPressed(mouse_left));
     REQUIRE_FALSE(inputHandler->KeyDown(mouse_left));
     REQUIRE_FALSE(inputHandler->KeyPressed(mouse_right));
     REQUIRE(inputHandler->KeyUp(mouse_left));
-    REQUIRE(inputHandler->KeyUp(mouse_right));
+    REQUIRE_FALSE(inputHandler->KeyUp(mouse_right));
 }
 
 TEST_CASE("Test mouse position")

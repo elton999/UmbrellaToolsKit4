@@ -10,6 +10,7 @@ void Umbrella::UmbrellaRoot::StartUp()
     auto* glfwBackend = new Umbrella::GLWF_BackendIntegration;
     RenderWindow->BackendIntegration = glfwBackend;
     ResourceManager = new Umbrella::ResourceManager;
+    RenderWindow->StartUp();
     Timer = new Umbrella::Timer(RenderWindow->BackendIntegration);
     SceneManager = new Umbrella::SceneManager(this);
     RenderManager = new Umbrella::RenderManager(this);
@@ -17,7 +18,6 @@ void Umbrella::UmbrellaRoot::StartUp()
     auto* glfwInput = new Umbrella::GlfwInputIntegration(glfwBackend->GetWindow());
     InputHandler = new Umbrella::InputHandler(glfwInput);
 
-    RenderWindow->StartUp();
     ResourceManager->StartUp();
     Timer->StartUp();
     SceneManager->StartUp();

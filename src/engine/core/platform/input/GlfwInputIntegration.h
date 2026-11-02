@@ -22,6 +22,7 @@ namespace Umbrella
 
             bool IsKeyDown(Umbrella::InputKeys key) override
             {
+		if (_window == nullptr) return false;
                 int keyId = ConvertKey(key);
                 if (keyId == -1)
                     return false;
@@ -36,11 +37,17 @@ namespace Umbrella
 
             bool IsKeyUp(Umbrella::InputKeys key) override
             {
-                int keyId = ConvertKey(key);
+		if (_window == nullptr) return false;
+               	int keyId = ConvertKey(key);
                 if (keyId == -1)
                     return false;
+		 int state = 0;
+                if (key == InputKeys::MOUSE_BUTTON_LEFT || key == InputKeys::MOUSE_BUTTON_RIGHT || key == InputKeys::MOUSE_SCROLL)
+                    state = glfwGetMouseButton(_window, keyId);
+                else
+                    state = glfwGetKey(_window, keyId);
 
-                int state = glfwGetKey(_window, keyId);
+                state = glfwGetKey(_window, keyId);
                 return state == GLFW_RELEASE;
             }
 

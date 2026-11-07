@@ -2,31 +2,34 @@
 
 void Umbrella::GLWF_BackendIntegration::Init()
 {
-	if (!glfwInit()) return;
+    if (!glfwInit())
+        return;
 
-	const char* glsl_version = "#version 330";
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    const char* glsl_version = "#version 330";
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 #ifdef __APPLE__
-	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // Required on Mac
+    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // Required on Mac
 #endif
 
-	// Create window with graphics context
-	_window = glfwCreateWindow(_width, _height, _windowName.c_str(), nullptr, nullptr);
-	if (_window == nullptr) {
-		glfwTerminate();
-		return;
-	}
-	glfwMakeContextCurrent(_window);
-	glfwSwapInterval(1); // Enable vsync
-	Log::Msg("int game");
+    // Create window with graphics context
+    _window = glfwCreateWindow(_width, _height, _windowName.c_str(), nullptr, nullptr);
+    if (_window == nullptr)
+    {
+        glfwTerminate();
+        return;
+    }
+    glfwMakeContextCurrent(_window);
+    glfwSwapInterval(1); // Enable vsync
+    Log::Msg("int game");
 
-	// Initialize GLAD loader
-	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
-		Log::MsgError("Failed to initialize GLAD");
-		return;
-	}
+    // Initialize GLAD loader
+    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+    {
+        Log::MsgError("Failed to initialize GLAD");
+        return;
+    }
 
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -34,38 +37,37 @@ void Umbrella::GLWF_BackendIntegration::Init()
 
 void Umbrella::GLWF_BackendIntegration::Update()
 {
-	glfwPollEvents();
-	int display_w, display_h;
-	glfwGetFramebufferSize(_window, &display_w, &display_h);
-	glViewport(0, 0, display_w, display_h);
-	glClearColor(0.45f, 0.55f, 0.60f, 1.00f);
-	glClear(GL_COLOR_BUFFER_BIT);
+    glfwPollEvents();
+    int display_w, display_h;
+    glfwGetFramebufferSize(_window, &display_w, &display_h);
+    glViewport(0, 0, display_w, display_h);
+    glClearColor(0.45f, 0.55f, 0.60f, 1.00f);
+    glClear(GL_COLOR_BUFFER_BIT);
 }
 
 void Umbrella::GLWF_BackendIntegration::Close()
 {
-	glfwDestroyWindow(_window);
-	glfwTerminate();
+    glfwDestroyWindow(_window);
+    glfwTerminate();
 }
 
 bool Umbrella::GLWF_BackendIntegration::IsRunning()
 {
-	return !glfwWindowShouldClose(_window);
+    return !glfwWindowShouldClose(_window);
 }
 
 void Umbrella::GLWF_BackendIntegration::SetSize(int wight, int height)
 {
-
 }
 
 void Umbrella::GLWF_BackendIntegration::SetWindowName(const std::string text)
 {
-	glfwSetWindowTitle(_window, text.c_str());
+    glfwSetWindowTitle(_window, text.c_str());
 }
 
 float Umbrella::GLWF_BackendIntegration::GetTime()
 {
-	return (float)glfwGetTime();
+    return (float)glfwGetTime();
 }
 
 void Umbrella::GLWF_BackendIntegration::ClearScreen()

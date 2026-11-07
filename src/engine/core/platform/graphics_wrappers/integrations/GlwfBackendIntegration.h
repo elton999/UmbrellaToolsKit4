@@ -8,20 +8,24 @@
 
 namespace Umbrella
 {
-	class GLWF_BackendIntegration : public GraphicBackend
-	{
-		private:
-			GLFWwindow* _window;
-		public:
-			void Init() override;
-			void Update() override;
-			void Close() override;
+    class GLWF_BackendIntegration : public GraphicBackend
+    {
+        private:
+            GLFWwindow* _window;
 
-			bool IsRunning() override;
-			void SetSize(int wight, int height) override;
-			void SetWindowName(const std::string text) override;
-			float GetTime() override;
+        public:
+            void Init() override;
+            void Update() override;
+            void Close() override;
+
+            bool IsRunning() override;
+            void SetSize(int wight, int height) override;
+            void SetWindowName(const std::string text) override;
+            float GetTime() override;
             void ClearScreen() override;
-	};
-};
-
+            GLFWwindow* GetWindow()
+            {
+                return _window;
+            }
+    };
+}; // namespace Umbrella

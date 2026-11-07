@@ -2,6 +2,7 @@
 
 #include "core/RenderWindow.h"
 #include "core/Timer.h"
+#include "core/io/input/InputHandler.h"
 #include "render/RenderManager.h"
 #include "resources/ResourceManager.h"
 #include "scene/SceneManager.h"
@@ -18,6 +19,7 @@ namespace Umbrella
             Umbrella::SceneManager* SceneManager;
             Umbrella::RenderManager* RenderManager;
             Umbrella::CameraManager* CameraManager;
+            Umbrella::InputHandler* InputHandler;
 
             void StartUp();
             void Run();

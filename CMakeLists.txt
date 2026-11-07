@@ -60,6 +60,7 @@ if(CMAKE_BUILD_TYPE STREQUAL "Debug")
  "tests/src/engine/render/RenderManagerTest.cpp"
  "tests/src/engine/render/component/SpriteRenderComponentTest.cpp"
  "tests/src/engine/render/component/SquareRenderComponentTest.cpp"
+ "tests/src/engine/core/io/input/InputHandlerTest.cpp"
   )
 
   target_link_libraries(unit_tests PRIVATE umbrella core Catch2::Catch2WithMain)

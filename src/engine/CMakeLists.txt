@@ -12,7 +12,9 @@ target_sources(umbrella PRIVATE
  "resources/ResourceManager.cpp"
  "resources/TextResource.h"
  "resources/TextResource.cpp"
- "scene/Scene.h"
+ "resources/FontResource.h"
+ "resources/FontResource.cpp"
+"scene/Scene.h"
  "scene/Scene.cpp"
  "scene/SceneManager.h"
  "scene/SceneManager.cpp"
@@ -40,7 +42,9 @@ target_sources(umbrella PRIVATE
  "render/component/SquareRenderComponent.h"
  "render/component/SpriteRenderComponent.cpp"
  "render/Sprite.h"
- "render/component/SquareRenderComponent.cpp"
+ "render/component/TextRenderComponent.h"
+ "render/component/TextRenderComponent.cpp"
+
 )
 
 target_include_directories(umbrella PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/")

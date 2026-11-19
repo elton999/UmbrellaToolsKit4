@@ -17,6 +17,7 @@ namespace Umbrella
     {
         private:
             std::map<char, Character> _characters;
+            bool _hasLoaded = false;
 
         public:
             void Load(std::string path) override;

@@ -62,6 +62,10 @@ void Umbrella::FontResource::Load(std::string path)
         _characters.insert(std::pair<char, Umbrella::Character>(c, character));
     }
 
+    glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+    FT_Done_Face(face);
+    FT_Done_FreeType(ft);
+
     _hasLoaded = true;
 }
 

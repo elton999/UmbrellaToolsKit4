@@ -1,18 +1,21 @@
 #pragma once
 #include "../../resources/FontResource.h"
-#include "../IRenderComponent.h"
+#include "MeshRenderComponent.h"
 
 namespace Umbrella
 {
-    class TextRenderComponent : public IRenderComponent
+    class Material;
+
+    class TextRenderComponent : public MeshRenderComponent
     {
         private:
-            FontResource* _font;
-            float fontSize = 1;
+            FontResource* _font = nullptr;
+            float _fontSize = 1;
+            Material* _material = nullptr;
 
         public:
             TextRenderComponent(std::string gameObjectId, Umbrella::Scene* scene, std::string componentId)
-                : IRenderComponent(gameObjectId, scene, componentId)
+                : MeshRenderComponent(gameObjectId, scene, componentId)
             {
             }
             void SetFont(FontResource* font);

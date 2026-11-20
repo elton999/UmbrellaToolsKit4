@@ -23,5 +23,6 @@ namespace Umbrella
             void Load(std::string path) override;
             void Unload() override;
             bool HasLoaded();
+            Character GetCharacter(char c);
     };
 } // namespace Umbrella

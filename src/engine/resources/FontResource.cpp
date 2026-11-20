@@ -82,3 +82,16 @@ bool Umbrella::FontResource::HasLoaded()
 {
     return _hasLoaded;
 }
+
+Umbrella::Character Umbrella::FontResource::GetCharacter(char c)
+{
+    for (auto chars : _characters)
+    {
+        if (chars.first == c)
+        {
+            return chars.second;
+        }
+    }
+
+    return _characters['@'];
+}

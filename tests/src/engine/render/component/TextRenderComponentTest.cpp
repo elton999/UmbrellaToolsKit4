@@ -31,7 +31,7 @@ TEST_CASE("Check set font resource ", "[SetResource]")
     GameObject* gameObject = scene->CreateGameObject();
     scene->AddGameObject(gameObject);
 
-    std::string path = "Testing/Temporary/fontImportTest";
+    std::string path = "Testing/Temporary/fontImportTest.ttf";
     auto* textComponent = scene->AddComponent<Umbrella::TextRenderComponent>(gameObject);
     auto* font = root.ResourceManager->Load<Umbrella::FontResource>(path);
 

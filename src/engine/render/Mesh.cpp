@@ -104,3 +104,10 @@ int Umbrella::Mesh::GetVAO()
 {
     return mVAO;
 }
+
+void Umbrella::Mesh::Bind()
+{
+    glBindVertexArray(GetVAO());
+    glDrawArrays(GL_TRIANGLES, 0, GetVerticesCount());
+    glBindVertexArray(0);
+}

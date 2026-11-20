@@ -1,7 +1,7 @@
 #pragma once
 
-#include <vector>
 #include <glm/glm.hpp>
+#include <vector>
 
 namespace Umbrella
 {
@@ -30,5 +30,6 @@ namespace Umbrella
 
             int GetVBO();
             int GetVAO();
+            void Bind();
     };
-}
+} // namespace Umbrella

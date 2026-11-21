@@ -40,4 +40,10 @@ TEST_CASE("Check set font resource ", "[SetResource]")
     textComponent->SetFont(font);
 
     REQUIRE(textComponent->HasFont());
+
+    REQUIRE_FALSE(textComponent->HasText());
+
+    textComponent->SetText("hello world");
+
+    REQUIRE(textComponent->HasText());
 }

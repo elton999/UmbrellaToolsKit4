@@ -19,6 +19,8 @@ namespace Umbrella
                 : MeshRenderComponent(gameObjectId, scene, componentId)
             {
             }
+
+            void OnStartUp() override;
             void SetFont(FontResource* font);
             bool HasFont();
             FontResource* GetFont();
@@ -28,6 +30,7 @@ namespace Umbrella
 
             std::string GetText();
             void SetText(std::string text);
+            bool HasText();
 
             void Draw() override;
     };

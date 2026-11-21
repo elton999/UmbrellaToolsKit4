@@ -1,24 +1,17 @@
 #include "TextRenderComponent.h"
 #include "../Mesh.h"
+#include "glm/ext/matrix_float4x4.hpp"
 #include "resources/FontResource.h"
 #include <ft2build.h>
 #include FT_FREETYPE_H
+#include "../../core/debug/Log.h"
 #include "../Material.h"
 #include "../Shader.h"
 #include <glad/glad.h>
 #include <glm/gtc/matrix_transform.hpp>
 
-void Umbrella::TextRenderComponent::SetFont(Umbrella::FontResource* font)
+void Umbrella::TextRenderComponent::OnStartUp()
 {
-    if (font == nullptr)
-        return;
-    if (!font->HasLoaded())
-        return;
-
-    _font = font;
-    if (HasMaterial())
-        return;
-
     std::vector<glm::vec3> square =
         {
             glm::vec3{0.0f, 1.0f, 0.0f},
@@ -32,13 +25,13 @@ void Umbrella::TextRenderComponent::SetFont(Umbrella::FontResource* font)
 
     std::vector<glm::vec2> texCoords =
         {
+            glm::vec2{0.0f, 0.0f},
             glm::vec2{0.0f, 1.0f},
             glm::vec2{1.0f, 1.0f},
-            glm::vec2{0.0f, 0.0f},
 
+            glm::vec2{0.0f, 0.0f},
             glm::vec2{1.0f, 1.0f},
             glm::vec2{1.0f, 0.0f},
-            glm::vec2{0.0f, 0.0f},
         };
 
     std::vector<glm::vec3> colors =
@@ -61,13 +54,15 @@ void Umbrella::TextRenderComponent::SetFont(Umbrella::FontResource* font)
 
     shader->Load(
         "#version 330 core\n"
-        "layout (location = 0) in vec4 vertex;\n"
+        "layout(location = 0) in vec3 position;\n"
+        "layout(location = 1) in vec3 vertexcolor;\n"
+        "layout(location = 2) in vec2 texcoords;\n"
         "out vec2 TextCoords;\n"
         "uniform mat4 projection;\n"
         "void main()\n"
         "{\n"
-        "gl_Position = projection * vec4(vertex.xy, 0.0, 1.0);\n"
-        "TextCoords = vertex.zw;\n"
+        "gl_Position = projection * vec4(position, 1.0);\n"
+        "TextCoords = texcoords;\n"
         "}\n",
 
         "#version 330 core\n"
@@ -84,6 +79,18 @@ void Umbrella::TextRenderComponent::SetFont(Umbrella::FontResource* font)
     SetMaterial(material);
     GetMaterial()->SetShader(shader);
     SetMesh(mesh);
+}
+
+void Umbrella::TextRenderComponent::SetFont(Umbrella::FontResource* font)
+{
+    if (font == nullptr)
+        return;
+    if (!font->HasLoaded())
+        return;
+
+    _font = font;
+    if (HasMaterial())
+        return;
 }
 
 bool Umbrella::TextRenderComponent::HasFont()
@@ -108,12 +115,17 @@ void Umbrella::TextRenderComponent::SetText(std::string text)
 
 std::string Umbrella::TextRenderComponent::GetText()
 {
-    if (_text.empty() == 0)
+    if (!HasText())
     {
         return "";
     }
 
     return _text;
+}
+
+bool Umbrella::TextRenderComponent::HasText()
+{
+    return !_text.empty();
 }
 
 Umbrella::FontResource* Umbrella::TextRenderComponent::GetFont()
@@ -132,19 +144,25 @@ void Umbrella::TextRenderComponent::Draw()
     if (!HasFont())
         return;
 
-    if (GetText().empty() == 0)
-        return;
+    auto* camera = GetCamera();
+    glm::mat4 projection = glm::ortho(0.0f, (float)camera->GetSize().x, (float)camera->GetSize().y, 0.0f, -1.0f, 1.0f);
 
-    glm::mat4 projection = glm::ortho(0.0f, 800.0f, 0.0f, 600.0f);
+    glm::vec3 position = GetPosition();
+    glm::mat4 model = glm::mat4(1.0f);
+    model = glm::translate(model, glm::vec3(position));
+    model = glm::scale(model, glm::vec3(20, 20, 1));
+    projection = projection;
 
-    GetMaterial()->SetMatrix4("projection", projection);
-    GetMaterial()->Use();
+    GetMaterial()->SetMatrix4("projection", projection * camera->GetCameraMatrix() * model);
+    GetMaterial()->SetVec3("textColor", {1, 1, 1});
 
     std::string::const_iterator c;
     std::string text = GetText();
     for (c = text.begin(); c != text.end(); c++)
     {
+        GetMaterial()->Use();
         Umbrella::Character ch = GetFont()->GetCharacter(*c);
+        glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, ch.TextureID);
         GetMesh()->Bind();
     }

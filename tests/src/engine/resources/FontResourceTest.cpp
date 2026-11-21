@@ -5,7 +5,7 @@
 
 TEST_CASE("Check font load", "[HasContent][resource != null]")
 {
-    std::string path = "Testing/Temporary/fontImportTest";
+    std::string path = "Testing/Temporary/fontImportTest.ttf";
     Umbrella::UmbrellaRoot root = {};
     root.StartUp();
 
@@ -21,7 +21,7 @@ TEST_CASE("Check font load", "[HasContent][resource != null]")
 
 TEST_CASE("Try to load a invalid font")
 {
-    std::string path = "Testing/Temporary/fakeFontImport";
+    std::string path = "Testing/Temporary/fakeFontImport.ttf";
     Umbrella::UmbrellaRoot root = {};
     root.StartUp();
 

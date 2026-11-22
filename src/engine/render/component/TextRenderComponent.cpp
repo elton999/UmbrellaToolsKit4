@@ -1,6 +1,5 @@
 #include "TextRenderComponent.h"
 #include "../Mesh.h"
-#include "glm/ext/matrix_float4x4.hpp"
 #include "resources/FontResource.h"
 #include <ft2build.h>
 #include FT_FREETYPE_H
@@ -151,37 +150,31 @@ void Umbrella::TextRenderComponent::Draw()
 
     std::string::const_iterator c;
     std::string text = GetText();
+    float x = 0.0f;
+
     for (c = text.begin(); c != text.end(); c++)
     {
         glm::mat4 model = glm::mat4(1.0f);
         Umbrella::Character ch = GetFont()->GetCharacter(*c);
-        int height = ch.Size.y;
-        int width = ch.Size.x;
 
-        glm::vec2 scale = {1, 1};
+        glm::vec2 scale = {GetFontSize(), GetFontSize()};
 
-        float xpos = ch.Bearing.x * scale.x;
-        float ypos = (ch.Size.y - ch.Bearing.y) * scale.y;
+        float xpos = GetPosition().x + x + ch.Bearing.x * scale.x;
+        float ypos = GetPosition().y - ch.Bearing.y * scale.y + 48 * scale.y;
 
         float w = ch.Size.x * scale.x;
         float h = ch.Size.y * scale.y;
 
-        model = glm::translate(model, glm::vec3(position));
-        glm::vec2 baseSize = {ch.Size.x, ch.Size.y};
-        glm::vec2 finalSize = baseSize * scale;
-
-        model = glm::scale(model, glm::vec3(finalSize, 1.0));
-
-        float texY = 1.0f - (float)height / ch.Size.y;
-        glm::vec2 texOffset = glm::vec2(ch.Size.x / (float)ch.Size.x, texY);
-        glm::vec2 texScale = glm::vec2(width / ch.Size.x, height / ch.Size.y);
+        model = glm::translate(model, glm::vec3(xpos, ypos, position.z));
+        model = glm::scale(model, glm::vec3(w, h, 1.0));
 
         GetMaterial()->SetMatrix4("projection", projection * camera->GetCameraMatrix() * model);
-        GetMaterial()->SetVec3("textColor", {1, 1, 1});
 
         GetMaterial()->Use();
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, ch.TextureID);
         GetMesh()->Bind();
+
+        x += (ch.Advanced >> 6) * scale.x;
     }
 }

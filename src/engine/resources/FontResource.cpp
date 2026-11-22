@@ -26,6 +26,12 @@ void Umbrella::FontResource::Load(std::string path)
 
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
+    if (FT_Load_Char(face, 'X', FT_LOAD_RENDER))
+    {
+        Log::MsgError("FREETYTPE: Failed to load Glyph");
+        return;
+    }
+
     for (unsigned char c = 0; c < 128; c++)
     {
         if (FT_Load_Char(face, c, FT_LOAD_RENDER))
@@ -50,14 +56,15 @@ void Umbrella::FontResource::Load(std::string path)
 
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
         Umbrella::Character character =
             {
                 texture,
                 glm::ivec2(face->glyph->bitmap.width, face->glyph->bitmap.rows),
-                glm::ivec2(face->glyph->bitmap_left, face->glyph->bitmap_top)};
+                glm::ivec2(face->glyph->bitmap_left, face->glyph->bitmap_top),
+                glm::ivec1(face->glyph->advance.x).x};
 
         _characters.insert(std::pair<char, Umbrella::Character>(c, character));
     }

@@ -1,0 +1,28 @@
+#pragma once
+#include "ResourceContentIntegration.h"
+#include <glm/glm.hpp>
+#include <map>
+
+namespace Umbrella
+{
+    struct Character
+    {
+            unsigned int TextureID;
+            glm::ivec2 Size;
+            glm::ivec2 Bearing;
+            int Advanced;
+    };
+
+    class FontResource : public ResourceContentIntegration
+    {
+        private:
+            std::map<char, Character> _characters;
+            bool _hasLoaded = false;
+
+        public:
+            void Load(std::string path) override;
+            void Unload() override;
+            bool HasLoaded();
+            Character GetCharacter(char c);
+    };
+} // namespace Umbrella

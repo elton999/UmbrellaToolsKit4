@@ -48,6 +48,7 @@ if(CMAKE_BUILD_TYPE STREQUAL "Debug")
  "tests/src/engine/core/platform/FileSystemTest.cpp"
  "tests/src/engine/resources/ResourceManagerTest.cpp"
  "tests/src/engine/resources/TextResourceTest.cpp"
+ "tests/src/engine/resources/FontResourceTest.cpp"
  "tests/src/engine/scene/SceneTest.cpp"
  "tests/src/engine/scene/SceneManagerTest.cpp"
  "tests/src/engine/scene/camera/CameraTest.cpp"
@@ -60,6 +61,7 @@ if(CMAKE_BUILD_TYPE STREQUAL "Debug")
  "tests/src/engine/render/RenderManagerTest.cpp"
  "tests/src/engine/render/component/SpriteRenderComponentTest.cpp"
  "tests/src/engine/render/component/SquareRenderComponentTest.cpp"
+ "tests/src/engine/render/component/TextRenderComponentTest.cpp"
  "tests/src/engine/core/io/input/InputHandlerTest.cpp"
   )
 

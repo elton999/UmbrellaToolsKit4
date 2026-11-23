@@ -51,10 +51,7 @@ void Umbrella::MeshRenderComponent::Draw()
         return;
 
     GetMaterial()->Use();
-
-    glBindVertexArray(GetMesh()->GetVAO());
-    glDrawArrays(GL_TRIANGLES, 0, GetMesh()->GetVerticesCount());
-    glBindVertexArray(0);
+    GetMesh()->Bind();
 }
 
 Umbrella::Camera* Umbrella::MeshRenderComponent::GetCamera()
